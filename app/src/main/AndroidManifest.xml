@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mad_cw">
 
+    <!--  Enable Permissions In-App  -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,13 +14,29 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".User_Sign_In">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <!-- Handling User DeepLinks -->
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="madcw.page.link" android:scheme="http"/>
+                <data android:host="madcw.page.link" android:scheme="https"/>
+            </intent-filter>
+
         </activity>
+
+        <!-- <activity android:name=".User_Sign_In" /> -->
+        <activity android:name=".User_Sign_Up"/>
+        <activity android:name=".User_Profile"/>
+
     </application>
 
 </manifest>
