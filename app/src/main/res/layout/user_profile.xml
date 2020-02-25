@@ -9,10 +9,10 @@
 
 <!--  User Profile Image  -->
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/userProfilePic"
         android:layout_width="100dp"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
