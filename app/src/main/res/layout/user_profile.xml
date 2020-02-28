@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center">
+    android:gravity="center" >
 
 <!--  User Profile Image  -->
 
@@ -27,38 +26,41 @@
         android:textStyle="bold" />
 
     <LinearLayout
+        android:id="@+id/main_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginHorizontal="50dp"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="50dp">
+        android:layout_marginBottom="50dp"
+        android:orientation="vertical" >
 
         <Button
             android:id="@+id/accountDetailsBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_input"
             android:layout_marginVertical="10dp"
-            android:backgroundTint="#FFFFFF"
+            android:background="@drawable/border_input"
+            android:backgroundTint="#C4C4C4"
+            android:fontFamily="@font/raleway_semibold"
             android:text="Account Details"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
 
         <Button
-            android:id="@+id/updateProfilePic"
+            android:id="@+id/pedal_tribe_feedback_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:background="@drawable/border_input"
-            android:backgroundTint="#FFFFFF"
-            android:text="Update Profile Picture"
+            android:backgroundTint="#C4C4C4"
+            android:fontFamily="@font/ubuntu_bold_italic"
+            android:text="@string/pedal_T"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/signOutButton"
@@ -66,12 +68,27 @@
             android:layout_height="wrap_content"
             android:layout_marginVertical="10dp"
             android:background="@drawable/border_input"
-            android:backgroundTint="#FFFFFF"
-            android:text="Sign Out"
+            android:backgroundTint="#C4C4C4"
+            android:fontFamily="@font/raleway_semibold"
+            android:text="@string/sign_out_txt"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
-            android:textSize="16dp"
-            android:textStyle="bold" />
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/user_profile_ad_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/border_input"
+            android:backgroundTint="#C4C4C4"
+            android:fontFamily="@font/raleway_semibold"
+            android:text="@string/post_ad"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="16sp" />
 
     </LinearLayout>
 

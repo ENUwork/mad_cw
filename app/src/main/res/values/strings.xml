@@ -89,19 +89,38 @@
     <string name="password_field"> Password </string>
     <string name="username_field"> Username </string>
     <string name="location_field"> Location </string>
+    <string name="f_name"> First Name </string>
 
 <!--  user_sign_up.xml - Strings  -->
     <string name="sign_up_welcome"> Welcome to Pedal Tribe, \n the largest cycling community \n built for cyclists, by cyclists </string>
     <string name="old_account"> Already have an account? </string>
     <string name="sign_up_text"> Sign Up </string>
-    <string name="error_sign_in_failed"> Uh-oh 😧 Sign In failed</string>
+    <string name="error_sign_in_failed"> Uh-oh 😧 Sign In failed </string>
 
 <!--  user_sign_in.xml - Strings  -->
     <string name="sign_in_welcome"> Welcome back pedal freak, </string>
     <string name="new_account"> Do not have an account? </string>
     <string name="sign_in_text"> Sign In </string>
-    <string name="error_sign_up_failed"> Uh-oh 😧 account could not be created</string>
+    <string name="error_sign_up_failed"> Uh-oh 😧 account could not be created </string>
+    
+<!--  user_profile.xml - Strings  -->
+    <string name="account_det_txt"> Account Details </string>
+    <string name="fav_ads_txt"> Favorite Ads </string>
+    <string name="my_ads_txt"> My Ads </string>
+    <string name="pedal_T"> Pedal Tribe </string>
+    <string name="sign_out_txt"> Sign Out </string>
+    <string name="post_ad"> Post Ad </string>
 
+<!--  post_ad.xml - Strings  -->
+    <string name="ad_title"> Title </string>
+    <string name="ad_desc"> Description </string>
+    <string name="ad_price"> Price </string>
+    <string name="ad_loc"> Item Location </string>
+    <string name="ad_cond"> Item Condition </string>
+    <string name="ad_age"> Item Age </string>
+
+    <string name="select_img"> Select Images </string>
+    <string name="upload"> Upload </string>
 
 
 

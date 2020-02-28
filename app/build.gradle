@@ -42,10 +42,16 @@ dependencies {
     // Firebase Storage:
     implementation 'com.google.firebase:firebase-storage:19.1.1'
 
+    // Firebase Firestore:
+    implementation 'com.google.firebase:firebase-firestore:21.4.0'
+
     // Circular Images Support:
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    // Recycler View
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

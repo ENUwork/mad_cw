@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="invisible"
+        style="?android:attr/progressBarStyleHorizontal" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="50dp" >
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:srcCompat="@tools:sample/avatars" />
+                </TableRow>
+
+            </TableLayout>
+
+<!--    Advertisement Input Details Fields    -->
+
+            <!--    Ad Title     -->
+
+            <TextView
+                android:id="@+id/textView_Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ad_title" />
+
+            <EditText
+                android:id="@+id/post_ad_input_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:inputType="textLongMessage"
+                android:padding="10dp"
+                android:textAlignment="textStart" />
+
+            <!--    Ad Description     -->
+
+            <TextView
+                android:id="@+id/textView_Desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ad_desc" />
+
+            <EditText
+                android:id="@+id/post_ad_input_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:inputType="textLongMessage"
+                android:padding="10dp"
+                android:textAlignment="textStart" />
+
+            <!--    Ad Location     -->
+
+            <TextView
+                android:id="@+id/textView_Loc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ad_loc" />
+
+            <EditText
+                android:id="@+id/post_ad_input_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:inputType="textAutoComplete"
+                android:padding="10dp"
+                android:textAlignment="textStart" />
+
+            <!--    Ad Condition   -->
+
+            <TextView
+                android:id="@+id/textView_Condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ad_cond" />
+
+            <Spinner
+                android:id="@+id/post_ad_select_condition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dropdown" />
+
+            <!--    Ad Price    -->
+
+            <TextView
+                android:id="@+id/textView_Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ad_price" />
+
+            <EditText
+                android:id="@+id/post_ad_input_price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:background="@drawable/border_input"
+                android:ems="10"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textAlignment="textStart" />
+
+
+
+            <!--    Submit Ad Button    -->
+
+            <Button
+                android:id="@+id/post_ad_select_img_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_img" />
+
+            <!--    Select Ad Images     -->
+
+            <Button
+                android:id="@+id/post_ad_upload_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/upload" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
