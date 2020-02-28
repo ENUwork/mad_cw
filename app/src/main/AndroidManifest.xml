@@ -42,6 +42,7 @@
         <activity android:name=".User_Profile_Edit" />
         <activity android:name=".Post_Ads" />
         <activity android:name=".View_Ads" />
+        <activity android:name=".Advert_Details" />
 <!--    <activity android:name=".Welcome" />-->
 
     </application>

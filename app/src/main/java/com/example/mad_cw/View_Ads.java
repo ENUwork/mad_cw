@@ -5,7 +5,11 @@ package com.example.mad_cw;
 // publicly to all users.
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -36,6 +40,8 @@ public class View_Ads extends BaseActivity {
     private AdvertsListAdapter advertsListAdapter;
     private List<Adverts> adverts_list;
 
+    private EditText searchField;
+
     // Access a Cloud Firestore instance from the Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -49,6 +55,9 @@ public class View_Ads extends BaseActivity {
         setContentView(R.layout.adverts_layout);
 
         // Layout View
+
+        // Dealing with search engine:
+        searchField = (EditText) findViewById(R.id.editText);
 
         // Click Events Setters
 
@@ -110,6 +119,28 @@ public class View_Ads extends BaseActivity {
         });
 
 
+        searchField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+        });
+
         // [Test]
         // getAdvertsData();
     }
@@ -138,6 +169,24 @@ public class View_Ads extends BaseActivity {
                         }
                     }
                 });
+    }
+
+
+    // Filter Method:
+    public void filter(String text){
+
+        List<Adverts> temp = new ArrayList();
+
+        for(Adverts d: adverts_list){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(d.getAd_title().contains(text)){
+                temp.add(d);
+            }
+        }
+
+        // Update Recycler View
+        advertsListAdapter.updateList(temp);
     }
 
 }
