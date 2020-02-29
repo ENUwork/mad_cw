@@ -41,6 +41,7 @@ public class View_Ads extends BaseActivity {
     private List<Adverts> adverts_list;
 
     private EditText searchField;
+    private SearchView searchField2;
 
     // Access a Cloud Firestore instance from the Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -51,14 +52,14 @@ public class View_Ads extends BaseActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Get the view_ads Layout
+        // Get the view_ads Layout:
         setContentView(R.layout.adverts_layout);
 
-        // Layout View
+        // Layout View:
 
         // Dealing with search engine:
         searchField = (EditText) findViewById(R.id.editText);
-
+        searchField2 = (SearchView) findViewById(R.id.searchField);
         // Click Events Setters
 
         // Initialize Firebase Auth
@@ -89,16 +90,13 @@ public class View_Ads extends BaseActivity {
                 }
 
                 // Single Calls, Retrives back al of the data, even on changes:
-                /*
 
-                for (DocumentSnapshot doc : queryDocumentSnapshots) {
-                    String advert_title = doc.getString("ad_title");
-
-                    Log.d(TAG, "Advert : " + advert_title);
-
-                }
-
-                 */
+//                for (DocumentSnapshot doc : queryDocumentSnapshots) {
+//                    String advert_title = doc.getString("ad_title");
+//
+//                    Log.d(TAG, "Advert : " + advert_title);
+//
+//                }
 
                 // On Document Change retrieves only the updated data:
                 for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
@@ -184,7 +182,6 @@ public class View_Ads extends BaseActivity {
                 temp.add(d);
             }
         }
-
         // Update Recycler View
         advertsListAdapter.updateList(temp);
     }

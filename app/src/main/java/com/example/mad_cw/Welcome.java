@@ -15,12 +15,11 @@ public class Welcome extends BaseActivity implements View.OnClickListener {
         // Get the view_ads Layout
         setContentView(R.layout.welcome_layout);
 
-        // Layout View
+        // Layout View:
 
-        // Click Events Setters
-        findViewById(R.id.button).setOnClickListener(this);
-
-        // Initialize Firebase Auth
+        // Click Events Setters:
+        findViewById(R.id.buttonAds).setOnClickListener(this);
+        findViewById(R.id.buttonUser).setOnClickListener(this);
 
     }
 
@@ -45,10 +44,16 @@ public class Welcome extends BaseActivity implements View.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.button:
+            case R.id.buttonAds:
 
                 Intent view_ads = new Intent(this, View_Ads.class);
                 startActivity(view_ads);
+                break;
+
+            case R.id.buttonUser:
+
+                Intent user_redirect = new Intent(this, User_Sign_In.class);
+                startActivity(user_redirect);
                 break;
 
         }

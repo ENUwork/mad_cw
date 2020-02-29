@@ -14,6 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
         <activity android:name=".Welcome">
 
             <intent-filter>
@@ -35,15 +37,22 @@
 
         <!-- Other Activities -->
 
-        <activity android:name=".User_Sign_In" />
+        <!-- Base Activity -->
+
         <activity android:name=".BaseActivity"/>
+
+        <!-- User Activities -->
+
+        <activity android:name=".User_Sign_In" />
         <activity android:name=".User_Sign_Up"/>
         <activity android:name=".User_Profile"/>
         <activity android:name=".User_Profile_Edit" />
+
+        <!-- Classified Ads Activities -->
+
         <activity android:name=".Post_Ads" />
         <activity android:name=".View_Ads" />
         <activity android:name=".Advert_Details" />
-<!--    <activity android:name=".Welcome" />-->
 
     </application>
 

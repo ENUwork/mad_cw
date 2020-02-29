@@ -3,13 +3,23 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center" >
+    android:gravity="center"
+    android:background="@color/colorPrimary" >
 
-<!--  [Test Button]  -->
+    <!--  [Test Adverts Button]  -->
+
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonAds"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="View Ads" />
+
+    <!--  [Test Adverts Button]  -->
+
+    <Button
+        android:id="@+id/buttonUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="User" />
 
 </LinearLayout>

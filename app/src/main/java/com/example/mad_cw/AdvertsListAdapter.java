@@ -13,7 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
+
+/* This class is responsible for handling the Recycler View for the Adverts that are
+   displayed in the View_Ads.java.
+ */
 
 public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsListAdapter.ViewHolder> {
 
@@ -43,6 +49,7 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsListAdapter.
 
         // Get the Name of the Advert:
         holder.ad_title.setText(advertsList.get(position).getAd_title());
+        holder.ad_price.setText(advertsList.get(position).getAd_price());
 
         // Populate Recycler View with an Image:
         Glide.with(holder.image_link.getContext())
@@ -66,7 +73,12 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsListAdapter.
         return advertsList.size();
     }
 
+
     public void updateList(List<Adverts> list){
+
+        /* Class method to update Recycler View on Filter:
+         */
+
         advertsList = list;
         notifyDataSetChanged();
     }
@@ -76,9 +88,9 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsListAdapter.
 
         // Class Variables:
         View view;
-        public TextView ad_title;
-        public ImageView image_link;
-        public Adverts adverts;
+        private TextView ad_title, ad_price;
+        private ImageView image_link;
+        private Adverts adverts;
 
         //
         public ViewHolder(@NonNull View itemView) {
@@ -89,6 +101,7 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsListAdapter.
 
             // Views:
             ad_title = (TextView) view.findViewById(R.id.advert_title_item);
+            ad_price = (TextView) view.findViewById(R.id.advert_item_price);
             image_link = (ImageView) view.findViewById(R.id.advert_image_item);
 
             // Set onCLick Triggers:
@@ -106,13 +119,14 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsListAdapter.
                 // Pass advert data along:
                 sel_advert.putExtra("advert", this.adverts);
 
-                // Initiate the data passing to the Advert_datils class:
+                // Initiate the data passing to the Advert_details class:
                 itemView.getContext().startActivity(sel_advert);
             }
         }
 
         // Class Constructor:
         public void bindAdverts(Adverts adverts) {
+
             this.adverts = adverts;
         }
 
