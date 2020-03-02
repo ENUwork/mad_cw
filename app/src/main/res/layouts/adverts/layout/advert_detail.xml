@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <!-- Flip through Ad Images -->
+
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager_ad"
+                android:layout_width="match_parent"
+                android:layout_height="339dp" >
+
+            </androidx.viewpager.widget.ViewPager>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:stretchColumns="0,1" >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:weightSum="10" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="9"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/ad_title_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ad_title"
+                            android:textSize="30sp" />
+
+                        <TextView
+                            android:id="@+id/ad_price_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ad_price"
+                            android:textSize="25sp" />
+
+                        <TextView
+                            android:id="@+id/ad_loc_txt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ad_loc"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <ImageButton
+                        android:id="@+id/fav_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+                    <ImageButton
+                        android:id="@+id/fav_btn2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        android:backgroundTint="@color/colorPrimary"
+                        android:tint="@color/colorAccent"
+                        android:layout_weight="1"
+                        app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+                </TableRow>
+
+            </TableLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

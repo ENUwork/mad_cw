@@ -1,4 +1,4 @@
-package com.example.mad_cw;
+package com.example.mad_cw.ui.user;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 
 // Google Android & Firebase Imports
+import com.example.mad_cw.BaseActivity;
+import com.example.mad_cw.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -28,7 +30,7 @@ import java.util.Map;
 public class User_Sign_Up extends BaseActivity implements View.OnClickListener {
 
     // Logcat Handling
-    private static final String TAG = "UserSignIn";
+    private static final String TAG = "UserSignUp";
 
     // Sign Up Input Fields
     private EditText locationField;

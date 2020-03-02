@@ -1,59 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mad_cw">
-
-    <!--  Enable Permissions In-App  -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-
+    <!-- Enable Permissions In-App -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-
-        <activity android:name=".Welcome">
+        <activity
+            android:name=".Main2Activity"
+            android:label="@string/title_activity_main2"
+            android:theme="@style/AppTheme.NoActionBar">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-            <!-- Handling User DeepLinks -->
-
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="madcw.page.link" android:scheme="http"/>
-                <data android:host="madcw.page.link" android:scheme="https"/>
-            </intent-filter>
-
         </activity>
-
+        <!-- Splash / Welcome Screen -->
+        <!-- Main Activity - Startup Activity -->
         <!-- Other Activities -->
-
         <!-- Base Activity -->
-
-        <activity android:name=".BaseActivity"/>
-
-        <!-- User Activities -->
-
-        <activity android:name=".User_Sign_In" />
-        <activity android:name=".User_Sign_Up"/>
-        <activity android:name=".User_Profile"/>
-        <activity android:name=".User_Profile_Edit" />
-
-        <!-- Classified Ads Activities -->
-
-        <activity android:name=".Post_Ads" />
-        <activity android:name=".View_Ads" />
-        <activity android:name=".Advert_Details" />
-
+        <activity android:name=".BaseActivity" /> <!-- User Activities -->
+        <activity android:name=".ui.user.User_Sign_In" />
+        <activity android:name=".ui.user.User_Sign_Up" />
+        <activity android:name=".ui.user.User_Profile" />
+        <activity android:name=".ui.user.User_Profile_Edit" /> <!-- Classified Ads Activities -->
+        <activity android:name=".ui.user.Post_Ads" />
+        <activity android:name=".ui.adverts.AdvertInfoActivity" />
     </application>
 
 </manifest>

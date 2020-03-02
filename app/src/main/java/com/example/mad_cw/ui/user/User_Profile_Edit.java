@@ -1,4 +1,4 @@
-package com.example.mad_cw;
+package com.example.mad_cw.ui.user;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -14,6 +14,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.example.mad_cw.BaseActivity;
+import com.example.mad_cw.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -94,7 +96,9 @@ public class User_Profile_Edit extends BaseActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        // Pass Image Data Along:
         if (requestCode == PICK_IMAGE && resultCode == RESULT_OK) {
             if (data != null) {
                 // this is the image selected by the user

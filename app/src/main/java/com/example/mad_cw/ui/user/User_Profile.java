@@ -1,4 +1,4 @@
-package com.example.mad_cw;
+package com.example.mad_cw.ui.user;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.mad_cw.BaseActivity;
+import com.example.mad_cw.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -15,7 +17,7 @@ public class User_Profile extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "User Profile";
 
-    // Main Profile View:
+    // MainActivity Profile View:
     private TextView UserUidNum;         // [Dev]
     private ImageView ProPic;
 

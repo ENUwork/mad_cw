@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <!--
+    This layout is responsible for the redirects inside the
+    navigation drawer/pane.
+      -->
+
+    <!--
+    Main Fragments NavigationDrawer / Pane
+    -->
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.mad_cw.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <!--
+    Adverts Fragment Redirect
+    -->
+
+    <fragment
+        android:id="@+id/nav_adverts"
+        android:name="com.example.mad_cw.ui.adverts.AdvertsViewFragment"
+        android:label="@string/menu_adverts"
+        tools:layout="@layout/adverts_layout" />
+
+    <!--
+    User Activity Redirect
+    -->
+
+    <activity
+        android:id="@+id/nav_account"
+        android:name="com.example.mad_cw.ui.user.User_Sign_Up"
+        android:label="@string/menu_account_profile"
+        tools:layout="@layout/fragment_home" />
+
+</navigation>

@@ -1,4 +1,4 @@
-package com.example.mad_cw;
+package com.example.mad_cw.ui.adverts.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -10,6 +10,7 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.mad_cw.R;
 
 import java.util.ArrayList;
 import java.util.List;

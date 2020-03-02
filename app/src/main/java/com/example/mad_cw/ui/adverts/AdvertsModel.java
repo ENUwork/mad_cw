@@ -1,30 +1,35 @@
-package com.example.mad_cw;
+package com.example.mad_cw.ui.adverts;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.firestore.DocumentId;
+
 import java.util.ArrayList;
 import java.util.List;
 
-// ___________________________
-/* (This) Class is a Data Model that holds Data Objects for the loaded
-    Adverts from the Firestore.
+/*
+    (This) Class is a Data Model that holds Data Objects for the loaded
+    AdvertsModel from the Firestore.
  */
 
-public class Adverts implements Parcelable {
+public class AdvertsModel implements Parcelable {
 
-    // Class (Adverts) Object Instances:
+    // Class (AdvertsModel) Object Instances:
+    @DocumentId
+    private String documentId;
     private String ad_title, image_link, ad_price;
     private List<String> images;
 
-    // Class (Adverts) Constructor(s):
+    // Class (AdvertsModel) Constructor(s):
 
     // [Empty]:
-    public Adverts () {
+    public AdvertsModel() {
     }
 
     // [5 Args]:
-    public Adverts (String ad_title, String image_link, String price, List<String> images) {
+    public AdvertsModel(String documentId, String ad_title, String image_link, String price, List<String> images) {
+        this.documentId = documentId;
         this.ad_title = ad_title;
         this.image_link = image_link;
         this.ad_price = price;
@@ -32,40 +37,45 @@ public class Adverts implements Parcelable {
     }
 
     // [Parcel]:
-    public Adverts(Parcel source) {
+    public AdvertsModel(Parcel source) {
+        this.documentId = source.readString();
         this.ad_title = source.readString();
         this.image_link = source.readString();
         this.ad_price = source.readString();
         this.images = new ArrayList<>();
-        source.readList(this.images, Adverts.class.getClassLoader());
+        source.readList(this.images, AdvertsModel.class.getClassLoader());
     }
 
     // ________
-    // Class (Adverts) Getters & Setters:
+    // Class (AdvertsModel) Getters & Setters:
 
     // Getters:
 
-    public String getAd_title() {
+    public  String getDocumentId() {
+        return documentId;
+    }
 
+    public String getAd_title() {
         return ad_title;
     }
 
     public String getImage_link() {
-
         return image_link;
     }
 
     public String getAd_price() {
-
         return ad_price;
     }
 
     public List<String> getImages() {
-
         return images;
     }
 
     // Setters:
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
 
     public void setAd_title(String ad_title) {
         this.ad_title = ad_title;
@@ -76,28 +86,26 @@ public class Adverts implements Parcelable {
     }
 
     public void setAd_price(String price) {
-
         this.ad_price = price;
     }
 
     public void setImages(List<String> images) {
-
         this.images = images;
     }
 
     // ________
     // Parcelable Methods:
 
-    public static final Parcelable.Creator<Adverts> CREATOR = new Parcelable.Creator<Adverts>(){
+    public static final Parcelable.Creator<AdvertsModel> CREATOR = new Parcelable.Creator<AdvertsModel>(){
 
         @Override
-        public Adverts createFromParcel(Parcel source) {
-            return new Adverts(source);
+        public AdvertsModel createFromParcel(Parcel source) {
+            return new AdvertsModel(source);
         }
 
         @Override
-        public Adverts[] newArray(int size) {
-            return new Adverts[size];
+        public AdvertsModel[] newArray(int size) {
+            return new AdvertsModel[size];
         }
     };
 
@@ -109,6 +117,7 @@ public class Adverts implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.documentId);
         dest.writeString(this.ad_title);
         dest.writeString(this.image_link);
         dest.writeString(this.ad_price);

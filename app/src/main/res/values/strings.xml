@@ -1,17 +1,52 @@
 <resources>
 
-<!--  Name of the App  -->
+    <!--
+    App Name
+    -->
+
     <string name="app_name">Pedal Tribe</string>
 
-<!--  Testing  -->
+    <!--
+    [Testing]
+    -->
+
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
     <string name="firebase_status_fmt">Firebase UID: %s</string>
     <string name="status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="plc_hold"> PlaceHolder Text </string>
 
+    <!--
+    Navigation Drawer Strings
+    -->
 
-<!--  User Related Strings  -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home"> Home </string>
+    <string name="menu_adverts"> Adverts </string>
+    <string name="menu_account_profile"> Account Profile </string>
+    <string name="menu_share">Share</string>
+    <string name="main_img_desc"> Main Advert Image View </string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!--
+    Fragment Home Strings
+    -->
+
+    <string name="buy_sell_txt"> Buy / Sell </string>
+    <string name="view_all_txt"> View all </string>
+
+
+
+    <!--
+    User Related Strings
+    -->
+
     <string name="update_profile"> Update Profile </string>
     <string name="email_field"> Email </string>
     <string name="password_field"> Password </string>
@@ -19,19 +54,28 @@
     <string name="location_field"> Location </string>
     <string name="f_name"> First Name </string>
 
-<!--  user_sign_up.xml - Strings  -->
+    <!--
+    user_sign_up.xml - Strings
+    -->
+
     <string name="sign_up_welcome"> Welcome to Pedal Tribe, \n the largest cycling community \n built for cyclists, by cyclists </string>
     <string name="old_account"> Already have an account? </string>
     <string name="sign_up_text"> Sign Up </string>
     <string name="error_sign_in_failed"> Uh-oh 😧 Sign In failed </string>
 
-<!--  user_sign_in.xml - Strings  -->
+    <!--
+    user_sign_in.xml - Strings
+    -->
+
     <string name="sign_in_welcome"> Welcome back pedal freak, </string>
     <string name="new_account"> Do not have an account? </string>
     <string name="sign_in_text"> Sign In </string>
     <string name="error_sign_up_failed"> Uh-oh 😧 account could not be created </string>
-    
-<!--  user_profile.xml - Strings  -->
+
+    <!--
+    user_profile.xml - Strings
+    -->
+
     <string name="account_det_txt"> Account Details </string>
     <string name="fav_ads_txt"> Favorite Ads </string>
     <string name="my_ads_txt"> My Ads </string>
@@ -39,10 +83,10 @@
     <string name="sign_out_txt"> Sign Out </string>
     <string name="post_ad"> Post Ad </string>
 
-<!--  ___________________________  -->
-<!--  User Post Adverts - Strings  -->
+    <!--
+    Advert Related Strings:
+    -->
 
-<!--  post_ad.xml - Strings  -->
     <string name="ad_title"> Title </string>
     <string name="ad_desc"> Description </string>
     <string name="ad_price"> Price </string>
@@ -52,12 +96,5 @@
 
     <string name="select_img"> Select Images </string>
     <string name="upload"> Upload </string>
-
-<!--  _________________  -->
-<!--  Adverts - Strings  -->
-
-<!--  advert_item.xml - Strings  -->
-    <string name="main_img_desc"> Main Advert Image View </string>
-
 
 </resources>
