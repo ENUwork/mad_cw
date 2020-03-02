@@ -28,8 +28,7 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:stretchColumns="0,1" >
+                android:layout_height="match_parent" >
 
                 <TableRow
                     android:layout_width="match_parent"
@@ -40,7 +39,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="9"
+                        android:layout_weight="8"
                         android:orientation="vertical">
 
                         <TextView
@@ -70,8 +69,10 @@
                         android:id="@+id/fav_btn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="visible"
+                        android:layout_alignParentRight="true"
                         android:layout_weight="1"
+                        android:backgroundTint="@color/common_google_signin_btn_text_light_default"
+                        android:scaleType="centerInside"
                         app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
                     <ImageButton
