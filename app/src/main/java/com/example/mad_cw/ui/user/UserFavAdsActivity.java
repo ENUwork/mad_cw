@@ -64,7 +64,6 @@ public class UserFavAdsActivity extends BaseActivity {
 
     @Override
     public void onResume() {
-        // After a pause OR at startup
         super.onResume();
 
         // Dealing with Instantiating the Recycler View & the View Holder:
@@ -80,7 +79,7 @@ public class UserFavAdsActivity extends BaseActivity {
         mAdverts_List.setAdapter(advertsListAdapter);
 
         // Set the Recycler View as a Gallery View:
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2); // (Context context, int spanCount)
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1); // (Context context, int spanCount)
 
         // Set the Recycler View as a Linear Row-by-Row view:
         // mAdverts_List.setLayoutManager(new LinearLayoutManager(this));
@@ -89,7 +88,6 @@ public class UserFavAdsActivity extends BaseActivity {
         mAdverts_List.setLayoutManager(mLayoutManager);
 
         getFavouriteAds();
-        //Refresh your stuff here
     }
 
     // ______________

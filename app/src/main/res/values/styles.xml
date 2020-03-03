@@ -17,4 +17,29 @@
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
+    <!--  ADVERT INPUT STYLE DESIGN  -->
+
+    <style name="advert_post_input">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!--  SPINNER STYLE DESIGN  -->
+
+    <style name="spinner_style">
+        <item name="android:background">@drawable/gradient_spinner</item>
+        <item name="android:dropDownVerticalOffset">40dp</item>
+        <item name="android:popupBackground">#FFFFFF</item>
+    </style>
+
+    <!--  ITEM CONDITION WEAR  -->
+
+    <string-array name="item_condition_wear">
+        <item> Like New </item>
+        <item> Mint </item>
+        <item> Visible Wear </item>
+        <item> Broken </item>
+        <item> Repair Required </item>
+    </string-array>
+
 </resources>

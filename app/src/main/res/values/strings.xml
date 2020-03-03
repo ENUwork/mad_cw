@@ -73,7 +73,7 @@
     <string name="error_sign_up_failed"> Uh-oh 😧 account could not be created </string>
 
     <!--
-    user_profile.xml - Strings
+    user_layout.xml- Strings
     -->
 
     <string name="account_det_txt"> Account Details </string>
@@ -83,9 +83,7 @@
     <string name="sign_out_txt"> Sign Out </string>
     <string name="post_ad"> Post Ad </string>
 
-    <!--
-    Advert Related Strings:
-    -->
+    <!-- ADVERT STRINGS -->
 
     <string name="ad_title"> Title </string>
     <string name="ad_desc"> Description </string>
@@ -96,5 +94,6 @@
 
     <string name="select_img"> Select Images </string>
     <string name="upload"> Upload </string>
+    <string name="item_img"> Uploaded Photos </string>
 
 </resources>

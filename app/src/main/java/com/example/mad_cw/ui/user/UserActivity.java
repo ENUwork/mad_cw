@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,35 +35,52 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-public class User_Profile_Edit extends BaseActivity implements View.OnClickListener {
+public class UserActivity extends BaseActivity implements View.OnClickListener {
 
-    /* Class Variables */
+    /*
+        Handles User & its Activity:
+     */
 
-    private static final String TAG = "User Profile Edit";
+    // Class Variables:
+    private static final String TAG = "UserActivity";
     private static final int PICK_IMAGE = 1;
 
-    private EditText fName, userLoc, userEmail, userName;
-
+    // MainActivity Profile View:
+    private TextView UserUidNum;
     private ImageView ProPic;
+
+    private EditText fName, userLoc, userEmail, userName;
+    private LinearLayout mainInfoLayout,userEditLayout;
 
     // Access to Firebase Authentication from the Activity
     private FirebaseAuth mAuth;
+
+    // _____________________
+    // class activity cycles:
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Load the User Edit Layout:
-        setContentView(R.layout.user_profile_edit);
+        // Set Layout for User Sign In:
+        setContentView(R.layout.user_layout);
 
-        // Locating Views:
+        // Layout View:
+        mainInfoLayout = findViewById(R.id.main_user_layout);
+        userEditLayout = findViewById(R.id.user_edit_layout);
+        ProPic = findViewById(R.id.userProfilePic);
+        UserUidNum = findViewById(R.id.textView);
         fName = findViewById(R.id.account_first_name);
         userName = findViewById(R.id.account_username);
         userLoc = findViewById(R.id.account_location);
         userEmail = findViewById(R.id.account_email);
-        ProPic = findViewById(R.id.userProfilePic);
 
-        // Set Event Clicks
+        // Click Events Setters
+        findViewById(R.id.signOutButton).setOnClickListener(this);
+        findViewById(R.id.accountDetailsBtn).setOnClickListener(this);
+        findViewById(R.id.pedal_tribe_feedback_btn).setOnClickListener(this);
+        findViewById(R.id.user_profile_ad_btn).setOnClickListener(this);
+        findViewById(R.id.fav_ads_btn).setOnClickListener(this);
         findViewById(R.id.updateProfilePic).setOnClickListener(this);
 
         // Initialize Firebase Auth
@@ -71,28 +90,52 @@ public class User_Profile_Edit extends BaseActivity implements View.OnClickListe
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
     }
 
+    // _____________________
+    // class click events handler:
+
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
-            // Updating Profile Picture
+            case R.id.signOutButton:
+                signOut();
+                break;
+
+            case R.id.fav_ads_btn:
+                Intent fav_ads = new Intent(this, UserFavAdsActivity.class);
+                startActivity(fav_ads);
+                break;
+
+            case R.id.user_profile_ad_btn:
+                Intent post_ad = new Intent(this, UserAdvertActivity.class);
+                startActivity(post_ad);
+                break;
+
+            case R.id.accountDetailsBtn:
+
+                userEditLayout.setVisibility(View.VISIBLE);
+                mainInfoLayout.setVisibility(View.GONE);
+                break;
+
             case R.id.updateProfilePic:
                 selectProfilePic();
                 break;
 
-            // Save Profile Details
             case R.id.saveAccount:
                 break;
 
         }
 
     }
+
+    // _____________________
+    // data-intent handling methods:
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -120,58 +163,7 @@ public class User_Profile_Edit extends BaseActivity implements View.OnClickListe
         }
     }
 
-    private void updateUI(FirebaseUser user) {
-        hideProgressBar();
-
-        // Check User Details
-        if (user != null) {
-
-            // Access a Cloud Firestore instance from your Activity
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            // Profile Image:
-            Uri photoUrl = user.getPhotoUrl();
-
-            if (photoUrl != null) {
-                Glide.with(this).load(photoUrl).into(ProPic);
-            }
-
-            // User Email:
-            DocumentReference docRef = db.collection("users").document(user.getUid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getString("email"));
-
-                            // Set Email to be seen:
-                            userEmail.setText(document.getString("email"));
-                            userLoc.setText(document.getString("location"));
-                            userName.setText(document.getString("username"));
-
-                        } else {
-                            Log.d(TAG, "No such document");
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
-                    }
-                }
-            });
-
-            // [ Test Env ]
-            // findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
-            // UserUidNum.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-        } else {
-
-            // Nothing happens
-
-        }
-    }
-
-    public void selectProfilePic() {
+    private void selectProfilePic() {
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 
@@ -183,8 +175,6 @@ public class User_Profile_Edit extends BaseActivity implements View.OnClickListe
 
         startActivityForResult(chooserIntent, PICK_IMAGE);
     }
-
-    /* Class [Public Methods] */
 
     private void handleUpload(Bitmap bitmap){
 
@@ -249,6 +239,68 @@ public class User_Profile_Edit extends BaseActivity implements View.OnClickListe
         // Refresh the UI Page:
         onStart();
 
+    }
+
+    private void updateUI(FirebaseUser user) {
+        hideProgressBar();
+
+        // Check User Details
+        if (user != null) {
+
+            // Access a Cloud Firestore instance from your Activity
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+            // Profile Image:
+            Uri photoUrl = user.getPhotoUrl();
+
+            if (photoUrl != null) {
+                // Display user Profile Details:
+                UserUidNum.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+                Glide.with(this).load(photoUrl).into(ProPic);
+            }
+
+            // User Email:
+            DocumentReference docRef = db.collection("users").document(user.getUid());
+            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                    if (task.isSuccessful()) {
+                        DocumentSnapshot document = task.getResult();
+                        if (document.exists()) {
+                            Log.d(TAG, "DocumentSnapshot data: " + document.getString("email"));
+
+                            // Set Email to be seen:
+                            userEmail.setText(document.getString("email"));
+                            userLoc.setText(document.getString("location"));
+                            userName.setText(document.getString("username"));
+
+                        } else {
+                            Log.d(TAG, "No such document");
+                        }
+                    } else {
+                        Log.d(TAG, "get failed with ", task.getException());
+                    }
+                }
+            });
+
+            // [ Test Env ]
+            // findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
+            // UserUidNum.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+
+        } else {
+
+            // Nothing happens
+
+        }
+    }
+
+    // _____________________
+    // user action methods:
+
+    private void signOut() {
+        mAuth.signOut();
+        this.finish();
+        updateUI(null);
     }
 
 }

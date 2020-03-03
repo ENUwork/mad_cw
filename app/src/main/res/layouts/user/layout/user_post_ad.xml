@@ -21,59 +21,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="50dp" >
+            android:layout_marginHorizontal="50dp"
+            android:orientation="vertical">
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/imageView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                    <ImageView
-                        android:id="@+id/imageView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                </TableRow>
-
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" >
-
-                    <ImageView
-                        android:id="@+id/imageView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
-
-                    <ImageView
-                        android:id="@+id/imageView2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        tools:srcCompat="@tools:sample/avatars" />
-                </TableRow>
-
-            </TableLayout>
-
-<!--    Advertisement Input Details Fields    -->
+            <!--    Advertisement Input Details Fields    -->
 
             <!--    Ad Title     -->
 
             <TextView
-                android:id="@+id/textView_Title"
-                android:layout_width="match_parent"
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/ad_title" />
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/item_img"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_img"
+                android:layout_width="match_parent"
+                android:layout_height="162dp" />
+
+            <TextView
+                android:id="@+id/textView_Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/ad_title"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/post_ad_input_title"
@@ -89,10 +67,14 @@
             <!--    Ad Description     -->
 
             <TextView
-                android:id="@+id/textView_Desc"
+                android:id="@+id/textView_Title2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ad_desc" />
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/ad_desc"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/post_ad_input_desc"
@@ -108,10 +90,14 @@
             <!--    Ad Location     -->
 
             <TextView
-                android:id="@+id/textView_Loc"
+                android:id="@+id/textView_Title3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ad_loc" />
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/ad_loc"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/post_ad_input_location"
@@ -127,24 +113,34 @@
             <!--    Ad Condition   -->
 
             <TextView
-                android:id="@+id/textView_Condition"
+                android:id="@+id/textView_Title4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ad_cond" />
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/ad_cond"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/post_ad_select_condition"
+                style="@style/spinner_style"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:spinnerMode="dropdown" />
+                android:spinnerMode="dropdown"
+                android:textSize="18sp" />
 
             <!--    Ad Price    -->
 
             <TextView
-                android:id="@+id/textView_Price"
+                android:id="@+id/textView_Title6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/ad_price" />
+                android:fontFamily="@font/raleway_semibold"
+                android:text="@string/ad_price"
+                android:textAlignment="textStart"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/post_ad_input_price"
@@ -156,7 +152,6 @@
                 android:inputType="number"
                 android:padding="10dp"
                 android:textAlignment="textStart" />
-
 
 
             <!--    Submit Ad Button    -->

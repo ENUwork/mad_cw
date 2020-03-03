@@ -81,7 +81,6 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
           return advertsModelList.size();
     }
 
-
     public void updateList(List<AdvertsModel> list){
 
         /* Class method to update Recycler View on Filter:
