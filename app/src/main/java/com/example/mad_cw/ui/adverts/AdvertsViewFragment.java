@@ -91,31 +91,31 @@ public class AdvertsViewFragment extends Fragment {
         // Accessing the data:
         db.collection("classified_ads")
 
-                .addSnapshotListener(new EventListener<QuerySnapshot>() {
-                    @Override
-                    public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+            .addSnapshotListener(new EventListener<QuerySnapshot>() {
+                @Override
+                public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
 
-                        if (e != null) {
-                            Log.d(TAG, "Error : " + e.getMessage());
-                        }
+                if (e != null) {
+                    Log.d(TAG, "Error : " + e.getMessage());
+                }
 
-                        // On Document Change retrieves only the updated data:
-                        for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
+                // On Document Change retrieves only the updated data:
+                for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
 
-                            if (doc.getType() == DocumentChange.Type.ADDED) {
+                    if (doc.getType() == DocumentChange.Type.ADDED) {
 
-                                // [Test]
-                                String advert_title = doc.getDocument().getString("image_link");
-                                Log.d(TAG, "Advert : " + advert_title);
+                        // [Test]
+                        String advert_title = doc.getDocument().getString("image_link");
+                        Log.d(TAG, "Advert : " + advert_title);
 
-                                AdvertsModel advertsModel = doc.getDocument().toObject(AdvertsModel.class);
-                                adverts_Model_list.add(advertsModel);
+                        AdvertsModel advertsModel = doc.getDocument().toObject(AdvertsModel.class);
+                        adverts_Model_list.add(advertsModel);
 
-                                advertsListAdapter.notifyDataSetChanged();
-                            }
-                        }
+                        advertsListAdapter.notifyDataSetChanged();
                     }
-                });
+                }
+                }
+            });
     }
 
     // Search Query Listen:

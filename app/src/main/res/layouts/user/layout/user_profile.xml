@@ -90,6 +90,20 @@
             android:textColor="@color/common_google_signin_btn_text_dark_focused"
             android:textSize="16sp" />
 
+        <Button
+            android:id="@+id/fav_ads_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/border_input"
+            android:backgroundTint="#C4C4C4"
+            android:fontFamily="@font/raleway_semibold"
+            android:text="@string/fav_ads_txt"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/common_google_signin_btn_text_dark_focused"
+            android:textSize="16sp" />
+
     </LinearLayout>
 
 </LinearLayout>

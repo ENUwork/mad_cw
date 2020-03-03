@@ -26,13 +26,19 @@
         <!-- Splash / Welcome Screen -->
         <!-- Main Activity - Startup Activity -->
         <!-- Other Activities -->
+
         <!-- Base Activity -->
-        <activity android:name=".BaseActivity" /> <!-- User Activities -->
+        <activity android:name=".BaseActivity" />
+
+        <!-- User Activities -->
         <activity android:name=".ui.user.User_Sign_In" />
         <activity android:name=".ui.user.User_Sign_Up" />
         <activity android:name=".ui.user.User_Profile" />
-        <activity android:name=".ui.user.User_Profile_Edit" /> <!-- Classified Ads Activities -->
+        <activity android:name=".ui.user.User_Profile_Edit" />
+
+        <!-- Classified Ads Activities -->
         <activity android:name=".ui.user.Post_Ads" />
+        <activity android:name=".ui.user.UserFavAdsActivity" />
         <activity android:name=".ui.adverts.AdvertInfoActivity" />
     </application>
 
