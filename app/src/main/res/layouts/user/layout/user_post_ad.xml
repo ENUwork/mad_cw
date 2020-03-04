@@ -1,177 +1,211 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center" >
+    android:background="@color/colorAccent"
+    android:gravity="center"
+    android:orientation="vertical" >
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:indeterminate="true"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:visibility="invisible"
-        style="?android:attr/progressBarStyleHorizontal" />
+        android:indeterminate="true"
+        android:visibility="gone" />
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
+            android:layout_margin="50dp"
             android:orientation="vertical">
 
-            <!--    Advertisement Input Details Fields    -->
-
-            <!--    Ad Title     -->
+            <!--    AD IMAGES     -->
 
             <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/item_img"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:id="@+id/upload_count"
+                style="@style/field"
+                android:layout_marginBottom="30sp"
+                android:paddingBottom="0dp"
+                android:text="@string/img_count" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_view_img"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="162dp" />
+                android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/textView_Title"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </androidx.recyclerview.widget.RecyclerView>
+
+            </RelativeLayout>
+
+            <ImageButton
+                android:id="@+id/select_ad_img_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/ad_title"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_marginHorizontal="10sp"
+                android:layout_marginVertical="30sp"
+                android:backgroundTint="#595959"
+                android:tint="#FFFFFF"
+                app:srcCompat="@drawable/ic_add_black_24dp" />
+
+            <!--    AD TITLE     -->
+
+            <TextView
+                style="@style/field"
+                android:text="@string/ad_title" />
 
             <EditText
                 android:id="@+id/post_ad_input_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="textLongMessage"
-                android:padding="10dp"
-                android:textAlignment="textStart" />
+                style="@style/inputFiled"
+                android:inputType="textLongMessage" />
 
-            <!--    Ad Description     -->
+            <!--    AD DESCRIPTION     -->
 
             <TextView
-                android:id="@+id/textView_Title2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/ad_desc"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/field"
+                android:text="@string/ad_desc" />
 
             <EditText
                 android:id="@+id/post_ad_input_desc"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="textLongMessage"
-                android:padding="10dp"
-                android:textAlignment="textStart" />
+                style="@style/inputFiled"
+                android:inputType="textLongMessage" />
 
-            <!--    Ad Location     -->
+            <!--    AD LOCATION     -->
 
             <TextView
-                android:id="@+id/textView_Title3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/ad_loc"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/field"
+                android:text="@string/ad_price" />
+
+            <EditText
+                android:id="@+id/post_ad_input_price"
+                style="@style/inputFiled"
+                android:inputType="number" />
+
+            <TextView
+                style="@style/field"
+                android:text="@string/ad_loc" />
 
             <EditText
                 android:id="@+id/post_ad_input_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="textAutoComplete"
-                android:padding="10dp"
-                android:textAlignment="textStart" />
+                style="@style/inputFiled"
+                android:inputType="textAutoComplete" />
 
-            <!--    Ad Condition   -->
+            <!--    AD CONDITION   -->
 
             <TextView
-                android:id="@+id/textView_Title4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/ad_cond"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                style="@style/field"
+                android:text="@string/ad_cond" />
 
             <Spinner
                 android:id="@+id/post_ad_select_condition"
                 style="@style/spinner_style"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                android:textSize="18sp" />
+                android:layout_height="wrap_content" />
 
-            <!--    Ad Price    -->
+            <!--    AD ADDITIONAL INFO    -->
 
             <TextView
-                android:id="@+id/textView_Title6"
+                style="@style/field"
+                android:text="@string/ad_info" />
+
+            <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/ad_price"
-                android:textAlignment="textStart"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_height="match_parent"
+                style="@style/inputFiled">
 
-            <EditText
-                android:id="@+id/post_ad_input_price"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:background="@drawable/border_input"
-                android:ems="10"
-                android:inputType="number"
-                android:padding="10dp"
-                android:textAlignment="textStart" />
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="4" >
 
+                    <!--    AD WHEEL SIZE    -->
 
-            <!--    Submit Ad Button    -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ad_wheel"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/spinnerWheels"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <!--    AD BIKE AGE    -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ad_age"
+                        android:layout_weight="1" />
+
+                    <EditText
+                        android:id="@+id/post_ad_input_age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:layout_weight="1" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:weightSum="4" >
+
+                    <!--    AD FRAME SIZE    -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ad_frame"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/spinnerWheels2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                    <!--    AD DRIVE TRAIN    -->
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/ad_dtrain"
+                        android:layout_weight="1" />
+
+                    <Spinner
+                        android:id="@+id/spinnerFrame2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </TableRow>
+
+            </TableLayout>
+
+            <!--    UPLOAD ADVERT    -->
 
             <Button
-                android:id="@+id/post_ad_select_img_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/select_img" />
-
-            <!--    Select Ad Images     -->
-
-            <Button
-                android:id="@+id/post_ad_upload_btn"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:id="@+id/upload_ad_btn"
+                style="@style/btn_main"
                 android:text="@string/upload" />
 
         </LinearLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

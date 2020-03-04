@@ -9,14 +9,14 @@
     card_view:cardCornerRadius="4dp"
     android:layout_margin="10dp" >
 
-    <!--  Advert Single Item View (Thumbnail)  -->
-
-    <!--  Advert MainActivity Image  -->
+    <!--  ADVERT SINGLE THUMBNAIL VIEW  -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
+        <!--    ADVERT MAIN IMAGE    -->
 
         <ImageView
             android:id="@+id/advert_image_item"
@@ -27,7 +27,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
 
-        <!--  Advert Details  -->
+        <!--  ADVERT DETAILS  -->
 
         <TextView
             android:id="@+id/advert_title_item"
@@ -37,6 +37,8 @@
             android:text="@string/plc_hold"
             android:textAlignment="textStart"
             android:textSize="16sp" />
+
+        <!-- ADVERT PRICE -->
 
         <TextView
             android:id="@+id/advert_item_price"
@@ -49,5 +51,4 @@
 
     </LinearLayout>
 
-    <!--YOUR CONTENT-->
 </androidx.cardview.widget.CardView>

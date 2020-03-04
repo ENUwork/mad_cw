@@ -1,14 +1,10 @@
 <resources>
 
-    <!--
-    App Name
-    -->
+    <!-- APP NAME -->
 
     <string name="app_name">Pedal Tribe</string>
 
-    <!--
-    [Testing]
-    -->
+    <!-- [TESTING] -->
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
@@ -16,9 +12,7 @@
     <string name="status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="plc_hold"> PlaceHolder Text </string>
 
-    <!--
-    Navigation Drawer Strings
-    -->
+    <!-- NAVIGATION DRAWER STRINGS -->
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -34,9 +28,7 @@
     <string name="main_img_desc"> Main Advert Image View </string>
     <string name="title_activity_main2">Main2Activity</string>
 
-    <!--
-    Fragment Home Strings
-    -->
+    <!-- FRAGMENT HOME SETTINGS -->
 
     <string name="buy_sell_txt"> Buy / Sell </string>
     <string name="view_all_txt"> View all </string>
@@ -86,14 +78,30 @@
     <!-- ADVERT STRINGS -->
 
     <string name="ad_title"> Title </string>
-    <string name="ad_desc"> Description </string>
+    <string name="ad_desc"> Item Description </string>
     <string name="ad_price"> Price </string>
     <string name="ad_loc"> Item Location </string>
     <string name="ad_cond"> Item Condition </string>
     <string name="ad_age"> Item Age </string>
+    <string name="ad_wheel"> Wheels Size </string>
+    <string name="ad_frame"> Frame Size </string>
+    <string name="ad_dtrain"> Drive train </string>
+    <string name="ad_cat"> Category </string>
+    <string name="ad_info"> Additional Info </string>
 
     <string name="select_img"> Select Images </string>
-    <string name="upload"> Upload </string>
-    <string name="item_img"> Uploaded Photos </string>
+    <string name="upload"> List Advert! </string>
+    <string name="img_count"> Photos: %s </string>
+
+    <!--  ITEM CONDITION WEAR  -->
+
+    <string-array name="item_condition_wear">
+        <item> </item>
+        <item> Like New </item>
+        <item> Mint </item>
+        <item> Visible Wear </item>
+        <item> Broken </item>
+        <item> Repair Required </item>
+    </string-array>
 
 </resources>

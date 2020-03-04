@@ -18,7 +18,7 @@ public class AdvertsModel implements Parcelable {
     // Class (AdvertsModel) Object Instances:
     @DocumentId
     private String documentId;
-    private String ad_title, image_link, ad_price;
+    private String ad_title, ad_price;
     private List<String> images;
 
     // Class (AdvertsModel) Constructor(s):
@@ -31,7 +31,6 @@ public class AdvertsModel implements Parcelable {
     public AdvertsModel(String documentId, String ad_title, String image_link, String price, List<String> images) {
         this.documentId = documentId;
         this.ad_title = ad_title;
-        this.image_link = image_link;
         this.ad_price = price;
         this.images = images;
     }
@@ -40,7 +39,6 @@ public class AdvertsModel implements Parcelable {
     public AdvertsModel(Parcel source) {
         this.documentId = source.readString();
         this.ad_title = source.readString();
-        this.image_link = source.readString();
         this.ad_price = source.readString();
         this.images = new ArrayList<>();
         source.readList(this.images, AdvertsModel.class.getClassLoader());
@@ -59,10 +57,6 @@ public class AdvertsModel implements Parcelable {
         return ad_title;
     }
 
-    public String getImage_link() {
-        return image_link;
-    }
-
     public String getAd_price() {
         return ad_price;
     }
@@ -79,10 +73,6 @@ public class AdvertsModel implements Parcelable {
 
     public void setAd_title(String ad_title) {
         this.ad_title = ad_title;
-    }
-
-    public void setImage_link(String image_link) {
-        this.image_link = image_link;
     }
 
     public void setAd_price(String price) {
@@ -119,7 +109,6 @@ public class AdvertsModel implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.documentId);
         dest.writeString(this.ad_title);
-        dest.writeString(this.image_link);
         dest.writeString(this.ad_price);
         dest.writeList(this.images);
     }

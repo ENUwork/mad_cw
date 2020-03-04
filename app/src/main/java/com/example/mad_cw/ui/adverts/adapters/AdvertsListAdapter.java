@@ -50,7 +50,7 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
 
         // Populate Recycler View with an Image:
         Glide.with(holder.image_link.getContext())
-                .load(advertsModelList.get(position).getImage_link())
+                .load(advertsModelList.get(position).getImages().get(0))
                 .into(holder.image_link);
 
         // Use 'position' to access the correct 'advert' object:

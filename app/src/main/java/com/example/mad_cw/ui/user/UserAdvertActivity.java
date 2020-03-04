@@ -3,12 +3,14 @@ package com.example.mad_cw.ui.user;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -21,6 +23,7 @@ import com.example.mad_cw.ui.user.adapters.UserAdImageAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -39,20 +42,22 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         Managing User Classified Ads Posting
      */
 
-    /* Class Variables */
-
+    // Class Variables:
     private static final String TAG = "User Profile Post Add";
 
     private static final int PICK_IMAGE = 1;
     private Uri ImageUri;
     private int upload_count = 0;
     private int counter = 0;
+    private int img_count = 0;
 
     // Class Local Temp. Storage | Var:
     private List<String> imagesList = new ArrayList<>();
     private ArrayList<Uri> ImageList = new ArrayList<>();
     private Map<String, Object> advert_info = new HashMap<>();
-    private EditText adPrice, adLoc, adTitle, adDesc;
+    private EditText adPrice, adLoc, adTitle, adDesc, adAge;
+    private TextView upCount;
+    private Spinner spinner;
     private String advert_uid;
 
     // Displaying Selected Images:
@@ -75,6 +80,9 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         // Set Layout for User Post Advert:
         setContentView(R.layout.user_post_ad);
 
+        // Hide Support Menu Bar:
+        // getSupportActionBar().hide();
+
         // Progress Bar:
         setProgressBar(R.id.progressBar);
 
@@ -83,18 +91,23 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         adDesc = findViewById(R.id.post_ad_input_desc);
         adLoc = findViewById(R.id.post_ad_input_location);
         adTitle = findViewById(R.id.post_ad_input_title);
+        adAge = findViewById(R.id.post_ad_input_age);
+
+        upCount = findViewById(R.id.upload_count);
 
         // Set Event Clicks
-        findViewById(R.id.post_ad_select_img_btn).setOnClickListener(this);
-        findViewById(R.id.post_ad_upload_btn).setOnClickListener(this);
+        findViewById(R.id.select_ad_img_btn).setOnClickListener(this);
+        findViewById(R.id.upload_ad_btn).setOnClickListener(this);
+
+        // Set Values
+        upCount.setText(getString(R.string.img_count, "0/10"));
 
         // ____________
         // Set Spinner:
-        Spinner spinner = (Spinner) findViewById(R.id.post_ad_select_condition);
+        spinner = (Spinner) findViewById(R.id.post_ad_select_condition);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.item_condition_wear, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.item_condition_wear, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
@@ -106,22 +119,25 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
     }
 
     // _____________________
-    // class click & select events handler:
+    // class click events handler:
 
     @Override
     public void onClick(View v) {
 
         switch (v.getId()){
 
-            // Updating Profile Picture
-            case R.id.post_ad_select_img_btn:
+            case R.id.select_ad_img_btn:
                 selectAdImages();
                 break;
 
-            // Save Profile Details
-            case R.id.post_ad_upload_btn:
+            case R.id.upload_ad_btn:
+                if (!advertValidation()) {
+                    Toast.makeText(this, "Uh-oh, please fill correctly all fields :)", Toast.LENGTH_LONG).show();
+                    break;
+                }
                 storeAdvert(advert_info);
                 handleImgUpload();
+                finish();
                 break;
 
         }
@@ -141,11 +157,24 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onItemClick(View view, int position) {
 
+        // Get Current RecyclerView Count
+        int img_track = imageListAdapter.getmData().size() - 1;
+
+        // Update Image Count
+        upCount.setText(getString(R.string.img_count,  img_track + "/10"));
+
+        if (img_track == 10) {
+            // Disable Add Images Btn.
+            findViewById(R.id.select_ad_img_btn).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.select_ad_img_btn).setVisibility(View.VISIBLE);
+        }
+
         Toast.makeText(this, "You clicked " + imageListAdapter.getItem(position) + " on row number " + position, Toast.LENGTH_SHORT).show();
     }
 
     // _____________________
-    // image selection & handling methods:
+    // image handling methods:
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -158,6 +187,11 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
                 int countClipData = data.getClipData().getItemCount();
                 int currentImageSelect = 0;
 
+                if (countClipData > 10) {
+                    Toast.makeText(this, "Only 10 Images allowed", Toast.LENGTH_LONG).show();
+                    return;
+                }
+
                 while (currentImageSelect < countClipData){
 
                     ImageUri = data.getClipData().getItemAt(currentImageSelect).getUri();
@@ -166,6 +200,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
 
                     currentImageSelect = currentImageSelect + 1;
                 }
+
                 displayAdImages();
             }
         }
@@ -187,15 +222,11 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
 
     private void displayAdImages() {
 
-        //TODO:
-        // Get the stream of images selected and populate the recycler view with those images,
-        // and on click on them, you can either delete them or view them in bigger resolution.
-
         // Setup the Recycler View:
         RecyclerView recyclerView = findViewById(R.id.recycler_view_img);
 
         // Set the Recycler View as a Gallery View:
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 5); // (Context context, int spanCount)
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 3); // (Context context, int spanCount)
         // Declare the assigned Layout:
         recyclerView.setLayoutManager(mLayoutManager);
 
@@ -203,6 +234,13 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         imageListAdapter.setClickListener(this);
         recyclerView.setAdapter(imageListAdapter);
 
+        // Update Img Counter Track
+        upCount.setText(getString(R.string.img_count,  + imageListAdapter.getmData().size() + "/10"));
+
+        if (imageListAdapter.getmData().size() == 10) {
+            // Disable Add Images Btn.
+            findViewById(R.id.select_ad_img_btn).setVisibility(View.GONE);
+        }
     }
 
     private void handleImgUpload(){
@@ -271,14 +309,18 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         only populated by classified listings.
          */
 
-        System.out.println(advert_info.toString()); // method 1
-
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String user_uid = currentUser.getUid();
 
         // Append more advert info to HashMap:
         advert_info.put("ad_title", adTitle.getText().toString());
         advert_info.put("ad_desc", adDesc.getText().toString());
         advert_info.put("ad_price", adPrice.getText().toString());
-        advert_info.put("ad_loc", adPrice.getText().toString());
+        advert_info.put("ad_loc", adLoc.getText().toString());
+        advert_info.put("ad_cond", spinner.getSelectedView().toString());
+        advert_info.put("ad_age", adAge.getText().toString());
+        advert_info.put("post_time", FieldValue.serverTimestamp());
+        advert_info.put("ad_owner", user_uid);
 
         // Place the new data in the database:
         db.collection("classified_ads")
@@ -300,6 +342,47 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
+    }
+
+    // _____________________
+    // user input validation:
+
+    private boolean advertValidation() {
+        boolean valid = true;
+
+        // Get Form Values:
+        String title = adTitle.getText().toString();
+        String desc = adDesc.getText().toString();
+        String loc = adLoc.getText().toString();
+        String cond = spinner.getSelectedItem().toString();
+
+        // Title Validation:
+        if (TextUtils.isEmpty(title)) {
+            adTitle.setError("Required.");
+            valid = false;
+        } else {
+            adTitle.setError(null);
+        }
+
+        // Description Validation:
+        if (TextUtils.isEmpty(desc)) {
+            adDesc.setError("Required.");
+            valid = false;
+        }
+
+        // Location Validation:
+        if (TextUtils.isEmpty(loc)) {
+            adLoc.setError("Required.");
+            valid = false;
+        }
+
+        // Location Validation:
+        if (TextUtils.isEmpty(cond)) {
+            ((TextView)spinner.getSelectedView()).setError("Required.");
+            valid = false;
+        }
+
+        return valid;
     }
 
 }

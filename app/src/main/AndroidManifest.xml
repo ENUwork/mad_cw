@@ -38,6 +38,7 @@
         <activity android:name=".ui.user.UserAdvertActivity" />
         <activity android:name=".ui.user.UserFavAdsActivity" />
         <activity android:name=".ui.adverts.AdvertInfoActivity" />
+
     </application>
 
 </manifest>
