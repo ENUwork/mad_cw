@@ -119,7 +119,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
     }
 
     // _____________________
-    // class click events handler:
+    // class listeners events handler:
 
     @Override
     public void onClick(View v) {
@@ -235,7 +235,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         recyclerView.setAdapter(imageListAdapter);
 
         // Update Img Counter Track
-        upCount.setText(getString(R.string.img_count,  + imageListAdapter.getmData().size() + "/10"));
+        upCount.setText(getString(R.string.img_count,  imageListAdapter.getmData().size() + "/10"));
 
         if (imageListAdapter.getmData().size() == 10) {
             // Disable Add Images Btn.
@@ -317,7 +317,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         advert_info.put("ad_desc", adDesc.getText().toString());
         advert_info.put("ad_price", adPrice.getText().toString());
         advert_info.put("ad_loc", adLoc.getText().toString());
-        advert_info.put("ad_cond", spinner.getSelectedView().toString());
+        advert_info.put("ad_cond", spinner.getSelectedItem().toString());
         advert_info.put("ad_age", adAge.getText().toString());
         advert_info.put("post_time", FieldValue.serverTimestamp());
         advert_info.put("ad_owner", user_uid);

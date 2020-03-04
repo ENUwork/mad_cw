@@ -52,7 +52,7 @@
         <item name="android:layout_marginBottom"> -8dp </item>
     </style>
 
-    <!--  ADVERT TITLE FIELDS  -->
+    <!--  ADVERT INPUT FIELDS  -->
 
     <style name="inputFiled">
         <item name="android:layout_width"> match_parent </item>
@@ -79,5 +79,21 @@
         <item name="android:dropDownVerticalOffset"> 40dp </item>
         <item name="android:popupBackground">#FFFFFF</item>
     </style>
+
+    <!--  ADVERT VIEW STYLES  -->
+
+    <style name="advertInfoRow">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> match_parent </item>
+        <item name="android:weightSum"> 10 </item>
+    </style>
+
+    <style name="advertInfoRowText">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_weight"> 5 </item>
+    </style>
+
+
 
 </resources>

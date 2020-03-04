@@ -34,23 +34,30 @@ import java.util.List;
    and display fully the advert in great detail.
  */
 
-public class AdvertInfoActivity extends AppCompatActivity implements View.OnClickListener {
+public class AdvertInfoActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
-    // Class Variables:
+    // _____________________
+    // class variables:
 
     private static final String TAG = "AdvertInfo";
 
-    private TextView adTitle, adPrice, adLoc;
-    private String adUid;
-    private ImageView AdImg;
+    private TextView adTitle, adPrice, adLoc, adWheel, adFrame, adAge, adPostTime, adDesc, imgCount;
+    private ImageView adOwnerPic;
+    private ImageButton favBtn_off, favBtn_on;
+
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
-    private ImageButton favBtn_off, favBtn_on;
+
+    private int numImg;
+    private String adUid;
 
     private FirebaseAuth mAuth;
 
     // Access a Cloud Firestore instance from the Activity
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    // _____________________
+    // class activity cycles:
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,20 +67,33 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.advert_detail);
 
         // Layout views:
-        adTitle = (TextView) findViewById(R.id.ad_title_txt);
-        // AdImg = (ImageView) findViewById(R.id.advert_image);
-        adPrice = (TextView) findViewById(R.id.ad_price_txt);
-        adLoc = (TextView) findViewById(R.id.ad_loc_txt);
-        viewPager = (ViewPager) findViewById(R.id.viewPager_ad);
-        favBtn_off = (ImageButton) findViewById(R.id.fav_btn);
-        favBtn_on =  (ImageButton) findViewById(R.id.fav_btn2);
+        adTitle = findViewById(R.id.ad_title_txt);
+        // adOwnerPic = (ImageView) findViewById(R.id.advert_image);
+        adPrice = findViewById(R.id.ad_price_txt);
+        adLoc = findViewById(R.id.ad_loc_txt);
+        adWheel = findViewById(R.id.advert_info_whsize);
+        adFrame = findViewById(R.id.advert_info_frsize);
+        adDesc = findViewById(R.id.advert_info_desc);
+        adAge = findViewById(R.id.advert_info_age);
+        adPostTime = findViewById(R.id.advert_info_post_txt);
 
-        // Set Click Listeners:
+        viewPager = findViewById(R.id.viewPager_ad);
+
+        favBtn_off = findViewById(R.id.fav_btn);
+        favBtn_on = findViewById(R.id.fav_btn2);
+        imgCount = findViewById(R.id.imgCount);
+
+        // Set Listeners:
         findViewById(R.id.fav_btn).setOnClickListener(this);
         findViewById(R.id.fav_btn2).setOnClickListener(this);
 
+        viewPager.addOnPageChangeListener(this);
+
+        // Initialize Firebase Auth
+        mAuth = FirebaseAuth.getInstance();
+
         // Access the Passed data through the intent:
-        AdvertsModel advert = (AdvertsModel) getIntent().getParcelableExtra("advert");
+        AdvertsModel advert = getIntent().getParcelableExtra("advert");
 
         // Check for Object to contain data:
         if (advert != null) {
@@ -82,18 +102,25 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
             viewPagerAdapter = new ViewPagerAdapter(this, advert.getImages());
             viewPager.setAdapter(viewPagerAdapter);
 
-            // Assign AD_Uid:
+            // Get Number of Images:
+            numImg = advert.getImages().size();
+
+            // Set Img Counter:
+            imgCount.setText(getString(R.string.ad_img_count, 1, numImg ));
+
+            // Get Advert_Uid:
             adUid = advert.getDocumentId();
 
-            // Glide.with(this).load(advert.getImages().get(1)).into(AdImg);
-
-            // Set Advert Content:
+            // Populate Advert Content:
+            // Glide.with(this).load(advert.getImages().get(1)).into(adOwnerPic);
             adTitle.setText(advert.getAd_title());
-            adPrice.setText(advert.getAd_price());
-            adLoc.setText(advert.getAd_title());
-
-            // Initialize Firebase Auth
-            mAuth = FirebaseAuth.getInstance();
+            adPrice.setText(getString(R.string.set_ad_price, advert.getAd_price()));
+            adLoc.setText(advert.getAd_loc());
+            adWheel.setText(adUid);
+            adFrame.setText(adUid);
+            adDesc.setText(advert.getAd_desc());
+            adAge.setText(advert.getAd_age());
+            adPostTime.setText(getString(R.string.set_post_time, advert.getPost_time()));
 
         }
     }
@@ -111,6 +138,9 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
          // FirebaseUser currentUser = mAuth.getCurrentUser();
          verify_fav_ad();
     }
+
+    // _____________________
+    // class listeners events handler:
 
     @Override
     public void onClick(View v) {
@@ -136,6 +166,25 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
         }
 
     }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+    }
+
+    @Override
+    public void onPageSelected(int arg0) {
+
+        // Update Image Counter:
+        imgCount.setText(getString(R.string.ad_img_count, (arg0 + 1), numImg ));
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
+    }
+
+    // ______________
+    // user actions handling:
 
     private void removeFavourite(String userUid, String adUid) {
 
@@ -194,6 +243,9 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
                 });
     }
 
+    // _____________________
+    // user input validation:
+
     private void verify_fav_ad() {
 
         // Get Current User UID Num.
@@ -204,26 +256,27 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
                 .document(userUid)
                 .get()
 
-        .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                DocumentSnapshot document = task.getResult();
-                List<String> fav_list = (List<String>) document.get("fav_ads");
+                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                        DocumentSnapshot document = task.getResult();
+                        List<String> fav_list = (List<String>) document.get("fav_ads");
 
-                for (String element : fav_list) {
+                        for (String element : fav_list) {
 
-                    System.out.println(element);
+                            System.out.println(element);
 
-                    if (adUid.equals(element)){
+                            if (adUid.equals(element)){
 
-                        // Hide-Show Buttons Respectively:
-                        favBtn_off.setVisibility(View.GONE);
-                        favBtn_on.setVisibility(View.VISIBLE);
+                                // Hide-Show Buttons Respectively:
+                                favBtn_off.setVisibility(View.GONE);
+                                favBtn_on.setVisibility(View.VISIBLE);
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
 
     }
 
 }
+

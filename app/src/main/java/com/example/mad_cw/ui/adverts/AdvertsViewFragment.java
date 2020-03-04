@@ -105,8 +105,8 @@ public class AdvertsViewFragment extends Fragment {
                     if (doc.getType() == DocumentChange.Type.ADDED) {
 
                         // [Test]
-                        String advert_title = doc.getDocument().getString("image_link");
-                        Log.d(TAG, "Advert : " + advert_title);
+//                        Timestamp advert_title = doc.getDocument().getTimestamp("post_time");
+//                        Log.d(TAG, "Advert : " + advert_title.getSeconds());
 
                         AdvertsModel advertsModel = doc.getDocument().toObject(AdvertsModel.class);
                         adverts_Model_list.add(advertsModel);

@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center" >
+    android:gravity="center"
+    android:background="@color/colorAccent" >
 
     <ScrollView
         android:layout_width="match_parent"
@@ -17,24 +18,47 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <!-- Flip through Ad Images -->
+            <!-- VIEW PAGER SLIDER & IMAGE COUNTER -->
 
-            <androidx.viewpager.widget.ViewPager
-                android:id="@+id/viewPager_ad"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="339dp" >
+                android:layout_height="match_parent">
 
-            </androidx.viewpager.widget.ViewPager>
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/viewPager_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="339dp">
 
-            <TableLayout
+                </androidx.viewpager.widget.ViewPager>
+
+                <TextView
+                    android:id="@+id/imgCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:text="@string/ad_img_count"
+                    android:textColor="#FFFFFF"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:padding="10dp"
+                    android:layout_margin="5sp"
+                    android:background="@color/colorPrimaryDark" />
+
+            </FrameLayout>
+
+            <!-- ADVERT MAIN DETAILS & FAVOURITE BUTTON -->
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="30sp" >
 
                 <TableRow
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="20dp"
-                    android:weightSum="10" >
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="30dp"
+                    android:weightSum="10">
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -47,20 +71,23 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ad_title"
-                            android:textSize="30sp" />
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="25sp" />
 
                         <TextView
                             android:id="@+id/ad_price_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ad_price"
-                            android:textSize="25sp" />
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="23sp" />
 
                         <TextView
                             android:id="@+id/ad_loc_txt"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ad_loc"
+                            android:textColor="@color/colorPrimaryDark"
                             android:textSize="20sp" />
 
                     </LinearLayout>
@@ -79,17 +106,102 @@
                         android:id="@+id/fav_btn2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:visibility="gone"
+                        android:layout_weight="1"
                         android:backgroundTint="@color/colorPrimary"
                         android:tint="@color/colorAccent"
-                        android:layout_weight="1"
+                        android:visibility="gone"
                         app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+                </TableRow>
+            </LinearLayout>
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="30dp"
+                android:background="#FFFFFF" >
+
+                <TableRow
+                    style="@style/advertInfoRow" >
+
+                    <TextView
+                        style="@style/advertInfoRowText"
+                        android:text="Wheel Size" />
+
+                    <TextView
+                        android:id="@+id/advert_info_whsize"
+                        style="@style/advertInfoRowText"
+                        android:text="TextView" />
+
+                </TableRow>
+
+                <TableRow
+                    style="@style/advertInfoRow" >
+
+                    <TextView
+                        style="@style/advertInfoRowText"
+                        android:text="@string/set_frame_size" />
+
+                    <TextView
+                        android:id="@+id/advert_info_frsize"
+                        style="@style/advertInfoRowText"
+                        android:text="TextView" />
+
+                </TableRow>
+
+                <TableRow
+                    style="@style/advertInfoRow" >
+
+                    <TextView
+                        style="@style/advertInfoRowText"
+                        android:text="@string/set_bike_age" />
+
+                    <TextView
+                        android:id="@+id/advert_info_age"
+                        style="@style/advertInfoRowText"
+                        android:text="TextView" />
 
                 </TableRow>
 
             </TableLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginVertical="30dp"
+                android:layout_marginHorizontal="30sp" >
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ad_desc"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/advert_info_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimaryDark" />
+
+                <TextView
+                    android:id="@+id/advert_info_post_txt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/set_post_time" />
+            </LinearLayout>
+
+            <!--    CONTACT SELLER BTN.    -->
+
+            <Button
+                android:id="@+id/upload_ad_btn"
+                style="@style/btn_main"
+                android:text="@string/contact_txt" />
+
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

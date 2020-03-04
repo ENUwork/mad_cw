@@ -47,7 +47,7 @@ public class ViewPagerAdapter extends PagerAdapter {
         layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         // Locate Target Layout:
-        View view = layoutInflater.inflate(R.layout.image_slider, null);
+        View view = layoutInflater.inflate(R.layout.advert_info_img, null);
 
         // Locate View:
         ImageView imageView = (ImageView) view.findViewById(R.id.imageVal);
