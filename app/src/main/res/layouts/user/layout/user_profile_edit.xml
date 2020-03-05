@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--  USER EDIT INFO LAYOUT  -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="50dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- USER INPUT [?] VIEW USERNAME FIELD -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/username_field" />
+
+        <EditText
+            android:id="@+id/account_username"
+            style="@style/userProfileInputField" />
+
+        <!-- USER INPUT [?] VIEW ACCOUNT LOCATION FIELD -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/location_field" />
+
+        <EditText
+            android:id="@+id/account_location"
+            style="@style/userProfileInputField" />
+
+        <!-- USER INPUT [?] VIEW EMAIL FIELD -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/email_field" />
+
+        <EditText
+            android:id="@+id/account_email"
+            style="@style/userProfileInputField" />
+
+        <!-- USER INPUT [?] VIEW FIRST NAME FIELD -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/f_name" />
+
+        <EditText
+            android:id="@+id/account_first_name"
+            style="@style/userProfileInputField" />
+
+        <!-- UPDATE PROFILE PICTURE Btn. -->
+
+        <Button
+            android:id="@+id/updateProfilePic"
+            style="@style/btn_user"
+            android:text="Update Profile Picture" />
+
+        <!-- SAVE PROFILE Btn. -->
+
+        <Button
+            android:id="@+id/saveAccount"
+            style="@style/btn_user"
+            android:text="Save Settings" />
+
+    </LinearLayout>
+</LinearLayout>

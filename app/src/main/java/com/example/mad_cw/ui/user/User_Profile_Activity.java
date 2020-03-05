@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -34,15 +36,17 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
-public class UserActivity extends BaseActivity implements View.OnClickListener {
+public class User_Profile_Activity extends BaseActivity implements View.OnClickListener {
 
     /*
         Handles User & its Activity:
      */
 
     // Class Variables:
-    private static final String TAG = "UserActivity";
+    private static final String TAG = "User_Profile_Activity";
     private static final int PICK_IMAGE = 1;
 
     // MainActivity Profile View:
@@ -50,10 +54,17 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
     private ImageView ProPic;
 
     private EditText fName, userLoc, userEmail, userName;
-    private LinearLayout mainInfoLayout,userEditLayout;
+    private LinearLayout mainInfoLayout, userEditLayout;
+
+    private Map<String, Object> user_updateHMap = new HashMap<>();
+
+    private Animation slideUp, slideDown;
 
     // Access to Firebase Authentication from the Activity
     private FirebaseAuth mAuth;
+
+    // Access a Cloud Firestore instance from the Activity
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // _____________________
     // class activity cycles:
@@ -63,17 +74,22 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Sign In:
-        setContentView(R.layout.user_layout);
+        setContentView(R.layout.user_profile_layout);
 
         // Layout View:
         mainInfoLayout = findViewById(R.id.main_user_layout);
         userEditLayout = findViewById(R.id.user_edit_layout);
+
         ProPic = findViewById(R.id.userProfilePic);
         UserUidNum = findViewById(R.id.textView);
         fName = findViewById(R.id.account_first_name);
         userName = findViewById(R.id.account_username);
         userLoc = findViewById(R.id.account_location);
         userEmail = findViewById(R.id.account_email);
+
+        // Animations:
+        slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down);
+        slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up);
 
         // Click Events Setters
         findViewById(R.id.signOutButton).setOnClickListener(this);
@@ -82,6 +98,8 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         findViewById(R.id.user_profile_ad_btn).setOnClickListener(this);
         findViewById(R.id.fav_ads_btn).setOnClickListener(this);
         findViewById(R.id.updateProfilePic).setOnClickListener(this);
+        findViewById(R.id.saveAccount).setOnClickListener(this);
+        findViewById(R.id.user_profile_myAds_btn).setOnClickListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -103,35 +121,42 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
 
         switch (v.getId()) {
 
-            case R.id.signOutButton:
-                signOut();
-                break;
-
             case R.id.fav_ads_btn:
-                Intent fav_ads = new Intent(this, UserFavAdsActivity.class);
+                Intent fav_ads = new Intent(this, User_Adverts_Favourite_Activity.class);
                 startActivity(fav_ads);
                 break;
 
             case R.id.user_profile_ad_btn:
-                Intent post_ad = new Intent(this, UserAdvertActivity.class);
+                Intent post_ad = new Intent(this, User_Advert_Create_Activity.class);
                 startActivity(post_ad);
                 break;
 
-            case R.id.accountDetailsBtn:
-
-                userEditLayout.setVisibility(View.VISIBLE);
-                mainInfoLayout.setVisibility(View.GONE);
+            case R.id.user_profile_myAds_btn:
+                Intent personal_ad = new Intent(this, User_Adverts_Personal_Activity.class);
+                startActivity(personal_ad);
                 break;
 
             case R.id.updateProfilePic:
                 selectProfilePic();
                 break;
 
-            case R.id.saveAccount:
+            case R.id.accountDetailsBtn:
+                mainInfoLayout.setVisibility(View.GONE);
+                // userEditLayout.startAnimation(slideUp);
+                userEditLayout.setVisibility(View.VISIBLE);
                 break;
 
-        }
+            case R.id.saveAccount:
+                updateProfileInfo();
+                mainInfoLayout.setVisibility(View.VISIBLE);
+                // userEditLayout.startAnimation(slideDown);
+                userEditLayout.setVisibility(View.GONE);
+                break;
 
+            case R.id.signOutButton:
+                signOut();
+                break;
+        }
     }
 
     // _____________________
@@ -158,7 +183,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
                 }
 
                 ProPic.setImageBitmap(bitmap);
-                handleUpload(bitmap);
+                handleImageUpload(bitmap);
             }
         }
     }
@@ -176,7 +201,7 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
         startActivityForResult(chooserIntent, PICK_IMAGE);
     }
 
-    private void handleUpload(Bitmap bitmap){
+    private void handleImageUpload(Bitmap bitmap){
 
         // Handle Image
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -238,6 +263,36 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
 
         // Refresh the UI Page:
         onStart();
+    }
+
+    private void updateProfileInfo() {
+
+        // Get Current User:
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String uid = currentUser.getUid();
+
+        user_updateHMap.put("email", userEmail.getText().toString());
+        user_updateHMap.put("location", userLoc.getText().toString());
+        user_updateHMap.put("username", userName.getText().toString());
+        user_updateHMap.put("first_name",fName.getText().toString());
+
+        // Add a new document with a generated ID
+        db.collection("users")
+                .document(uid)
+                .update(user_updateHMap)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void Void) {
+                        // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.w(TAG, "User Successfully Registered");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
 
     }
 
@@ -286,10 +341,6 @@ public class UserActivity extends BaseActivity implements View.OnClickListener {
             // [ Test Env ]
             // findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
             // UserUidNum.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
-        } else {
-
-            // Nothing happens
 
         }
     }

@@ -9,6 +9,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -26,11 +30,12 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 // Implementing Fragments:
 
-public class AdvertsViewFragment extends Fragment {
+public class AdvertsViewFragment extends Fragment implements View.OnClickListener {
 
     // Fragment (Class) Variables:
 
@@ -40,12 +45,20 @@ public class AdvertsViewFragment extends Fragment {
     private AdvertsListAdapter advertsListAdapter;
     private List<AdvertsModel> adverts_Model_list;
 
+    private CheckBox w26, w275, w29,
+            fXS, fS, fM, fL, fXL, fXXL,
+            m, ln, vw, b, rp;
+
     private SearchView searchField;
+    private LinearLayout mainLayout, refineLayout;
+
+    private Animation slideDown, slideUp;
 
     // Access a Cloud Firestore instance from the Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // ________________
+    // activity cycle methods:
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -53,15 +66,41 @@ public class AdvertsViewFragment extends Fragment {
         // Setting the View for Fragment:
         View root = inflater.inflate(R.layout.adverts_layout, container, false);
 
-        // Instantiating Local Class Variables:
-        searchField = (SearchView) root.findViewById(R.id.searchField);
+        // Set Up Variables
+        searchField = root.findViewById(R.id.searchField);
+        refineLayout = root.findViewById(R.id.refine_search_layout);
+        mainLayout = root.findViewById(R.id.adverts_view_main_layout);
+
+        // Set Listeners:
+        root.findViewById(R.id.refine_search_btn).setOnClickListener(this);
+        root.findViewById(R.id.refine_apply_btn).setOnClickListener(this);
+
+        // Identify CheckBoxes:
+        w26 = root.findViewById(R.id.filter_wheels_size_26);
+        w275 = root.findViewById(R.id.filter_wheels_size_275);
+        w29 = root.findViewById(R.id.filter_wheels_size_29);
+        fXS = root.findViewById(R.id.filter_frame_size_XS);
+        fS = root.findViewById(R.id.filter_frame_size_S);
+        fM = root.findViewById(R.id.filter_frame_size_M);
+        fL = root.findViewById(R.id.filter_frame_size_L);
+        fXL = root.findViewById(R.id.filter_frame_size_XL);
+        fXXL = root.findViewById(R.id.filter_frame_size_XXL);
+        m = root.findViewById(R.id.filter_condition_MINT);
+        ln = root.findViewById(R.id.filter_condition_LN);
+        vw = root.findViewById(R.id.filter_condition_VW);
+        b = root.findViewById(R.id.filter_condition_B);
+        rp = root.findViewById(R.id.filter_condition_RP);
+
+        // Animations:
+        slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
+        slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
 
         // Dealing with Instantiating the Recycler View & the View Holder:
         adverts_Model_list = new ArrayList<>();
         advertsListAdapter = new AdvertsListAdapter(adverts_Model_list);
 
         // Recycler View Config:
-        mAdverts_List = (RecyclerView) root.findViewById(R.id.adverts_recycler_view);
+        mAdverts_List = root.findViewById(R.id.adverts_recycler_view);
         mAdverts_List.setHasFixedSize(true);
         mAdverts_List.setAdapter(advertsListAdapter);
 
@@ -81,7 +120,9 @@ public class AdvertsViewFragment extends Fragment {
         return root;
     }
 
-    // Get & Listen to DB Changes:
+    // ________________
+    // handling adverts methods:
+
     private void getAdvertsData() {
 
         /* (This) Class Method gets all of the documents from Firebase Firestore
@@ -118,7 +159,6 @@ public class AdvertsViewFragment extends Fragment {
             });
     }
 
-    // Search Query Listen:
     private void searchQuery() {
 
         searchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -146,7 +186,6 @@ public class AdvertsViewFragment extends Fragment {
         });
     }
 
-    // Filter Method:
     private void filter(String text){
 
         List<AdvertsModel> temp = new ArrayList();
@@ -162,4 +201,70 @@ public class AdvertsViewFragment extends Fragment {
         advertsListAdapter.updateList(temp);
     }
 
+    private void refineSearchSelect() {
+
+        List<String> filter_list = new ArrayList<String>();
+
+        String item_val;
+
+        List<CheckBox> items = new ArrayList<CheckBox>(Arrays.asList(w26, w275, w29, fXS, fS, fM, fL, fXL, fXXL, m, ln, vw, b, rp));
+        for (CheckBox item : items){
+            if(item.isChecked()) {
+
+                item_val = item.getText().toString();
+
+                filter_list.add(item_val);
+            }
+        }
+
+        refineSearchFilter(filter_list);
+    }
+
+    private void refineSearchFilter(List<String> filter) {
+
+        // Get the Object Other Data Info:
+
+        List<AdvertsModel> temp = new ArrayList();
+
+        for(AdvertsModel d: adverts_Model_list){
+
+            // Compare arrays
+            ArrayList<String> filter_values = new ArrayList<>(filter);
+            ArrayList<String> advert_values = new ArrayList<>(d.getAd_other());
+
+            filter_values.retainAll(advert_values);
+
+            System.out.println(filter_values);
+            if(filter_values.size() > 0){
+                temp.add(d);
+            }
+        }
+
+        // Update Recycler View
+        advertsListAdapter.updateList(temp);
+    }
+
+    // _____________
+    // user click handling:
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.refine_search_btn:
+                mainLayout.setVisibility(View.GONE);
+                refineLayout.setVisibility(View.VISIBLE);
+                refineLayout.startAnimation(slideUp);
+                break;
+
+            case R.id.refine_apply_btn:
+                refineLayout.setVisibility(View.GONE);
+                refineLayout.startAnimation(slideDown);
+                mainLayout.setVisibility(View.VISIBLE);
+                refineSearchSelect();
+                break;
+        }
+
+    }
 }

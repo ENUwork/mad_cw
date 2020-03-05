@@ -38,15 +38,13 @@ public class HomeFragment extends Fragment {
     // Access a Cloud Firestore instance from the Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    // ________________
+    // _____________________
+    // class fragment cycles:
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_home, container, false);
-
-        // Views:
-
 
         // Dealing with Instantiating the Recycler View & the View Holder:
         adverts_Model_list = new ArrayList<>();
@@ -71,7 +69,10 @@ public class HomeFragment extends Fragment {
         return root;
     }
 
-    // Get & Listen to DB Changes:
+
+    // _____________________
+    // data-intent handling methods:
+
     private void getAdvertsData() {
 
         /* Method used to get the first 2 (newest ads first) and populate the "new" ads container */
@@ -108,4 +109,5 @@ public class HomeFragment extends Fragment {
                     }
                 });
     }
+
 }

@@ -1,32 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!--  Recycler View for AdvertsModel  -->
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/adverts_view_main_layout" >
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="match_parent">
 
-            <SearchView
-                android:id="@+id/searchField"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible">
 
-            </SearchView>
+                <SearchView
+                    android:id="@+id/searchField"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/adverts_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                </SearchView>
 
-        </LinearLayout>
-    </ScrollView>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/adverts_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+
+                    <Button
+                        android:id="@+id/refine_search_btn"
+                        style="@style/btn_main"
+                        android:layout_gravity="bottom|right"
+                        android:text="@string/refine_txt" />
+
+                </FrameLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <!-- REFINE SEARCH VIEW LAYOUT -->
+
+    <LinearLayout
+        android:id="@+id/refine_search_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="gone" >
+
+        <include
+            layout="@layout/adverts_refine_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 
 </LinearLayout>

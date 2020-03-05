@@ -32,11 +32,12 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class UserAdvertActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, UserAdImageAdapter.ItemClickListener {
+public class User_Advert_Create_Activity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, UserAdImageAdapter.ItemClickListener {
 
     /*
         Managing User Classified Ads Posting
@@ -55,10 +56,12 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
     private List<String> imagesList = new ArrayList<>();
     private ArrayList<Uri> ImageList = new ArrayList<>();
     private Map<String, Object> advert_info = new HashMap<>();
+    private Map<String, List<String>> imagesHash = new HashMap<>();
     private EditText adPrice, adLoc, adTitle, adDesc, adAge;
     private TextView upCount;
-    private Spinner spinner;
     private String advert_uid;
+
+    private Spinner spinnerCondition, spinnerWheels, spinnerFrame;
 
     // Displaying Selected Images:
     private RecyclerView imgRecycler;
@@ -78,7 +81,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Post Advert:
-        setContentView(R.layout.user_post_ad);
+        setContentView(R.layout.user_advert_create);
 
         // Hide Support Menu Bar:
         // getSupportActionBar().hide();
@@ -102,17 +105,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         // Set Values
         upCount.setText(getString(R.string.img_count, "0/10"));
 
-        // ____________
-        // Set Spinner:
-        spinner = (Spinner) findViewById(R.id.post_ad_select_condition);
-
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.item_condition_wear, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        spinnerData();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -136,12 +129,9 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
                     break;
                 }
                 storeAdvert(advert_info);
-                handleImgUpload();
                 finish();
                 break;
-
         }
-
     }
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
@@ -243,6 +233,51 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         }
     }
 
+    private void storeAdvert(Map<String, Object> advert_info) {
+
+        /*
+        A method used to store the advert data in a separate collection,
+        only populated by classified listings.
+         */
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        String user_uid = currentUser.getUid();
+
+        // Append more advert single:
+        advert_info.put("ad_title", adTitle.getText().toString());
+        advert_info.put("ad_desc", adDesc.getText().toString());
+        advert_info.put("ad_price", adPrice.getText().toString());
+        advert_info.put("ad_loc", adLoc.getText().toString());
+        advert_info.put("ad_age", adAge.getText().toString());
+        advert_info.put("post_time", FieldValue.serverTimestamp());
+        advert_info.put("ad_owner", user_uid);
+        advert_info.put("ad_other", Arrays.asList(spinnerCondition.getSelectedItem().toString(),
+                spinnerWheels.getSelectedItem().toString(), spinnerFrame.getSelectedItem().toString()));
+
+        // Place the new data in the database:
+        db.collection("classified_ads")
+                .add(advert_info)
+
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+
+                        // Store the Advert UID For Posting the Images:
+                        advert_uid = documentReference.getId();
+                        storeAdvertUser();
+                        handleImgUpload();
+                    }
+                })
+
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG, "Error adding document", e);
+                    }
+                });
+    }
+
     private void handleImgUpload(){
 
         showProgressBar();
@@ -273,8 +308,6 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
 
                             // Store Image_Links:
                             // imagesList.add(url);
-                            // advert_info.put("images", FieldValue.arrayUnion(url));
-                            System.out.println(advert_info.toString()); // method 1
 
                             // Place the new data in the database:
                             db.collection("classified_ads")
@@ -302,37 +335,22 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         }
     }
 
-    private void storeAdvert(Map<String, Object> advert_info) {
+    private void storeAdvertUser() {
 
-        /*
-        A method used to store the advert data in a separate collection,
-        only populated by classified listings.
-         */
-
+        // Get Current User UID Num.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        String user_uid = currentUser.getUid();
+        String userUid = currentUser.getUid();
 
-        // Append more advert info to HashMap:
-        advert_info.put("ad_title", adTitle.getText().toString());
-        advert_info.put("ad_desc", adDesc.getText().toString());
-        advert_info.put("ad_price", adPrice.getText().toString());
-        advert_info.put("ad_loc", adLoc.getText().toString());
-        advert_info.put("ad_cond", spinner.getSelectedItem().toString());
-        advert_info.put("ad_age", adAge.getText().toString());
-        advert_info.put("post_time", FieldValue.serverTimestamp());
-        advert_info.put("ad_owner", user_uid);
+        // Add advert to fav_ads user array:
+        db.collection("users")
+                .document(userUid)
+                .update("my_ads", FieldValue.arrayUnion(advert_uid))
 
-        // Place the new data in the database:
-        db.collection("classified_ads")
-                .add(advert_info)
-
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-
-                        // Store the Advert UID For Posting the Images:
-                        advert_uid = documentReference.getId();
+                    public void onSuccess(Void Void) {
+                        // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
+                        Log.w(TAG, "User Successfully Registered");
                     }
                 })
 
@@ -354,7 +372,7 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
         String title = adTitle.getText().toString();
         String desc = adDesc.getText().toString();
         String loc = adLoc.getText().toString();
-        String cond = spinner.getSelectedItem().toString();
+        String cond = spinnerCondition.getSelectedItem().toString();
 
         // Title Validation:
         if (TextUtils.isEmpty(title)) {
@@ -378,11 +396,45 @@ public class UserAdvertActivity extends BaseActivity implements View.OnClickList
 
         // Location Validation:
         if (TextUtils.isEmpty(cond)) {
-            ((TextView)spinner.getSelectedView()).setError("Required.");
+            ((TextView)spinnerCondition.getSelectedView()).setError("Required.");
             valid = false;
         }
 
+        // Images Validation:
+
         return valid;
+    }
+
+    // _____________________
+    // class data population:
+
+    private void spinnerData() {
+
+        // locate spinners
+        spinnerCondition = (Spinner) findViewById(R.id.post_ad_select_condition);
+        spinnerWheels = (Spinner) findViewById(R.id.spinnerWheelSize);
+        spinnerFrame = (Spinner) findViewById(R.id.spinnerFrameSize);
+
+        // create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapterCondition = ArrayAdapter.createFromResource(this, R.array.item_condition_wear, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterWheels = ArrayAdapter.createFromResource(this, R.array.bike_wheel_size, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterFrame= ArrayAdapter.createFromResource(this, R.array.bike_frame_size, android.R.layout.simple_spinner_item);
+
+
+        // specify the layout to use when the list of choices appears
+        adapterCondition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterWheels.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterFrame.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        // apply the adapter to the spinner(s)
+        spinnerCondition.setAdapter(adapterCondition);
+        spinnerWheels.setAdapter(adapterWheels);
+        spinnerFrame.setAdapter(adapterFrame);
+
+        // set spinner listeners:
+        spinnerCondition.setOnItemSelectedListener(this);
+        spinnerWheels.setOnItemSelectedListener(this);
+        spinnerFrame.setOnItemSelectedListener(this);
     }
 
 }

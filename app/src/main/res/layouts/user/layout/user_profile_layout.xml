@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true" >
+
+    <!--  SCROLLABLE CONTAINER  -->
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30sp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:animateLayoutChanges="true" >
+
+            <!--  USER PROFILE IMAGE  -->
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/userProfilePic"
+                android:layout_width="125dp"
+                android:layout_height="125dp"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <!--  USER WELCOME MESSAGE  -->
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                android:text="Hello"
+                android:textAlignment="center"
+                android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <!--  USER MAIN INFO LAYOUT  -->
+
+            <LinearLayout
+                android:id="@+id/main_user_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="50dp"
+                android:orientation="vertical">
+
+                <!-- USER ACCOUNT EDIT INFO REDIRECT Btn. -->
+
+                <Button
+                    android:id="@+id/accountDetailsBtn"
+                    style="@style/btn_user"
+                    android:drawableStart="@drawable/ic_menu_account"
+                    android:text="Account Details" />
+
+                <!-- USER PEDAL TRIBE FEEDBACK REDIRECT Btn. -->
+
+                <Button
+                    android:id="@+id/pedal_tribe_feedback_btn"
+                    style="@style/btn_user"
+                    android:fontFamily="@font/ubuntu_bold_italic"
+                    android:text="@string/pedal_T"
+                    android:textSize="18sp" />
+
+                <!-- USER ADVERT CREATE Btn. -->
+
+                <Button
+                    android:id="@+id/user_profile_ad_btn"
+                    style="@style/btn_user"
+                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:text="@string/post_ad" />
+
+                <!-- USER PERSONAL ADVERTS Btn. -->
+
+                <Button
+                    android:id="@+id/user_profile_myAds_btn"
+                    style="@style/btn_user"
+                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:text="@string/my_ads_txt" />
+
+                <!-- USER FAVOURITE ADVERTS Btn. -->
+
+                <Button
+                    android:id="@+id/fav_ads_btn"
+                    style="@style/btn_user"
+                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:text="@string/fav_ads_txt" />
+
+                <!-- USER SING OUT Btn. -->
+
+                <Button
+                    android:id="@+id/signOutButton"
+                    style="@style/btn_user"
+                    android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
+                    android:text="@string/sign_out_txt" />
+
+            </LinearLayout>
+
+            <!-- USER EDIT [?] VIEW PROFILE LAYOUT -->
+
+            <LinearLayout
+                android:id="@+id/user_edit_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:visibility="gone"
+                android:animateLayoutChanges="true" >
+
+                <include
+                    layout="@layout/user_profile_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

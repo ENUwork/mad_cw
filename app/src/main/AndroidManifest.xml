@@ -12,6 +12,7 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
@@ -31,12 +32,13 @@
         <activity android:name=".BaseActivity" />
 
         <!-- User Activities -->
-        <activity android:name=".ui.user.UserAuthActivity" />
-        <activity android:name=".ui.user.UserActivity" />
+        <activity android:name=".ui.user.User_Auth_Activity" />
+        <activity android:name=".ui.user.User_Profile_Activity" />
 
         <!-- Classified Ads Activities -->
-        <activity android:name=".ui.user.UserAdvertActivity" />
-        <activity android:name=".ui.user.UserFavAdsActivity" />
+        <activity android:name=".ui.user.User_Advert_Create_Activity" />
+        <activity android:name=".ui.user.User_Adverts_Favourite_Activity" />
+        <activity android:name=".ui.user.User_Adverts_Personal_Activity"/>
         <activity android:name=".ui.adverts.AdvertInfoActivity" />
 
     </application>

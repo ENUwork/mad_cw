@@ -10,9 +10,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.adapters.ViewPagerAdapter;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -34,7 +34,7 @@ import java.util.List;
    and display fully the advert in great detail.
  */
 
-public class AdvertInfoActivity extends AppCompatActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class AdvertInfoActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     // _____________________
     // class variables:
@@ -68,7 +68,6 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
 
         // Layout views:
         adTitle = findViewById(R.id.ad_title_txt);
-        // adOwnerPic = (ImageView) findViewById(R.id.advert_image);
         adPrice = findViewById(R.id.ad_price_txt);
         adLoc = findViewById(R.id.ad_loc_txt);
         adWheel = findViewById(R.id.advert_info_whsize);
@@ -76,17 +75,15 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
         adDesc = findViewById(R.id.advert_info_desc);
         adAge = findViewById(R.id.advert_info_age);
         adPostTime = findViewById(R.id.advert_info_post_txt);
-
         viewPager = findViewById(R.id.viewPager_ad);
-
         favBtn_off = findViewById(R.id.fav_btn);
         favBtn_on = findViewById(R.id.fav_btn2);
         imgCount = findViewById(R.id.imgCount);
+        // adOwnerPic = (ImageView) findViewById(R.id.advert_image);
 
         // Set Listeners:
         findViewById(R.id.fav_btn).setOnClickListener(this);
         findViewById(R.id.fav_btn2).setOnClickListener(this);
-
         viewPager.addOnPageChangeListener(this);
 
         // Initialize Firebase Auth
@@ -116,8 +113,8 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
             adTitle.setText(advert.getAd_title());
             adPrice.setText(getString(R.string.set_ad_price, advert.getAd_price()));
             adLoc.setText(advert.getAd_loc());
-            adWheel.setText(adUid);
-            adFrame.setText(adUid);
+            adWheel.setText(advert.getAd_other().get(1));
+            adFrame.setText(advert.getAd_other().get(2));
             adDesc.setText(advert.getAd_desc());
             adAge.setText(advert.getAd_age());
             adPostTime.setText(getString(R.string.set_post_time, advert.getPost_time()));
@@ -129,14 +126,10 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
     public void onStart() {
         super.onStart();
 
-        /*
-        Verify if user is signed in,
-        check if this ad is one of users favourite ads,
-        if so, change the favourite icon accordingly.
-        */
-
-         // FirebaseUser currentUser = mAuth.getCurrentUser();
-         verify_fav_ad();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null){
+            verify_fav_ad();
+        }
     }
 
     // _____________________
@@ -147,6 +140,12 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
 
         // Get Current User UID Num.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null){
+            Toast.makeText(this, " ☺  Please sing in/up to enable this feature", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         String userUid = currentUser.getUid();
 
         switch (v.getId()) {
@@ -156,7 +155,6 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
                 Toast.makeText(this, "Removed from Favourites", Toast.LENGTH_SHORT).show();
                 removeFavourite(userUid, adUid);
                 break;
-
 
             // Set Add as Favourite:
             case R.id.fav_btn:
@@ -244,7 +242,7 @@ public class AdvertInfoActivity extends AppCompatActivity implements View.OnClic
     }
 
     // _____________________
-    // user input validation:
+    // user validation:
 
     private void verify_fav_ad() {
 

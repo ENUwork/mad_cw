@@ -3,16 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_home" >
 
     <!--
     This layout is responsible for the redirects inside the
     navigation drawer/pane.
       -->
 
-    <!--
-    Main Fragments NavigationDrawer / Pane
-    -->
+    <!-- MAIN FRAGMENT START APP -->
 
     <fragment
         android:id="@+id/nav_home"
@@ -20,9 +18,7 @@
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
-    <!--
-    Adverts Fragment Redirect
-    -->
+    <!-- ADVERTS FRAGMENT REDIRECT -->
 
     <fragment
         android:id="@+id/nav_adverts"
@@ -30,14 +26,12 @@
         android:label="@string/menu_adverts"
         tools:layout="@layout/adverts_layout" />
 
-    <!--
-    User Activity Redirect
-    -->
+    <!-- USERS ACTIVITY REDIRECT FRAGMENT REDIRECT -->
 
     <activity
         android:id="@+id/nav_account"
-        android:name="com.example.mad_cw.ui.user.UserAuthActivity"
+        android:name="com.example.mad_cw.ui.user.User_Auth_Activity"
         android:label="@string/menu_account_profile"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/user_auth" />
 
 </navigation>

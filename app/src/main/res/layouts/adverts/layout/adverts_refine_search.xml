@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refine_search_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <TableRow
+        style="@style/refineRowLayout" >
+
+        <TextView
+            style="@style/refineRowLayoutText"
+            android:text="@string/set_wheel_size" />
+
+        <CheckBox
+            android:id="@+id/filter_wheels_size_26"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text='26"' />
+
+        <CheckBox
+            android:id="@+id/filter_wheels_size_275"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text='27,5"' />
+
+        <CheckBox
+            android:id="@+id/filter_wheels_size_29"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text='29"' />
+
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TableRow
+        style="@style/refineRowLayout" >
+
+        <TextView
+            style="@style/refineRowLayoutText"
+            android:text="@string/ad_frame" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/filter_frame_size_XS"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X-Small" />
+
+                <CheckBox
+                    android:id="@+id/filter_frame_size_S"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Small" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/filter_frame_size_M"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Medium" />
+
+                <CheckBox
+                    android:id="@+id/filter_frame_size_L"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Large" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/filter_frame_size_XL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="X-Large" />
+
+                <CheckBox
+                    android:id="@+id/filter_frame_size_XXL"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="XX-Large" />
+            </TableRow>
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TableRow
+        style="@style/refineRowLayout" >
+
+        <TextView
+            style="@style/refineRowLayoutText"
+            android:text="@string/ad_cond" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="3"
+            android:orientation="vertical">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/filter_condition_MINT"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mint" />
+
+                <CheckBox
+                    android:id="@+id/filter_condition_LN"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Like New" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/filter_condition_VW"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Visible Wear" />
+
+                <CheckBox
+                    android:id="@+id/filter_condition_B"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Broken" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <CheckBox
+                    android:id="@+id/filter_condition_RP"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Repair Required" />
+            </TableRow>
+
+        </LinearLayout>
+
+    </TableRow>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/colorPrimaryDark" />
+
+    <TableRow
+        style="@style/refineRowLayout" >
+
+        <TextView
+            style="@style/refineRowLayoutText"
+            android:text="@string/ad_price" />
+
+        <EditText
+            android:id="@+id/filter_price_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="5"
+            android:hint="Min."
+            android:inputType="number" />
+
+        <View
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:background="?android:attr/listDivider" />
+
+        <EditText
+            android:id="@+id/filter_price_max"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="5"
+            android:hint="Max."
+            android:inputType="number" />
+
+    </TableRow>
+
+    <Button
+        android:id="@+id/refine_apply_btn"
+        style="@style/btn_main"
+        android:text="@string/search_txt" />
+
+</LinearLayout>

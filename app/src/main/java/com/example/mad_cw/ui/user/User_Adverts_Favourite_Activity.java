@@ -24,7 +24,7 @@ import java.util.List;
 
 /* (This) Class Deals with the Display of Users favorite Ads */
 
-public class UserFavAdsActivity extends BaseActivity {
+public class User_Adverts_Favourite_Activity extends BaseActivity {
 
     // Fragment (Class) Variables:
 
@@ -51,7 +51,7 @@ public class UserFavAdsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Sign In
-        setContentView(R.layout.user_fav_ads);
+        setContentView(R.layout.user_advert_favourite);
 
         // Instantiating Local Class Variables:
         searchField = (SearchView) findViewById(R.id.searchField);

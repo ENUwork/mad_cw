@@ -19,11 +19,13 @@ import java.util.List;
 
 public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> {
 
-    // Class Variables:
+    // ________________
+    // class variables:
 
     // Holds list of AdvertsModel Data:
     public List<AdvertsModel> advertsModelList;
 
+    // ________________
     // Class (AdvertsListAdapter) [Public] Constructor [1 Args]:
     public AdvertsListAdapter(List<AdvertsModel> advertsModelList) {
 
@@ -60,23 +62,12 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
         holder.bindAdverts(a);
     }
 
-     // private final int limit = 2;
-
     @Override
     public int getItemCount() {
 
         /* Method Counts the number of items that are displayed in the
            list, to then use with the recyclerView.
          */
-
-        // [Test]:
-//        if(advertsModelList.size() > limit){
-//            return limit;
-//        }
-//        else
-//        {
-//            return advertsModelList.size();
-//        }
 
           return advertsModelList.size();
     }

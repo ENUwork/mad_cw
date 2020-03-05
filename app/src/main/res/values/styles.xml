@@ -36,6 +36,32 @@
         <item name="android:textAlignment"> center </item>
     </style>
 
+    <style name="btn_user">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginVertical"> 10dp </item>
+        <item name="android:background"> @drawable/border_input </item>
+        <item name="android:backgroundTint"> @color/colorAccent </item>
+        <item name="android:fontFamily"> @font/raleway_semibold </item>
+        <item name="android:paddingLeft"> 20dp </item>
+        <item name="android:textAlignment"> textStart </item>
+        <item name="android:textAllCaps"> false </item>
+        <item name="android:textColor"> @color/common_google_signin_btn_text_dark_focused </item>
+        <item name="android:textSize"> 16sp </item>
+        <item name="android:drawablePadding"> 15sp </item>
+    </style>
+
+    <style name="userProfileInputField">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_marginVertical"> 10dp </item>
+        <item name="android:background"> @drawable/border_input </item>
+        <item name="android:ems"> 10 </item>
+        <item name="android:inputType"> textEmailAddress </item>
+        <item name="android:padding"> 10dp </item>
+        <item name="android:textAlignment"> textStart </item>
+    </style>
+
     <!--  ADVERT INPUT TITLE FIELDS  -->
 
     <style name="field">
@@ -71,7 +97,7 @@
     <!--  SPINNER STYLE DESIGN  -->
 
     <style name="spinner_style">
-        <item name="android:background">@drawable/gradient_spinner</item>
+        <item name="android:background"> @drawable/gradient_spinner </item>
         <item name="android:textSize"> 20sp </item>
         <item name="android:spinnerMode"> dropdown </item>
         <item name="android:padding"> 10dp </item>
@@ -80,7 +106,7 @@
         <item name="android:popupBackground">#FFFFFF</item>
     </style>
 
-    <!--  ADVERT VIEW STYLES  -->
+    <!--  SINGLE ADVERT VIEW STYLES  -->
 
     <style name="advertInfoRow">
         <item name="android:layout_width"> match_parent </item>
@@ -94,6 +120,21 @@
         <item name="android:layout_weight"> 5 </item>
     </style>
 
+    <!-- ADVERT REFINE SEARCH LAYOUT -->
+
+    <style name="refineRowLayout">
+        <item name="android:layout_width"> match_parent </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:padding"> 30sp </item>
+        <item name="android:weightSum"> 8 </item>
+    </style>
+
+    <style name="refineRowLayoutText">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:layout_weight"> 5 </item>
+        <item name="android:textSize"> 20sp </item>
+    </style>
 
 
 </resources>
