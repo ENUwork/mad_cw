@@ -30,7 +30,7 @@ public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = mInflater.inflate(R.layout.image_advert, parent, false);
+        View view = mInflater.inflate(R.layout.adapter_image_advert_view_pager, parent, false);
         return new ViewHolder(view);
     }
 

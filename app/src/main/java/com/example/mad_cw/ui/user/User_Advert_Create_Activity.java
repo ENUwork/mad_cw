@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mad_cw.BaseActivity;
@@ -33,6 +34,7 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +116,25 @@ public class User_Advert_Create_Activity extends BaseActivity implements View.On
     // _____________________
     // class listeners events handler:
 
+    ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT |
+            ItemTouchHelper.DOWN | ItemTouchHelper.UP | ItemTouchHelper.START | ItemTouchHelper.END, 0) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+
+            int fromPosition = viewHolder.getAdapterPosition();
+            int toPosition = target.getAdapterPosition();
+            Collections.swap(ImageList, fromPosition, toPosition);
+            recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+
+        }
+    };
+
+
     @Override
     public void onClick(View v) {
 
@@ -129,6 +150,7 @@ public class User_Advert_Create_Activity extends BaseActivity implements View.On
                     break;
                 }
                 storeAdvert(advert_info);
+                handleImgUpload();
                 finish();
                 break;
         }
@@ -231,6 +253,9 @@ public class User_Advert_Create_Activity extends BaseActivity implements View.On
             // Disable Add Images Btn.
             findViewById(R.id.select_ad_img_btn).setVisibility(View.GONE);
         }
+
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
     private void storeAdvert(Map<String, Object> advert_info) {
@@ -265,8 +290,6 @@ public class User_Advert_Create_Activity extends BaseActivity implements View.On
 
                         // Store the Advert UID For Posting the Images:
                         advert_uid = documentReference.getId();
-                        storeAdvertUser();
-                        handleImgUpload();
                     }
                 })
 
@@ -335,31 +358,11 @@ public class User_Advert_Create_Activity extends BaseActivity implements View.On
         }
     }
 
-    private void storeAdvertUser() {
+    // _____________________
+    // user actions:
 
-        // Get Current User UID Num.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        String userUid = currentUser.getUid();
+    private void dragAndDropOrder() {
 
-        // Add advert to fav_ads user array:
-        db.collection("users")
-                .document(userUid)
-                .update("my_ads", FieldValue.arrayUnion(advert_uid))
-
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void Void) {
-                        // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Log.w(TAG, "User Successfully Registered");
-                    }
-                })
-
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
     }
 
     // _____________________

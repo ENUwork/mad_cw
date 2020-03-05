@@ -37,7 +37,7 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
     public AdvertsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         // Identify the target view of the activity:
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.advert_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_advert_item_display, parent, false);
 
         //
         return new AdvertsViewHolder(view);

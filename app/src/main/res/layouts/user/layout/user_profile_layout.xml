@@ -4,7 +4,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:animateLayoutChanges="true" >
+    android:animateLayoutChanges="true"
+    android:background="@color/colorAccent" >
 
     <!--  SCROLLABLE CONTAINER  -->
 
@@ -49,7 +50,7 @@
                 android:id="@+id/main_user_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="50dp"
+                android:layout_marginHorizontal="30dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="50dp"
                 android:orientation="vertical">
@@ -60,6 +61,7 @@
                     android:id="@+id/accountDetailsBtn"
                     style="@style/btn_user"
                     android:drawableStart="@drawable/ic_menu_account"
+                    android:drawableTint="@color/colorPrimary"
                     android:text="Account Details" />
 
                 <!-- USER PEDAL TRIBE FEEDBACK REDIRECT Btn. -->
@@ -77,6 +79,7 @@
                     android:id="@+id/user_profile_ad_btn"
                     style="@style/btn_user"
                     android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableTint="@color/colorPrimary"
                     android:text="@string/post_ad" />
 
                 <!-- USER PERSONAL ADVERTS Btn. -->
@@ -85,6 +88,7 @@
                     android:id="@+id/user_profile_myAds_btn"
                     style="@style/btn_user"
                     android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableTint="@color/colorPrimary"
                     android:text="@string/my_ads_txt" />
 
                 <!-- USER FAVOURITE ADVERTS Btn. -->
@@ -93,6 +97,7 @@
                     android:id="@+id/fav_ads_btn"
                     style="@style/btn_user"
                     android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableTint="@color/colorPrimary"
                     android:text="@string/fav_ads_txt" />
 
                 <!-- USER SING OUT Btn. -->
@@ -101,6 +106,7 @@
                     android:id="@+id/signOutButton"
                     style="@style/btn_user"
                     android:drawableStart="@drawable/ic_exit_to_app_black_24dp"
+                    android:drawableTint="#F92F2F"
                     android:text="@string/sign_out_txt" />
 
             </LinearLayout>

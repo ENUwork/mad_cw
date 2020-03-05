@@ -142,7 +142,7 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser == null){
-            Toast.makeText(this, " ☺  Please sing in/up to enable this feature", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, getString(R.string.feature_disabled), Toast.LENGTH_LONG).show();
             return;
         }
 

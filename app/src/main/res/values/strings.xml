@@ -91,6 +91,9 @@
     <string name="refine_txt"> Refine Search </string>
     <string name="search_txt"> Search! </string>
 
+    <!-- ERROR MESSAGES -->
+    <string name="feature_disabled"> ☺  Please sing in/up to enable this feature </string>
+
     <!--  ITEM CONDITION WEAR  -->
 
     <string-array name="item_condition_wear">
@@ -106,9 +109,9 @@
 
     <string-array name="bike_wheel_size">
         <item> </item>
-        <item> 26" </item>
-        <item> 27.5" </item>
-        <item> 29" </item>
+        <item> 26\" </item>
+        <item> 27.5\" </item>
+        <item> 29\" </item>
     </string-array>
 
     <!--  BIKE FRAME SIZE  -->
