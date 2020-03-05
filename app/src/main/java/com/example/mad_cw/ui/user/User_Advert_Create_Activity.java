@@ -124,7 +124,8 @@ public class User_Advert_Create_Activity extends BaseActivity implements View.On
             int fromPosition = viewHolder.getAdapterPosition();
             int toPosition = target.getAdapterPosition();
             Collections.swap(ImageList, fromPosition, toPosition);
-            recyclerView.getAdapter().notifyItemMoved(fromPosition, toPosition);
+            imageListAdapter.notifyItemMoved(fromPosition, toPosition);
+            imageListAdapter.notifyDataSetChanged();
             return false;
         }
 

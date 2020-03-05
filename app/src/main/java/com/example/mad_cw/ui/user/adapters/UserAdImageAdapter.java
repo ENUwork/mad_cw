@@ -43,6 +43,13 @@ public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.
         Glide.with(holder.image_link.getContext())
                 .load(image)
                 .into(holder.image_link);
+
+        // Apply different layout for the main image:
+        if (position == 0){
+            holder.image_link.setBackgroundResource(R.drawable.image_border);
+        } else {
+            holder.image_link.setBackgroundResource(0);
+        }
     }
 
     // total number of rows
@@ -50,7 +57,6 @@ public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.
     public int getItemCount() {
         return mData.size();
     }
-
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
