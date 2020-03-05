@@ -93,6 +93,7 @@
 
     <!-- ERROR MESSAGES -->
     <string name="feature_disabled"> ☺  Please sing in/up to enable this feature </string>
+    <string name="advert_uploaded"> </string>
 
     <!--  ITEM CONDITION WEAR  -->
 

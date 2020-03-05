@@ -80,6 +80,7 @@ public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.
             if (mClickListener != null) {
                 mClickListener.onItemClick(view, getAdapterPosition());
                 removeItem(getAdapterPosition());
+                notifyDataSetChanged();
             }
         }
     }
