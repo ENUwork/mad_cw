@@ -210,7 +210,6 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
                         Log.w(TAG, "Error adding document", e);
                     }
                 });
-
     }
 
     private void addToFavourites(String userUid, String adUid) {

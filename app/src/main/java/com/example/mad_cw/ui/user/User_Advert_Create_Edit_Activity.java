@@ -24,13 +24,17 @@ import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
 import com.example.mad_cw.ui.user.adapters.User_Advert_Image_Select_Adapter;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -389,6 +393,9 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         // Delete Images First:
         deleteAdvertImg();
 
+        // Delete From All Users Favourites:
+        deleteAdvertFromUserFavourites();
+
         // Get a new write batch
         WriteBatch batch = db.batch();
         DocumentReference exist_doc = db.collection("classified_ads").document(advert_uid);
@@ -433,6 +440,24 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                 }
             });
         }
+    }
+
+    private void deleteAdvertFromUserFavourites() {
+
+        // Get the list of favourite ads from the user db:
+        db.collection("users").whereArrayContains("fav_ads", advert_uid).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                db.collection("users").document(document.getId()).update("fav_ads", FieldValue.arrayRemove(advert_uid));
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
     }
 
     // _____________________
