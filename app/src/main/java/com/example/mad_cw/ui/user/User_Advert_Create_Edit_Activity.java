@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
-import com.example.mad_cw.ui.user.adapters.UserAdImageAdapter;
+import com.example.mad_cw.ui.user.adapters.User_Advert_Image_Select_Adapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +42,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User_Advert_Create_Edit_Activity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, UserAdImageAdapter.ItemClickListener {
+public class User_Advert_Create_Edit_Activity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, User_Advert_Image_Select_Adapter.ItemClickListener {
 
     /*
         Managing User Classified Adverts Creation & Editing:
@@ -68,7 +68,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
     // Displaying Selected Images:
     private RecyclerView recyclerView;
-    private UserAdImageAdapter imageListAdapter;
+    private User_Advert_Image_Select_Adapter imageListAdapter;
 
     // Access a Cloud Firestore instance from the Activity:
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -84,7 +84,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Post Advert:
-        setContentView(R.layout.user_advert_create);
+        setContentView(R.layout.user_advert_create_edit);
 
         // Hide Support Menu Bar:
         // getSupportActionBar().hide();
@@ -247,7 +247,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
     private void displayAdvertImages(ArrayList<String> ImageList) {
 
-        imageListAdapter = new UserAdImageAdapter(this, ImageList);
+        imageListAdapter = new User_Advert_Image_Select_Adapter(this, ImageList);
         imageListAdapter.setClickListener(this);
         recyclerView.setAdapter(imageListAdapter);
 

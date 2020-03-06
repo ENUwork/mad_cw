@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -31,7 +32,9 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 // Implementing Fragments:
 
@@ -48,6 +51,8 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
     private CheckBox w26, w275, w29,
             fXS, fS, fM, fL, fXL, fXXL,
             m, ln, vw, b, rp;
+
+    private EditText priceMin, priceMax;
 
     private SearchView searchField;
     private LinearLayout mainLayout, refineLayout;
@@ -90,6 +95,10 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
         vw = root.findViewById(R.id.filter_condition_VW);
         b = root.findViewById(R.id.filter_condition_B);
         rp = root.findViewById(R.id.filter_condition_RP);
+
+        // Identify Input Fields:
+        priceMin = root.findViewById(R.id.filter_price_min);
+        priceMax = root.findViewById(R.id.filter_price_max);
 
         // Animations:
         slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
@@ -165,35 +174,23 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // collapse the view ?
-                //menu.findItem(R.id.menu_search).collapseActionView();
-                Log.e("queryText",query);
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                // search goes here !!
-                // listAdapter.getFilter().filter(query);
-
-                // filter your list from your input
-                filter(newText);
-                //you can use runnable postDelayed like 500 ms to delay search text
-
-                Log.e("queryText",newText);
+                filterByTitle(newText);
                 return false;
             }
         });
     }
 
-    private void filter(String text){
+    private void filterByTitle(String text){
 
         List<AdvertsModel> temp = new ArrayList();
 
         for(AdvertsModel d: adverts_Model_list){
-            //or use .equal(text) with you want equal match
-            //use .toLowerCase() for better matches
-            if(d.getAd_title().contains(text)){
+            if(d.getAd_title().toLowerCase().contains(text.toLowerCase())){
                 temp.add(d);
             }
         }
@@ -203,45 +200,77 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
     private void refineSearchSelect() {
 
-        List<String> filter_list = new ArrayList<String>();
+        // List of all the selected queries:
+        List<String> filter_list = new ArrayList<>();
 
+        // Checkboxes:
         String item_val;
-
-        List<CheckBox> items = new ArrayList<CheckBox>(Arrays.asList(w26, w275, w29, fXS, fS, fM, fL, fXL, fXXL, m, ln, vw, b, rp));
+        List<CheckBox> items = new ArrayList<>(Arrays.asList(w26, w275, w29, fXS, fS, fM, fL, fXL, fXXL, m, ln, vw, b, rp));
         for (CheckBox item : items){
             if(item.isChecked()) {
-
                 item_val = item.getText().toString();
-
                 filter_list.add(item_val);
             }
         }
 
-        refineSearchFilter(filter_list);
+        // Price Range:
+        String temp_min = priceMin.getText().toString();
+        String temp_max = priceMax.getText().toString();
+        int pMin, pMax;
+
+        // Price Min,
+        if (!temp_min.isEmpty()){
+            pMin = Integer.valueOf(temp_min);
+        } else {
+            pMin = 0;
+        }
+
+        // Price Max,
+        if (!temp_max.isEmpty()){
+            pMax = Integer.valueOf(temp_max);
+        }
+        else {
+            pMax = 10000000;
+        }
+
+        refineSearchFilter(filter_list, pMin, pMax);
     }
 
-    private void refineSearchFilter(List<String> filter) {
+    private void refineSearchFilter(List<String> filter_list, int pMin, int pMax) {
 
-        // Get the Object Other Data Info:
+        // Use Set to Remove Duplicates:
+        Set<AdvertsModel> set_temp = new LinkedHashSet<>();
 
-        List<AdvertsModel> temp = new ArrayList();
+        // Checkbox Query Search:
+        if (filter_list.size() != 0) {
+            for (AdvertsModel d : adverts_Model_list) {
 
-        for(AdvertsModel d: adverts_Model_list){
+                // Compare arrays
+                ArrayList<String> filter_values = new ArrayList<>(filter_list);
+                ArrayList<String> advert_values = new ArrayList<>(d.getAd_other());
 
-            // Compare arrays
-            ArrayList<String> filter_values = new ArrayList<>(filter);
-            ArrayList<String> advert_values = new ArrayList<>(d.getAd_other());
+                filter_values.retainAll(advert_values);
 
-            filter_values.retainAll(advert_values);
-
-            System.out.println(filter_values);
-            if(filter_values.size() > 0){
-                temp.add(d);
+                System.out.println(filter_values);
+                if (filter_values.size() > 0) {
+                    set_temp.add(d);
+                }
             }
         }
 
+        // Price Range Search:
+        for (AdvertsModel d : adverts_Model_list) {
+            int price = Integer.valueOf(d.getAd_price());
+            if (price > pMin && price < pMax){
+                set_temp.add(d);
+            }
+        }
+
+        // Copy over non duplicate data to results array:
+        List<AdvertsModel> result = new ArrayList<>(set_temp);
+
         // Update Recycler View
-        advertsListAdapter.updateList(temp);
+        advertsListAdapter.updateList(result);
     }
 
     // _____________
@@ -255,12 +284,12 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
             case R.id.refine_search_btn:
                 mainLayout.setVisibility(View.GONE);
                 refineLayout.setVisibility(View.VISIBLE);
-                refineLayout.startAnimation(slideUp);
+                // refineLayout.startAnimation(slideUp);
                 break;
 
             case R.id.refine_apply_btn:
                 refineLayout.setVisibility(View.GONE);
-                refineLayout.startAnimation(slideDown);
+                // refineLayout.startAnimation(slideDown);
                 mainLayout.setVisibility(View.VISIBLE);
                 refineSearchSelect();
                 break;

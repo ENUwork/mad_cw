@@ -141,16 +141,16 @@ public class User_Profile_Activity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.accountDetailsBtn:
-                mainInfoLayout.setVisibility(View.GONE);
                 // userEditLayout.startAnimation(slideUp);
+                mainInfoLayout.setVisibility(View.GONE);
                 userEditLayout.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.saveAccount:
                 updateProfileInfo();
-                mainInfoLayout.setVisibility(View.VISIBLE);
                 // userEditLayout.startAnimation(slideDown);
                 userEditLayout.setVisibility(View.GONE);
+                mainInfoLayout.setVisibility(View.VISIBLE);
                 break;
 
             case R.id.signOutButton:
@@ -189,6 +189,7 @@ public class User_Profile_Activity extends BaseActivity implements View.OnClickL
     }
 
     private void selectProfilePic() {
+
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 
