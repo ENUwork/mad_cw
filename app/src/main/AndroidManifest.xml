@@ -36,7 +36,7 @@
         <activity android:name=".ui.user.User_Profile_Activity" />
 
         <!-- Classified Ads Activities -->
-        <activity android:name=".ui.user.User_Advert_Create_Activity" />
+        <activity android:name=".ui.user.User_Advert_Create_Edit_Activity" />
         <activity android:name=".ui.user.User_Adverts_Favourite_Activity" />
         <activity android:name=".ui.user.User_Adverts_Personal_Activity"/>
         <activity android:name=".ui.adverts.AdvertInfoActivity" />

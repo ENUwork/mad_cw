@@ -127,7 +127,7 @@ public class User_Profile_Activity extends BaseActivity implements View.OnClickL
                 break;
 
             case R.id.user_profile_ad_btn:
-                Intent post_ad = new Intent(this, User_Advert_Create_Activity.class);
+                Intent post_ad = new Intent(this, User_Advert_Create_Edit_Activity.class);
                 startActivity(post_ad);
                 break;
 

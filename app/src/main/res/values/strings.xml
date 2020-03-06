@@ -79,7 +79,9 @@
 
     <string name="ad_img_count"> %d/%d </string>
     <string name="select_img"> Select Images </string>
-    <string name="upload"> List Advert! </string>
+    <string name="create_txt"> List Advert! </string>
+    <string name="update_txt"> Update </string>
+    <string name="delete_txt"> Delete Ad </string>
     <string name="img_count"> Photos: %s </string>
     <string name="set_ad_price"> Price: %s £ </string>
     <string name="set_wheel_size"> Wheel Size: </string>

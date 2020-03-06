@@ -133,7 +133,7 @@
                     android:layout_height="match_parent"
                     android:weightSum="4" >
 
-                    <!--    AD WHEEL SIZE    -->
+                    <!-- AD WHEEL SIZE -->
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -147,7 +147,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <!--    AD BIKE AGE    -->
+                    <!-- AD BIKE AGE -->
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -169,7 +169,7 @@
                     android:layout_height="match_parent"
                     android:weightSum="4" >
 
-                    <!--    AD FRAME SIZE    -->
+                    <!-- AD FRAME SIZE -->
 
                     <TextView
                         android:layout_width="match_parent"
@@ -183,7 +183,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
-                    <!--    AD DRIVE TRAIN    -->
+                    <!-- AD DRIVE TRAIN -->
 
                     <TextView
                         android:layout_width="match_parent"
@@ -201,12 +201,36 @@
 
             </TableLayout>
 
-            <!--    UPLOAD ADVERT    -->
+            <!-- CREATE ADVERT Btn. -->
 
-            <Button
-                android:id="@+id/upload_ad_btn"
-                style="@style/btn_main"
-                android:text="@string/upload" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <Button
+                    android:id="@+id/delete_ad_btn"
+                    style="@style/btn_main"
+                    android:backgroundTint="#FF7373"
+                    android:text="@string/delete_txt"
+                    android:textColor="#FFFFFF"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/create_ad_btn"
+                    style="@style/btn_main"
+                    android:text="@string/create_txt" />
+
+                <Button
+                    android:id="@+id/update_ad_btn"
+                    style="@style/btn_main"
+                    android:backgroundTint="#FF8A00"
+                    android:text="@string/update_txt"
+                    android:textColor="#FFFFFF"
+                    android:visibility="gone" />
+
+            </TableRow>
+
+            <!-- UPDATE ADVERT Btn. -->
 
         </LinearLayout>
 

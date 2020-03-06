@@ -1,7 +1,6 @@
 package com.example.mad_cw.ui.user.adapters;
 
 import android.content.Context;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,12 +15,12 @@ import java.util.List;
 
 public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.ViewHolder> {
 
-    private List<Uri> mData;
+    private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public UserAdImageAdapter(Context context, List<Uri> data) {
+    public UserAdImageAdapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }
@@ -37,7 +36,7 @@ public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Uri image = mData.get(position);
+        String image = mData.get(position);
 
         // Populate Recycler View with an Image:
         Glide.with(holder.image_link.getContext())
@@ -86,11 +85,11 @@ public class UserAdImageAdapter extends RecyclerView.Adapter<UserAdImageAdapter.
     }
 
     // convenience method for getting data at click position
-    public Uri getItem(int id) {
+    public String getItem(int id) {
         return mData.get(id);
     }
 
-    public List<Uri> getmData() {
+    public List<String> getmData() {
         return mData;
     }
 

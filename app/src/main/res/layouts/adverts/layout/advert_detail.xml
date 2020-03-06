@@ -196,7 +196,7 @@
             <!--    CONTACT SELLER BTN.    -->
 
             <Button
-                android:id="@+id/upload_ad_btn"
+                android:id="@+id/create_ad_btn"
                 style="@style/btn_main"
                 android:text="@string/contact_txt" />
 
