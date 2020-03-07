@@ -17,7 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.adapters.ViewPagerAdapter;
-import com.example.mad_cw.ui.chat.Chat_User_to_User_Activity;
+import com.example.mad_cw.ui.chat.ChatRoom_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -170,7 +170,7 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
 
             // Open chat with advert owner:
             case R.id.contact_ad_owner:
-                Intent open_chat = new Intent(this, Chat_User_to_User_Activity.class);
+                Intent open_chat = new Intent(this, ChatRoom_Activity.class);
                 open_chat.putExtra("advert_info", advert);
                 startActivity(open_chat);
                 break;

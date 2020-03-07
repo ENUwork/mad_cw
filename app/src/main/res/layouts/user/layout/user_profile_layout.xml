@@ -87,6 +87,15 @@
                 <!-- USER FAVOURITE ADVERTS Btn. -->
 
                 <Button
+                    android:id="@+id/user_profile_myChat"
+                    style="@style/btn_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableTint="@color/colorPrimary"
+                    android:text="My Chats" />
+
+                <Button
                     android:id="@+id/fav_ads_btn"
                     style="@style/btn_user"
                     android:drawableStart="@drawable/ic_favorite_black_24dp"

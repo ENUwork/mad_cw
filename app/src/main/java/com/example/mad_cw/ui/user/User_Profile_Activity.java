@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 import com.bumptech.glide.Glide;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
+import com.example.mad_cw.ui.chat.ChatLobby_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -100,6 +101,7 @@ public class User_Profile_Activity extends BaseActivity implements View.OnClickL
         findViewById(R.id.updateProfilePic).setOnClickListener(this);
         findViewById(R.id.saveAccount).setOnClickListener(this);
         findViewById(R.id.user_profile_myAds_btn).setOnClickListener(this);
+        findViewById(R.id.user_profile_myChat).setOnClickListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -144,6 +146,11 @@ public class User_Profile_Activity extends BaseActivity implements View.OnClickL
                 // userEditLayout.startAnimation(slideUp);
                 mainInfoLayout.setVisibility(View.GONE);
                 userEditLayout.setVisibility(View.VISIBLE);
+                break;
+
+            case R.id.user_profile_myChat:
+                Intent open_chats = new Intent(this, ChatLobby_Activity.class);
+                startActivity(open_chats);
                 break;
 
             case R.id.saveAccount:

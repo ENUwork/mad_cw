@@ -36,7 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Chat_User_to_User_Activity extends BaseActivity implements View.OnClickListener {
+public class ChatRoom_Activity extends BaseActivity implements View.OnClickListener {
 
     // _____________________
     // class variables:

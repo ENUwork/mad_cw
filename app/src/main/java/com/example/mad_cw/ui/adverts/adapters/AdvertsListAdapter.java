@@ -4,6 +4,7 @@ import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,8 +38,19 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
     @Override
     public AdvertsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        // Identify the target view of the activity:
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_advert_item_display, parent, false);
+        View view;
+
+        // Verify Caller (View) Class:
+        String class_name = parent.getContext().getClass().getSimpleName();
+        Toast.makeText(parent.getContext(), parent.getContext().getClass().getSimpleName(), Toast.LENGTH_LONG).show();
+
+        if (class_name.equals("ChatLobby_Activity")){
+            // Load the chat lobby inflatable layout:
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_room_display, parent, false);
+        }
+        else {
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_advert_item_display, parent, false);
+        }
 
         return new AdvertsViewHolder(view);
     }

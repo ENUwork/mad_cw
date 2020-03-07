@@ -36,7 +36,8 @@
         <activity android:name=".ui.user.User_Profile_Activity" />
 
         <!-- Chat Activities -->
-        <activity android:name=".ui.chat.Chat_User_to_User_Activity"/>
+        <activity android:name=".ui.chat.ChatRoom_Activity" />
+        <activity android:name=".ui.chat.ChatLobby_Activity"/>
 
         <!-- Classified Ads Activities -->
         <activity android:name=".ui.user.User_Advert_Create_Edit_Activity" />
