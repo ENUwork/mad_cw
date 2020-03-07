@@ -53,7 +53,7 @@
     <string name="my_ads_txt"> My Ads </string>
     <string name="pedal_T"> Pedal Tribe </string>
     <string name="sign_out_txt"> Sign Out </string>
-    <string name="post_ad"> Post Ad </string>
+    <string name="post_ad"> Post advert </string>
     <string name="update_profile"> Update Profile </string>
     <string name="email_field"> Email </string>
     <string name="password_field"> Password </string>
@@ -84,6 +84,7 @@
     <string name="delete_txt"> Delete Ad </string>
     <string name="img_count"> Photos: %s </string>
     <string name="set_ad_price"> Price: %s £ </string>
+    <string name="set_ad_priceV2"> %s £ </string>
     <string name="set_wheel_size"> Wheel Size: </string>
     <string name="set_frame_size"> Frame Size: </string>
     <string name="set_bike_age"> From: </string>
@@ -93,6 +94,7 @@
     <string name="refine_txt"> Refine Search </string>
     <string name="query_example_txt"> Scott Spark 2019... </string>
     <string name="search_txt"> Search! </string>
+    <string name="display_ads_qty"> Displaying %d Result(s) </string>
 
     <!-- ERROR MESSAGES -->
     <string name="feature_disabled"> ☺  Please sing in/up to enable this feature </string>

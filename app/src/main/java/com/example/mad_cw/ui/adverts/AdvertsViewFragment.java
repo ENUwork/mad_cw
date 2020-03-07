@@ -11,10 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -52,7 +54,9 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
             fXS, fS, fM, fL, fXL, fXXL,
             m, ln, vw, b, rp;
 
+    private TextView advertQueryNum;
     private EditText priceMin, priceMax;
+    private Button refineSearchApplyBtn, refineSearchBtn;
 
     private SearchView searchField;
     private LinearLayout mainLayout, refineLayout;
@@ -75,10 +79,12 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
         searchField = root.findViewById(R.id.searchField);
         refineLayout = root.findViewById(R.id.refine_search_layout);
         mainLayout = root.findViewById(R.id.adverts_view_main_layout);
+        refineSearchBtn = root.findViewById(R.id.refine_search_btn);
+        refineSearchApplyBtn = root.findViewById(R.id.refine_apply_btn);
 
         // Set Listeners:
-        root.findViewById(R.id.refine_search_btn).setOnClickListener(this);
-        root.findViewById(R.id.refine_apply_btn).setOnClickListener(this);
+        refineSearchBtn.setOnClickListener(this);
+        refineSearchApplyBtn.setOnClickListener(this);
 
         // Identify CheckBoxes:
         w26 = root.findViewById(R.id.filter_wheels_size_26);
@@ -100,6 +106,9 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
         priceMin = root.findViewById(R.id.filter_price_min);
         priceMax = root.findViewById(R.id.filter_price_max);
 
+        // Other Layout Identifiers:
+        advertQueryNum = root.findViewById(R.id.adverts_query_results_txt);
+
         // Animations:
         slideDown = AnimationUtils.loadAnimation(getContext(), R.anim.slide_down);
         slideUp = AnimationUtils.loadAnimation(getContext(), R.anim.slide_up);
@@ -116,9 +125,6 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
         // Set the Recycler View as a Gallery View:
         GridLayoutManager mLayoutManager = new GridLayoutManager(getActivity(), 2); // (Context context, int spanCount)
 
-        // Set the Recycler View as a Linear Row-by-Row view:
-        // mAdverts_List.setLayoutManager(new LinearLayoutManager(this));
-
         // Declare the assigned Layout:
         mAdverts_List.setLayoutManager(mLayoutManager);
 
@@ -134,34 +140,21 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
     private void getAdvertsData() {
 
-        /* (This) Class Method gets all of the documents from Firebase Firestore
-            and then acts accordingly
-         */
-
         // Accessing the data:
         db.collection("classified_ads")
-
             .addSnapshotListener(new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
-
                 if (e != null) {
                     Log.d(TAG, "Error : " + e.getMessage());
                 }
-
                 // On Document Change retrieves only the updated data:
                 for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
-
                     if (doc.getType() == DocumentChange.Type.ADDED) {
-
-                        // [Test]
-//                        Timestamp advert_title = doc.getDocument().getTimestamp("post_time");
-//                        Log.d(TAG, "Advert : " + advert_title.getSeconds());
-
                         AdvertsModel advertsModel = doc.getDocument().toObject(AdvertsModel.class);
                         adverts_Model_list.add(advertsModel);
-
                         advertsListAdapter.notifyDataSetChanged();
+                        advertQueryNum.setText(getString(R.string.display_ads_qty, advertsListAdapter.getItemCount()));
                     }
                 }
                 }
@@ -271,6 +264,9 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
         // Update Recycler View
         advertsListAdapter.updateList(result);
+
+        // Update Display Counter:
+        advertQueryNum.setText(getString(R.string.display_ads_qty, advertsListAdapter.getItemCount()));
     }
 
     // _____________
@@ -283,6 +279,7 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
             case R.id.refine_search_btn:
                 mainLayout.setVisibility(View.GONE);
+                refineSearchBtn.setVisibility(View.GONE);
                 refineLayout.setVisibility(View.VISIBLE);
                 // refineLayout.startAnimation(slideUp);
                 break;
@@ -290,6 +287,7 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
             case R.id.refine_apply_btn:
                 refineLayout.setVisibility(View.GONE);
                 // refineLayout.startAnimation(slideDown);
+                refineSearchBtn.setVisibility(View.VISIBLE);
                 mainLayout.setVisibility(View.VISIBLE);
                 refineSearchSelect();
                 break;

@@ -1,5 +1,6 @@
 package com.example.mad_cw.ui.adverts.adapters;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,9 +47,12 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull AdvertsViewHolder holder, int position) {
 
+        // Access the Resources from ViewHolder:
+        Resources res = holder.itemView.getContext().getResources();
+
         // Get the Name of the Advert:
         holder.ad_title.setText(advertsModelList.get(position).getAd_title());
-        holder.ad_price.setText(advertsModelList.get(position).getAd_price());
+        holder.ad_price.setText(res.getString(R.string.set_ad_priceV2, advertsModelList.get(position).getAd_price()));
 
         // Populate Recycler View with an Image:
         Glide.with(holder.image_link.getContext())

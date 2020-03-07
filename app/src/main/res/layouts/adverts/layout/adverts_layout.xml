@@ -31,6 +31,18 @@
 
                 </SearchView>
 
+                <TextView
+                    android:id="@+id/adverts_query_results_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="20dp"
+                    android:fontFamily="@font/raleway_semibold"
+                    android:layout_gravity="center"
+                    android:padding="5dp"
+                    android:text="@string/display_ads_qty"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/adverts_recycler_view"
                     android:layout_width="match_parent"
@@ -48,6 +60,7 @@
     <Button
         android:id="@+id/refine_search_btn"
         style="@style/btn_main"
+        android:layout_margin="20dp"
         android:layout_gravity="end|bottom"
         android:text="@string/refine_txt" />
 

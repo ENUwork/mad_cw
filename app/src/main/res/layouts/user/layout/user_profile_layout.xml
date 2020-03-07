@@ -66,19 +66,12 @@
 
                 <!-- USER PEDAL TRIBE FEEDBACK REDIRECT Btn. -->
 
-                <Button
-                    android:id="@+id/pedal_tribe_feedback_btn"
-                    style="@style/btn_user"
-                    android:fontFamily="@font/ubuntu_bold_italic"
-                    android:text="@string/pedal_T"
-                    android:textSize="18sp" />
-
                 <!-- USER ADVERT CREATE Btn. -->
 
                 <Button
                     android:id="@+id/user_profile_ad_btn"
                     style="@style/btn_user"
-                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableStart="@drawable/ic_create_black_24dp"
                     android:drawableTint="@color/colorPrimary"
                     android:text="@string/post_ad" />
 
@@ -96,11 +89,18 @@
                 <Button
                     android:id="@+id/fav_ads_btn"
                     style="@style/btn_user"
-                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableStart="@drawable/ic_favorite_black_24dp"
                     android:drawableTint="@color/colorPrimary"
                     android:text="@string/fav_ads_txt" />
 
                 <!-- USER SING OUT Btn. -->
+
+                <Button
+                    android:id="@+id/pedal_tribe_feedback_btn"
+                    style="@style/btn_user"
+                    android:fontFamily="@font/ubuntu_bold_italic"
+                    android:text="@string/pedal_T"
+                    android:textSize="18sp" />
 
                 <Button
                     android:id="@+id/signOutButton"

@@ -78,7 +78,7 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
         mAdverts_List.setAdapter(advertsListAdapter);
 
         // Set the Recycler View as a Gallery View:
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1); // (Context context, int spanCount)
+        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2); // (Context context, int spanCount)
 
         // Set the Recycler View as a Linear Row-by-Row view:
         // mAdverts_List.setLayoutManager(new LinearLayoutManager(this));
