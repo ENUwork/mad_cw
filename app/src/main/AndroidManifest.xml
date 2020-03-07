@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!-- Main Activity + Splash Screen -->
         <activity
             android:name=".Main2Activity"
             android:label="@string/title_activity_main2"
@@ -24,8 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!-- Splash / Welcome Screen -->
-        <!-- Main Activity - Startup Activity -->
+
         <!-- Other Activities -->
 
         <!-- Base Activity -->
@@ -34,6 +34,9 @@
         <!-- User Activities -->
         <activity android:name=".ui.user.User_Auth_Activity" />
         <activity android:name=".ui.user.User_Profile_Activity" />
+
+        <!-- Chat Activities -->
+        <activity android:name=".ui.chat.Chat_User_to_User_Activity"/>
 
         <!-- Classified Ads Activities -->
         <activity android:name=".ui.user.User_Advert_Create_Edit_Activity" />

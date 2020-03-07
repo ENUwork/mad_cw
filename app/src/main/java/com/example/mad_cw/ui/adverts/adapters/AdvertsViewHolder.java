@@ -18,8 +18,7 @@ public class AdvertsViewHolder extends RecyclerView.ViewHolder implements View.O
 
     // Class Variables:
     View view;
-    TextView ad_title;
-    TextView ad_price;
+    TextView ad_title, ad_price;
     ImageView image_link;
     private AdvertsModel advertsModel;
 

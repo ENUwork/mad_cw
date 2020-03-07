@@ -1,8 +1,10 @@
 package com.example.mad_cw.ui.adverts;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.adapters.ViewPagerAdapter;
+import com.example.mad_cw.ui.chat.Chat_User_to_User_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -44,6 +47,7 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
     private TextView adTitle, adPrice, adLoc, adWheel, adFrame, adAge, adPostTime, adDesc, imgCount;
     private ImageView adOwnerPic;
     private ImageButton favBtn_off, favBtn_on;
+    private Button contactBtn;
 
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
@@ -51,9 +55,9 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
     private int numImg;
     private String adUid;
 
-    private FirebaseAuth mAuth;
+    private AdvertsModel advert;
 
-    // Access a Cloud Firestore instance from the Activity
+    private FirebaseAuth mAuth;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     // _____________________
@@ -78,19 +82,21 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
         viewPager = findViewById(R.id.viewPager_ad);
         favBtn_off = findViewById(R.id.fav_btn);
         favBtn_on = findViewById(R.id.fav_btn2);
+        contactBtn = findViewById(R.id.contact_ad_owner);
         imgCount = findViewById(R.id.imgCount);
         // adOwnerPic = (ImageView) findViewById(R.id.advert_image);
 
         // Set Listeners:
-        findViewById(R.id.fav_btn).setOnClickListener(this);
-        findViewById(R.id.fav_btn2).setOnClickListener(this);
+        favBtn_off.setOnClickListener(this);
+        favBtn_on.setOnClickListener(this);
+        contactBtn.setOnClickListener(this);
         viewPager.addOnPageChangeListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
         // Access the Passed data through the intent:
-        AdvertsModel advert = getIntent().getParcelableExtra("advert");
+        advert = getIntent().getParcelableExtra("advert");
 
         // Check for Object to contain data:
         if (advert != null) {
@@ -160,6 +166,13 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
             case R.id.fav_btn:
                 Toast.makeText(this, "Added to Favourites", Toast.LENGTH_SHORT).show();
                 addToFavourites(userUid, adUid);
+                break;
+
+            // Open chat with advert owner:
+            case R.id.contact_ad_owner:
+                Intent open_chat = new Intent(this, Chat_User_to_User_Activity.class);
+                open_chat.putExtra("advert_info", advert);
+                startActivity(open_chat);
                 break;
         }
 
@@ -258,16 +271,17 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         DocumentSnapshot document = task.getResult();
                         List<String> fav_list = (List<String>) document.get("fav_ads");
+                        if (fav_list != null){
+                            for (String element : fav_list) {
 
-                        for (String element : fav_list) {
+                                System.out.println(element);
 
-                            System.out.println(element);
+                                if (adUid.equals(element)){
 
-                            if (adUid.equals(element)){
-
-                                // Hide-Show Buttons Respectively:
-                                favBtn_off.setVisibility(View.GONE);
-                                favBtn_on.setVisibility(View.VISIBLE);
+                                    // Hide-Show Buttons Respectively:
+                                    favBtn_off.setVisibility(View.GONE);
+                                    favBtn_on.setVisibility(View.VISIBLE);
+                                }
                             }
                         }
                     }

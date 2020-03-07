@@ -93,7 +93,6 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
     // ______________
     // Custom Methods:
 
-    // Get & Listen to DB Changes:
     private void getFavouriteAds() {
 
         /* (This) Class Method gets all of the documents from Firebase Firestore
@@ -114,12 +113,10 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         DocumentSnapshot document = task.getResult();
                         List<String> fav_list = (List<String>) document.get("fav_ads");
-                        for (String element : fav_list) {
-                            fav_ads_list.add(element);
-                            // System.out.println(element);
+                        if (fav_list != null){
+                            fav_ads_list.addAll(fav_list);
+                            queryFavouriteAds();
                         }
-
-                        queryFavouriteAds();
                     }
                 });
     }
@@ -152,7 +149,6 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
 
     }
 
-    // Search Query Listen:
     private void searchQuery() {
 
         searchField.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -180,7 +176,6 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
         });
     }
 
-    // Filter Method:
     private void filter(String text){
 
         List<AdvertsModel> temp = new ArrayList();

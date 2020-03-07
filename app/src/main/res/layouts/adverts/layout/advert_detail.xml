@@ -196,8 +196,10 @@
             <!--    CONTACT SELLER BTN.    -->
 
             <Button
-                android:id="@+id/create_ad_btn"
+                android:id="@+id/contact_ad_owner"
                 style="@style/btn_main"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/contact_txt" />
 
         </LinearLayout>

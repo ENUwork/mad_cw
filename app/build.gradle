@@ -23,7 +23,7 @@ android {
             res.srcDirs = ['src/main/res',
                            'src/main/res/layouts/adverts',
                            'src/main/res/layouts/user',
-                           'src/main/res/layouts/adapters']
+                           'src/main/res/layouts/adapters', 'src/main/res/layouts/chat']
         }
     }
 }

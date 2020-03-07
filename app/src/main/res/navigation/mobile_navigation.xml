@@ -34,4 +34,10 @@
         android:label="@string/menu_account_profile"
         tools:layout="@layout/user_auth" />
 
+    <activity
+        android:id="@+id/nav_share"
+        android:name="com.example.mad_cw.ui.chat.Chat_User_to_User_Activity"
+        android:label="User Chat Room"
+        tools:layout="@layout/chat_room_layout" />
+
 </navigation>

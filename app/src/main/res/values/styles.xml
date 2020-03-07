@@ -120,14 +120,13 @@
         <item name="android:layout_height"> match_parent </item>
         <item name="android:weightSum"> 10 </item>
     </style>
-
     <style name="advertInfoRowText">
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height"> wrap_content </item>
         <item name="android:layout_weight"> 5 </item>
     </style>
 
-    <!-- ADVERT REFINE SEARCH LAYOUT -->
+    <!-- advert refine search layout -->
 
     <style name="refineRowLayout">
         <item name="android:layout_width"> match_parent </item>
@@ -135,7 +134,6 @@
         <item name="android:padding"> 30sp </item>
         <item name="android:weightSum"> 8 </item>
     </style>
-
     <style name="refineRowLayoutText">
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -143,5 +141,33 @@
         <item name="android:textSize"> 20sp </item>
     </style>
 
+    <!-- chat styles -->
+
+    <style name="chatOutgoing">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:fontFamily"> @font/open_sans </item>
+        <item name="android:padding"> 10dp </item>
+        <item name="android:textAlignment"> textStart </item>
+        <item name="android:textSize"> 15sp </item>
+        <item name="android:layout_marginVertical"> 5sp </item>
+        <item name="android:textColor"> #FFFFFF </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:background"> @drawable/outgoing_message </item>
+        <item name="android:layout_gravity"> end </item>
+    </style>
+    <style name="chatIncoming">
+        <item name="android:layout_width"> wrap_content </item>
+        <item name="android:layout_height"> wrap_content </item>
+        <item name="android:fontFamily"> @font/open_sans </item>
+        <item name="android:padding"> 10dp </item>
+        <item name="android:textAlignment"> textEnd </item>
+        <item name="android:textSize"> 15sp </item>
+        <item name="android:layout_marginVertical"> 5sp </item>
+        <item name="android:textColor"> #FFFFFF </item>
+        <item name="android:textStyle"> bold </item>
+        <item name="android:background"> @drawable/incoming_message </item>
+        <item name="android:layout_gravity"> start </item>
+    </style>
 
 </resources>

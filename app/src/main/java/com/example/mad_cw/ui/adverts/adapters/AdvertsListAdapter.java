@@ -40,7 +40,6 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
         // Identify the target view of the activity:
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_advert_item_display, parent, false);
 
-        //
         return new AdvertsViewHolder(view);
     }
 
@@ -68,11 +67,6 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
 
     @Override
     public int getItemCount() {
-
-        /* Method Counts the number of items that are displayed in the
-           list, to then use with the recyclerView.
-         */
-
           return advertsModelList.size();
     }
 
