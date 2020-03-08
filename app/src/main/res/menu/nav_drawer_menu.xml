@@ -3,13 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
-<!--
-    This layout is responsible for the redirects inside the
-    navigation drawer/pane.
-
-    Each Item Represents an Icons, related to a particular redirect
-  -->
-
     <group android:checkableBehavior="single">
 
         <item

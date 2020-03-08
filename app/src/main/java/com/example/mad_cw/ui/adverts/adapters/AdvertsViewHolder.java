@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertInfoActivity;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
+import com.example.mad_cw.ui.chat.ChatRoom_Activity;
 import com.example.mad_cw.ui.user.User_Advert_Create_Edit_Activity;
 
 public class AdvertsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -43,35 +44,33 @@ public class AdvertsViewHolder extends RecyclerView.ViewHolder implements View.O
 
         Toast.makeText(view.getContext(), view.getContext().getClass().getSimpleName(), Toast.LENGTH_LONG).show();
 
-        // Verify Caller (View) Class:
+        // Identify Caller Class, and act accordingly:
         String class_name = view.getContext().getClass().getSimpleName();
-
-        // Identify if the caller class originated from the "User_Personal_Ads,
-        // if so, redirect to "Advert Edit Activity"
 
         if(this.advertsModel != null){
 
-            if (!class_name.equals("User_Adverts_Personal_Activity")) {
+            if (class_name.equals("ChatLobby_Activity")) {
+                // Redirect to "Chat Room":
+                Intent open_chat = new Intent(itemView.getContext(), ChatRoom_Activity.class);
+                open_chat.putExtra("advert_info", this.advertsModel);
+                itemView.getContext().startActivity(open_chat);
 
-                // Create new Intent to pass along data:
-                Intent sel_advert = new Intent(itemView.getContext(), AdvertInfoActivity.class);
-
-                // Pass advert data along:
-                sel_advert.putExtra("advert", this.advertsModel);
-
-                // Initiate the data passing to the Advert_details class:
-                itemView.getContext().startActivity(sel_advert);
             }
-
-            // Redirect User to "Edit page":
-            else {
-
+            else if (class_name.equals("User_Adverts_Personal_Activity")) {
+                // Redirect User to "Edit page":
                 // Create new Intent to pass along data:
                 Intent sel_advert = new Intent(itemView.getContext(), User_Advert_Create_Edit_Activity.class);
-
                 // Pass advert data along:
                 sel_advert.putExtra("advert", this.advertsModel);
+                // Initiate the data passing to the Advert_details class:
+                itemView.getContext().startActivity(sel_advert);
 
+            }
+            else {
+                // Create new Intent to pass along data:
+                Intent sel_advert = new Intent(itemView.getContext(), AdvertInfoActivity.class);
+                // Pass advert data along:
+                sel_advert.putExtra("advert", this.advertsModel);
                 // Initiate the data passing to the Advert_details class:
                 itemView.getContext().startActivity(sel_advert);
             }
