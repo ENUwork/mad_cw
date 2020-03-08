@@ -40,14 +40,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User_Profile_Activity extends BaseActivity implements View.OnClickListener {
+public class UserProfile_Activity extends BaseActivity implements View.OnClickListener {
 
     /*
         Handles User & its Activity:
      */
 
     // Class Variables:
-    private static final String TAG = "User_Profile_Activity";
+    private static final String TAG = "UserProfile_Activity";
     private static final int PICK_IMAGE = 1;
 
     // MainActivity Profile View:

@@ -25,7 +25,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mad_cw.R;
-import com.example.mad_cw.ui.adverts.adapters.AdvertsListAdapter;
+import com.example.mad_cw.ui.adverts.adapters.AdvertsList_Adapter;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,14 +40,14 @@ import java.util.Set;
 
 // Implementing Fragments:
 
-public class AdvertsViewFragment extends Fragment implements View.OnClickListener {
+public class AdvertsView_Fragment extends Fragment implements View.OnClickListener {
 
     // Fragment (Class) Variables:
 
     private static final String TAG = "AdvertsView";
 
     private RecyclerView mAdverts_List;
-    private AdvertsListAdapter advertsListAdapter;
+    private AdvertsList_Adapter advertsListAdapter;
     private List<AdvertsModel> adverts_Model_list;
 
     private CheckBox w26, w275, w29,
@@ -115,7 +115,7 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
         // Dealing with Instantiating the Recycler View & the View Holder:
         adverts_Model_list = new ArrayList<>();
-        advertsListAdapter = new AdvertsListAdapter(adverts_Model_list);
+        advertsListAdapter = new AdvertsList_Adapter(adverts_Model_list);
 
         // Recycler View Config:
         mAdverts_List = root.findViewById(R.id.adverts_recycler_view);
@@ -134,6 +134,8 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
 
         return root;
     }
+
+
 
     // ________________
     // handling adverts methods:
@@ -234,9 +236,11 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
         // Use Set to Remove Duplicates:
         Set<AdvertsModel> set_temp = new LinkedHashSet<>();
 
-        // Checkbox Query Search:
-        if (filter_list.size() != 0) {
-            for (AdvertsModel d : adverts_Model_list) {
+        for (AdvertsModel d : adverts_Model_list) {
+            int price = Integer.valueOf(d.getAd_price());
+
+            // Checkbox Query Search,
+            if (filter_list.size() != 0) {
 
                 // Compare arrays
                 ArrayList<String> filter_values = new ArrayList<>(filter_list);
@@ -245,17 +249,14 @@ public class AdvertsViewFragment extends Fragment implements View.OnClickListene
                 filter_values.retainAll(advert_values);
 
                 System.out.println(filter_values);
-                if (filter_values.size() > 0) {
+                if (filter_values.size() > 0 && price >= pMin && price <= pMax) {
                     set_temp.add(d);
                 }
-            }
-        }
-
-        // Price Range Search:
-        for (AdvertsModel d : adverts_Model_list) {
-            int price = Integer.valueOf(d.getAd_price());
-            if (price > pMin && price < pMax){
-                set_temp.add(d);
+            } else {
+                // Price Range Search:
+                if (price >= pMin && price <= pMax) {
+                    set_temp.add(d);
+                }
             }
         }
 

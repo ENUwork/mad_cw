@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mad_cw.R;
-import com.example.mad_cw.ui.adverts.AdvertInfoActivity;
+import com.example.mad_cw.ui.adverts.AdvertDetails_Activity;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
 import com.example.mad_cw.ui.chat.ChatRoom_Activity;
 import com.example.mad_cw.ui.user.User_Advert_Create_Edit_Activity;
@@ -68,7 +68,7 @@ public class AdvertsViewHolder extends RecyclerView.ViewHolder implements View.O
             }
             else {
                 // Create new Intent to pass along data:
-                Intent sel_advert = new Intent(itemView.getContext(), AdvertInfoActivity.class);
+                Intent sel_advert = new Intent(itemView.getContext(), AdvertDetails_Activity.class);
                 // Pass advert data along:
                 sel_advert.putExtra("advert", this.advertsModel);
                 // Initiate the data passing to the Advert_details class:

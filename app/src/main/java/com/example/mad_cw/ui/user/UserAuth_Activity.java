@@ -25,7 +25,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User_Auth_Activity extends BaseActivity implements View.OnClickListener {
+public class UserAuth_Activity extends BaseActivity implements View.OnClickListener {
 
     /*
         User Sign In/Up Using Email & Password
@@ -88,7 +88,7 @@ public class User_Auth_Activity extends BaseActivity implements View.OnClickList
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null ){
             finish();
-            startActivity(new Intent(this, User_Profile_Activity.class));
+            startActivity(new Intent(this, UserProfile_Activity.class));
         }
 
     }
@@ -156,13 +156,13 @@ public class User_Auth_Activity extends BaseActivity implements View.OnClickList
 
                             // Redirect to User Profile
                             finish();
-                            Intent userProfile = new Intent(User_Auth_Activity.this, User_Profile_Activity.class);
+                            Intent userProfile = new Intent(UserAuth_Activity.this, UserProfile_Activity.class);
                             startActivity(userProfile);
 
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithEmail:failure", task.getException());
-                            Toast.makeText(User_Auth_Activity.this, "Authentication failed.",
+                            Toast.makeText(UserAuth_Activity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
 
                             // updateUI(null);
@@ -171,7 +171,7 @@ public class User_Auth_Activity extends BaseActivity implements View.OnClickList
                         // [START_EXCLUDE]
 
                         if (!task.isSuccessful()) {
-                            Toast.makeText(User_Auth_Activity.this, "Authentication failed.",
+                            Toast.makeText(UserAuth_Activity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
                         hideProgressBar();
@@ -210,14 +210,14 @@ public class User_Auth_Activity extends BaseActivity implements View.OnClickList
                             storeData(email, location, username);
 
                             // Access the User Profile / Portal
-                            Intent userProfile = new Intent(User_Auth_Activity.this, User_Profile_Activity.class);
+                            Intent userProfile = new Intent(UserAuth_Activity.this, UserProfile_Activity.class);
                             startActivity(userProfile);
 
                         } else {
 
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(User_Auth_Activity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(UserAuth_Activity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                         }
                     }

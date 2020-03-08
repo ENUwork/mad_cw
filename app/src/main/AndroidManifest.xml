@@ -32,8 +32,8 @@
         <activity android:name=".BaseActivity" />
 
         <!-- User Activities -->
-        <activity android:name=".ui.user.User_Auth_Activity" />
-        <activity android:name=".ui.user.User_Profile_Activity" />
+        <activity android:name=".ui.user.UserAuth_Activity" />
+        <activity android:name=".ui.user.UserProfile_Activity" />
 
         <!-- Chat Activities -->
         <activity android:name=".ui.chat.ChatRoom_Activity" />
@@ -43,7 +43,7 @@
         <activity android:name=".ui.user.User_Advert_Create_Edit_Activity" />
         <activity android:name=".ui.user.User_Adverts_Favourite_Activity" />
         <activity android:name=".ui.user.User_Adverts_Personal_Activity"/>
-        <activity android:name=".ui.adverts.AdvertInfoActivity" />
+        <activity android:name=".ui.adverts.AdvertDetails_Activity" />
 
     </application>
 

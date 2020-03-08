@@ -15,7 +15,7 @@ import com.example.mad_cw.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ViewPagerAdapter extends PagerAdapter {
+public class ViewPager_Adapter extends PagerAdapter {
 
     private Context context;
     private LayoutInflater layoutInflater;
@@ -25,7 +25,7 @@ public class ViewPagerAdapter extends PagerAdapter {
     // Constructor:
 
     // [1 Args]:
-    public ViewPagerAdapter(Context context, List<String> images) {
+    public ViewPager_Adapter(Context context, List<String> images) {
         this.context = context;
         this.images = new ArrayList<>();
         this.images = images;

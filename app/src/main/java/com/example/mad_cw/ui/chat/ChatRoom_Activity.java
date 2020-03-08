@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
-import com.example.mad_cw.ui.chat.adapters.ChatRoomListAdapter;
+import com.example.mad_cw.ui.chat.adapters.ChatRoomList_Adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +43,7 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
 
     // Displaying Selected Images:
     private RecyclerView recyclerView;
-    private ChatRoomListAdapter chatListAdapter;
+    private ChatRoomList_Adapter chatListAdapter;
     private ArrayList<ChatModel> chat_model_list = new ArrayList<>();
 
     private Map<String, Object> newChatMap = new HashMap<>();
@@ -109,7 +109,7 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
         if (currentUser != null){
 
             // Dealing with Instantiating the Recycler View & the View Holder:
-            chatListAdapter = new ChatRoomListAdapter(chat_model_list, currentUser.getUid());
+            chatListAdapter = new ChatRoomList_Adapter(chat_model_list, currentUser.getUid());
             recyclerView.setAdapter(chatListAdapter);
 
             // Toast.makeText(this, "Success, user verified", Toast.LENGTH_LONG).show();

@@ -91,9 +91,9 @@
                     style="@style/btn_user"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:drawableStart="@drawable/ic_menu_gallery"
+                    android:drawableStart="@drawable/ic_chat_black_24dp"
                     android:drawableTint="@color/colorPrimary"
-                    android:text="My Chats" />
+                    android:text="Messages" />
 
                 <Button
                     android:id="@+id/fav_ads_btn"

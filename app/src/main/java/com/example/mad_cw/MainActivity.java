@@ -16,9 +16,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
-import com.example.mad_cw.ui.adverts.AdvertsViewFragment;
-import com.example.mad_cw.ui.home.HomeFragment;
-import com.example.mad_cw.ui.user.User_Auth_Activity;
+import com.example.mad_cw.ui.adverts.AdvertsView_Fragment;
+import com.example.mad_cw.ui.user.UserAuth_Activity;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,15 +60,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        // Navigation Bar Handling:
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        // Dealing with Rotating Screens, & initial displayed fragment:
         if(savedInstanceState == null){
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new HomeFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_home);
+                    new AdvertsView_Fragment()).commit();
+            navigationView.setCheckedItem(R.id.nav_adverts);
         }
     }
 
@@ -89,19 +90,21 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (menuItem.getItemId()){
 
+            /*
             case R.id.nav_home:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFragment()).commit();
                 break;
+             */
 
             case R.id.nav_account:
-                Intent open_account = new Intent(this, User_Auth_Activity.class);
+                Intent open_account = new Intent(this, UserAuth_Activity.class);
                 startActivity(open_account);
                 break;
 
             case R.id.nav_adverts:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AdvertsViewFragment()).commit();
+                        new AdvertsView_Fragment()).commit();
                 break;
         }
 
@@ -123,12 +126,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // user UI/UX Update:
 
     private void updateUI(FirebaseUser user) {
-
-        /*
-        Updating Navigation Bar Layout, based on user logged in
-        or not
-         */
-
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
 

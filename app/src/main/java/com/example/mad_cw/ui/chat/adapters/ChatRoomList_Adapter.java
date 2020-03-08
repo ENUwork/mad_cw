@@ -13,7 +13,7 @@ import com.example.mad_cw.ui.chat.ChatModel;
 
 import java.util.ArrayList;
 
-public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapter.ViewHolder> {
+public class ChatRoomList_Adapter extends RecyclerView.Adapter<ChatRoomList_Adapter.ViewHolder> {
 
     // ____________
     // class variables:
@@ -23,7 +23,7 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
     // _____________
     // constructor:
 
-    public ChatRoomListAdapter(ArrayList<ChatModel> chatList, String currentUserUid) {
+    public ChatRoomList_Adapter(ArrayList<ChatModel> chatList, String currentUserUid) {
         this.currentUserUid = currentUserUid;
         this.chatList = chatList;
     }
@@ -33,15 +33,15 @@ public class ChatRoomListAdapter extends RecyclerView.Adapter<ChatRoomListAdapte
 
     @NonNull
     @Override
-    public ChatRoomListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChatRoomList_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         // Identify the target view of the activity:
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_row_display, parent, false);
-        return new ChatRoomListAdapter.ViewHolder(view);
+        return new ChatRoomList_Adapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChatRoomListAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ChatRoomList_Adapter.ViewHolder holder, int position) {
 
         // Change the chat message layout depending on which user sent it:
         if (chatList.get(position).getUser_uid().equals(currentUserUid)) {

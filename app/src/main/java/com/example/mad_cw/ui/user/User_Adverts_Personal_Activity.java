@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
-import com.example.mad_cw.ui.adverts.adapters.AdvertsListAdapter;
+import com.example.mad_cw.ui.adverts.adapters.AdvertsList_Adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +30,7 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
     private static final String TAG = "UserFavAds";
 
     private RecyclerView mAdverts_List;
-    private AdvertsListAdapter advertsListAdapter;
+    private AdvertsList_Adapter advertsListAdapter;
     private List<AdvertsModel> adverts_Model_list;
 
     private SearchView searchField;
@@ -67,7 +67,7 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
 
         // Dealing with Instantiating the Recycler View & the View Holder:
         adverts_Model_list = new ArrayList<>();
-        advertsListAdapter = new AdvertsListAdapter(adverts_Model_list);
+        advertsListAdapter = new AdvertsList_Adapter(adverts_Model_list);
 
         // Instantiate ArrayList<>
         fav_ads_list = new ArrayList<>();

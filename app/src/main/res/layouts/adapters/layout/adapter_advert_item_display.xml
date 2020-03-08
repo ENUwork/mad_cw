@@ -51,10 +51,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/raleway_semibold"
-                android:textColor="@color/colorPrimaryDark"
                 android:text="@string/plc_hold"
                 android:textAlignment="textEnd"
-                android:textSize="1sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

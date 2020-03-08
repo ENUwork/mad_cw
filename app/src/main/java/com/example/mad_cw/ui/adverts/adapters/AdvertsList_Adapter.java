@@ -16,10 +16,10 @@ import com.example.mad_cw.ui.adverts.AdvertsModel;
 import java.util.List;
 
 /* This class is responsible for handling the Recycler View for the AdvertsModel that are
-   displayed in the AdvertsViewFragment.java.
+   displayed in the AdvertsView_Fragment.java.
  */
 
-public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> {
+public class AdvertsList_Adapter extends RecyclerView.Adapter<AdvertsViewHolder> {
 
     // ________________
     // class variables:
@@ -28,8 +28,8 @@ public class AdvertsListAdapter extends RecyclerView.Adapter<AdvertsViewHolder> 
     public List<AdvertsModel> advertsModelList;
 
     // ________________
-    // Class (AdvertsListAdapter) [Public] Constructor [1 Args]:
-    public AdvertsListAdapter(List<AdvertsModel> advertsModelList) {
+    // Class (AdvertsList_Adapter) [Public] Constructor [1 Args]:
+    public AdvertsList_Adapter(List<AdvertsModel> advertsModelList) {
 
         this.advertsModelList = advertsModelList;
     }

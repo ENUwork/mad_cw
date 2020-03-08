@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/nav_adverts"
-        android:name="com.example.mad_cw.ui.adverts.AdvertsViewFragment"
+        android:name="com.example.mad_cw.ui.adverts.AdvertsView_Fragment"
         android:label="@string/menu_adverts"
         tools:layout="@layout/adverts_layout" />
 
@@ -30,7 +30,7 @@
 
     <activity
         android:id="@+id/nav_account"
-        android:name="com.example.mad_cw.ui.user.User_Auth_Activity"
+        android:name="com.example.mad_cw.ui.user.UserAuth_Activity"
         android:label="@string/menu_account_profile"
         tools:layout="@layout/user_auth" />
 

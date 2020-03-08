@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
-import com.example.mad_cw.ui.adverts.adapters.AdvertsListAdapter;
+import com.example.mad_cw.ui.adverts.adapters.AdvertsList_Adapter;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,7 +32,7 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "HomeView";
 
     private RecyclerView mAdverts_List;
-    private AdvertsListAdapter advertsListAdapter;
+    private AdvertsList_Adapter advertsListAdapter;
     private List<AdvertsModel> adverts_Model_list;
 
     // Access a Cloud Firestore instance from the Activity
@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment {
 
         // Dealing with Instantiating the Recycler View & the View Holder:
         adverts_Model_list = new ArrayList<>();
-        advertsListAdapter = new AdvertsListAdapter(adverts_Model_list);
+        advertsListAdapter = new AdvertsList_Adapter(adverts_Model_list);
 
         // Recycler View Config:
         mAdverts_List = (RecyclerView) root.findViewById(R.id.adverts_recycler_view);

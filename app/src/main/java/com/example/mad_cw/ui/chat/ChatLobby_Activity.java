@@ -1,7 +1,6 @@
 package com.example.mad_cw.ui.chat;
 
 import android.os.Bundle;
-import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
-import com.example.mad_cw.ui.adverts.adapters.AdvertsListAdapter;
+import com.example.mad_cw.ui.adverts.adapters.AdvertsList_Adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -29,7 +28,7 @@ public class ChatLobby_Activity extends BaseActivity {
     private static final String TAG = "UserFavAds";
 
     private RecyclerView mAdverts_List;
-    private AdvertsListAdapter advertsListAdapter;
+    private AdvertsList_Adapter advertsListAdapter;
     private List<AdvertsModel> adverts_Model_list;
 
     private List<String> ad_uid_list;
@@ -63,7 +62,7 @@ public class ChatLobby_Activity extends BaseActivity {
 
         // Dealing with Instantiating the Recycler View & the View Holder:
         adverts_Model_list = new ArrayList<>();
-        advertsListAdapter = new AdvertsListAdapter(adverts_Model_list);
+        advertsListAdapter = new AdvertsList_Adapter(adverts_Model_list);
 
         // Instantiate ArrayList<>
         ad_uid_list = new ArrayList<>();

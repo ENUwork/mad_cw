@@ -16,7 +16,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
-import com.example.mad_cw.ui.adverts.adapters.ViewPagerAdapter;
+import com.example.mad_cw.ui.adverts.adapters.ViewPager_Adapter;
 import com.example.mad_cw.ui.chat.ChatRoom_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -37,7 +37,7 @@ import java.util.List;
    and display fully the advert in great detail.
  */
 
-public class AdvertInfoActivity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
+public class AdvertDetails_Activity extends BaseActivity implements View.OnClickListener, ViewPager.OnPageChangeListener {
 
     // _____________________
     // class variables:
@@ -50,7 +50,7 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
     private Button contactBtn;
 
     private ViewPager viewPager;
-    private ViewPagerAdapter viewPagerAdapter;
+    private ViewPager_Adapter viewPagerAdapter;
 
     private int numImg;
     private String adUid;
@@ -102,7 +102,7 @@ public class AdvertInfoActivity extends BaseActivity implements View.OnClickList
         if (advert != null) {
 
             // Assign Object Data to the target layout components:
-            viewPagerAdapter = new ViewPagerAdapter(this, advert.getImages());
+            viewPagerAdapter = new ViewPager_Adapter(this, advert.getImages());
             viewPager.setAdapter(viewPagerAdapter);
 
             // Get Number of Images:
