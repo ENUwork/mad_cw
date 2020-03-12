@@ -93,7 +93,7 @@
     <string name="contact_txt"> Contact seller </string>
     <string name="refine_txt"> Refine Search </string>
     <string name="query_example_txt"> Scott Spark 2019... </string>
-    <string name="search_txt"> Search! </string>
+    <string name="search_txt"> Search </string>
     <string name="display_ads_qty"> Displaying %d Result(s) </string>
 
     <!-- ERROR MESSAGES -->

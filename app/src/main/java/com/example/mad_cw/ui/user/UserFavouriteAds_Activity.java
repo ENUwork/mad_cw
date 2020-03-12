@@ -2,6 +2,8 @@ package com.example.mad_cw.ui.user;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -16,15 +18,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/* (This) Class Deals with the Display of Users favorite Ads */
-
-public class User_Adverts_Favourite_Activity extends BaseActivity {
+public class UserFavouriteAds_Activity extends BaseActivity implements View.OnClickListener {
 
     // Fragment (Class) Variables:
 
@@ -35,6 +36,7 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
     private List<AdvertsModel> adverts_Model_list;
 
     private SearchView searchField;
+    private ImageButton backBtnPress;
 
     private List<String> fav_ads_list;
 
@@ -44,17 +46,21 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
     private FirebaseAuth mAuth;
 
     // ______________
-    // Activity Cycle Methods:
+    // activity cycle Methods:
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Sign In
-        setContentView(R.layout.user_favourite_ads_layout);
+        setContentView(R.layout.user_personal_ads_layout);
 
-        // Instantiating Local Class Variables:
+        // Locate Target Components:
         searchField = (SearchView) findViewById(R.id.searchField);
+        backBtnPress = findViewById(R.id.backBtn);
+
+        // Set onCLickListeners:
+        backBtnPress.setOnClickListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -81,16 +87,19 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
         // Set the Recycler View as a Gallery View:
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2); // (Context context, int spanCount)
 
+        // Set the Recycler View as a Linear Row-by-Row view:
+        // mAdverts_List.setLayoutManager(new LinearLayoutManager(this));
+
         // Declare the assigned Layout:
         mAdverts_List.setLayoutManager(mLayoutManager);
 
-        getFavouriteAds();
+        getPersonalAds();
     }
 
-    // ______________
-    // Custom Methods:
+    // ________________
+    // handling adverts methods:
 
-    private void getFavouriteAds() {
+    private void getPersonalAds() {
 
         /* (This) Class Method gets all of the documents from Firebase Firestore
             and then acts accordingly
@@ -101,49 +110,24 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
         String userUid = currentUser.getUid();
 
         // Get the list of favourite ads from the user db:
-        db.collection("users")
-                .document(userUid)
-                .get()
+        db.collection("classified_ads")
+            .whereEqualTo("ad_owner", userUid)
+            .get()
 
-                .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        DocumentSnapshot document = task.getResult();
-                        List<String> fav_list = (List<String>) document.get("fav_ads");
-                        if (fav_list != null){
-                            fav_ads_list.addAll(fav_list);
-                            queryFavouriteAds();
-                        }
-                    }
-                });
-    }
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
 
-    private void queryFavouriteAds() {
-
-        // Use those UID to populate the advertsModel Object, and build up a Recycler View:
-        for (String element : fav_ads_list) {
-
-            System.out.println(element);
-
-            db.collection("classified_ads")
-                    .document(element)
-                    .get()
-
-                    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                            DocumentSnapshot document = task.getResult();
-
-                            System.out.println(document);
-
-                            AdvertsModel advertsModel = document.toObject(AdvertsModel.class);
-                            adverts_Model_list.add(advertsModel);
-
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Log.d(TAG, document.getId() + " => " + document.getData());
+                            adverts_Model_list.add(document.toObject(AdvertsModel.class));
                             advertsListAdapter.notifyDataSetChanged();
                         }
-                    });
-        }
-
+                        advertsListAdapter.notifyDataSetChanged();
+                    }
+                }
+            });
     }
 
     private void searchQuery() {
@@ -186,6 +170,20 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
         }
         // Update Recycler View
         advertsListAdapter.updateList(temp);
+    }
+
+    // _____________________
+    // user action methods:
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.backBtn:
+                finish();
+                break;
+        }
     }
 
 }

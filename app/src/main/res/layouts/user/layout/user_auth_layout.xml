@@ -3,20 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent"
     android:gravity="center">
 
 <!--  PROGRESS BAR - [INVISIBLE]  -->
-
     <ProgressBar
         android:id="@+id/progressBar"
         android:indeterminate="true"
         android:layout_width="match_parent"
         android:layout_height="10dp"
         android:visibility="invisible"
+        android:background="@color/colorPrimary"
         style="?android:attr/progressBarStyleHorizontal" />
 
 <!--  USER SIGN IN LAYOUT - [VISIBLE]  -->
-
     <LinearLayout
         android:id="@+id/sign_in_layout"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
-            android:text="Welcome back,"
+            android:text="Welcome back"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="36sp"
@@ -73,8 +73,9 @@
             android:background="@drawable/button_primary"
             android:onClick="onClick"
             android:text="Sign In"
+            android:textAllCaps="false"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
 
@@ -111,7 +112,6 @@
     </LinearLayout>
 
 <!--  USER SIGN UP LAYOUT - [GONE]  -->
-
     <LinearLayout
         android:id="@+id/sign_up_layout"
         android:layout_width="match_parent"
@@ -210,8 +210,9 @@
             android:fontFamily="@font/raleway_semibold"
             android:onClick="onClick"
             android:text="@string/sign_up_text"
+            android:textAllCaps="false"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
 

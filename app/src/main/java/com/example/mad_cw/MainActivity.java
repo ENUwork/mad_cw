@@ -1,11 +1,9 @@
 package com.example.mad_cw;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +13,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.bumptech.glide.Glide;
 import com.example.mad_cw.ui.adverts.AdvertsView_Fragment;
 import com.example.mad_cw.ui.user.UserAuth_Activity;
 import com.google.android.material.navigation.NavigationView;

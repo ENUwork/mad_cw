@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
-import com.example.mad_cw.ui.user.adapters.User_Advert_Image_Select_Adapter;
+import com.example.mad_cw.ui.user.adapters.UserAdImg_Adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -46,7 +46,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class User_Advert_Create_Edit_Activity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, User_Advert_Image_Select_Adapter.ItemClickListener {
+public class UserCURDAds_Activity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener, UserAdImg_Adapter.ItemClickListener {
 
     /*
         Managing User Classified Adverts Creation & Editing:
@@ -72,7 +72,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
     // Displaying Selected Images:
     private RecyclerView recyclerView;
-    private User_Advert_Image_Select_Adapter imageListAdapter;
+    private UserAdImg_Adapter imageListAdapter;
 
     // Access a Cloud Firestore instance from the Activity:
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -162,6 +162,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                 break;
 
             case R.id.delete_ad_btn:
+                showProgressBar();
                 deleteAdvert();
                 break;
 
@@ -171,6 +172,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
             case R.id.update_ad_btn:
             case R.id.create_ad_btn:
+                showProgressBar();
                 if (!advertValidation()) {
                     Toast.makeText(this, "Uh-oh, please fill correctly all fields :)", Toast.LENGTH_LONG).show();
                     break;
@@ -253,7 +255,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
     private void displayAdvertImages(ArrayList<String> ImageList) {
 
-        imageListAdapter = new User_Advert_Image_Select_Adapter(this, ImageList);
+        imageListAdapter = new UserAdImg_Adapter(this, ImageList);
         imageListAdapter.setClickListener(this);
         recyclerView.setAdapter(imageListAdapter);
 
@@ -341,6 +343,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                     @Override
                     public void onSuccess(Void aVoid) {
                         Toast.makeText(getBaseContext(), "\uD83C\uDF89 Success! Your advert is now live!", Toast.LENGTH_LONG).show();
+                        hideProgressBar();
                         finish();
                     }
                 })
@@ -349,6 +352,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Toast.makeText(getBaseContext(), "\uD83D\uDE31 Uh-Oh! Something went wrong", Toast.LENGTH_LONG).show();
+                        hideProgressBar();
                     }
                 });
     }
@@ -379,6 +383,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
             @Override
             public void onSuccess(Void aVoid) {
                 Toast.makeText(getBaseContext(), "\uD83C\uDF89 Success! Your advert has been updated", Toast.LENGTH_LONG).show();
+                hideProgressBar();
                 finish();
             }
         })
@@ -386,6 +391,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(getBaseContext(), "\uD83D\uDE31 Uh-Oh! Something went wrong", Toast.LENGTH_LONG).show();
+                hideProgressBar();
             }
         });
     }
@@ -397,6 +403,9 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
         // Delete From All Users Favourites:
         deleteAdvertFromUserFavourites();
+
+        // Delete From all Users Respective Chats:
+        deleteAdvertUserChats();
 
         // Get a new write batch
         WriteBatch batch = db.batch();
@@ -410,6 +419,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                 @Override
                 public void onSuccess(Void aVoid) {
                     Toast.makeText(getBaseContext(), "\uD83C\uDF89 Success! Your advert has been removed", Toast.LENGTH_LONG).show();
+                    hideProgressBar();
                     finish();
                 }
             })
@@ -417,6 +427,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                 @Override
                 public void onFailure(@NonNull Exception e) {
                     Toast.makeText(getBaseContext(), "\uD83D\uDE31 Uh-Oh! Something went wrong", Toast.LENGTH_LONG).show();
+                    hideProgressBar();
                 }
             });
     }
@@ -460,6 +471,25 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                         }
                     }
                 });
+    }
+
+    private void deleteAdvertUserChats() {
+
+        // Get the list of favourite ads from the user db:
+        db.collection("chat").whereEqualTo("ad_uid", advert_uid).get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            for (DocumentSnapshot document : task.getResult()) {
+                                db.collection("chat").document(document.getId()).delete();
+                            }
+                        } else {
+                            Log.d(TAG, "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
     }
 
     // _____________________

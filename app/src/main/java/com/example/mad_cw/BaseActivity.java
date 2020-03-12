@@ -23,7 +23,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     // _________________
-    // Progress Bar Methods:
+    // progress bar methods:
 
     public void setProgressBar(int resId) {
         mProgressBar = findViewById(resId);

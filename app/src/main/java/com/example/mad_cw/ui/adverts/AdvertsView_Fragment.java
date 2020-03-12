@@ -56,7 +56,7 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
 
     private TextView advertQueryNum;
     private EditText priceMin, priceMax;
-    private Button refineSearchApplyBtn, refineSearchBtn;
+    private Button refineSearchApplyBtn, refineSearchBtn, refineCancelSearchBtn;
 
     private SearchView searchField;
     private LinearLayout mainLayout, refineLayout;
@@ -81,10 +81,12 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
         mainLayout = root.findViewById(R.id.adverts_view_main_layout);
         refineSearchBtn = root.findViewById(R.id.refine_search_btn);
         refineSearchApplyBtn = root.findViewById(R.id.refine_apply_btn);
+        refineCancelSearchBtn = root.findViewById(R.id.cancelSearchBtn);
 
         // Set Listeners:
         refineSearchBtn.setOnClickListener(this);
         refineSearchApplyBtn.setOnClickListener(this);
+        refineCancelSearchBtn.setOnClickListener(this);
 
         // Identify CheckBoxes:
         w26 = root.findViewById(R.id.filter_wheels_size_26);
@@ -292,7 +294,13 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
                 mainLayout.setVisibility(View.VISIBLE);
                 refineSearchSelect();
                 break;
-        }
 
+            case R.id.cancelSearchBtn:
+                refineLayout.setVisibility(View.GONE);
+                // refineLayout.startAnimation(slideDown);
+                refineSearchBtn.setVisibility(View.VISIBLE);
+                mainLayout.setVisibility(View.VISIBLE);
+                break;
+        }
     }
 }

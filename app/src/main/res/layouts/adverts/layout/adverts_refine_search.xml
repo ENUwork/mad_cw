@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/refine_search_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <TableRow
         style="@style/refineRowLayout" >
@@ -38,7 +39,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="#C4C4C4" />
 
     <TableRow
         style="@style/refineRowLayout" >
@@ -113,7 +114,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="#C4C4C4" />
 
     <TableRow
         style="@style/refineRowLayout" >
@@ -182,7 +183,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="@color/colorPrimaryDark" />
+        android:background="#C4C4C4" />
 
     <TableRow
         style="@style/refineRowLayout" >
@@ -218,9 +219,23 @@
 
     </TableRow>
 
-    <Button
-        android:id="@+id/refine_apply_btn"
-        style="@style/btn_main"
-        android:text="@string/search_txt" />
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center" >
+
+        <Button
+            android:id="@+id/cancelSearchBtn"
+            style="@style/btn_main"
+            android:backgroundTint="#CCCCCC"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@android:string/cancel" />
+
+        <Button
+            android:id="@+id/refine_apply_btn"
+            style="@style/btn_main"
+            android:text="@string/search_txt" />
+
+    </TableRow>
 
 </LinearLayout>

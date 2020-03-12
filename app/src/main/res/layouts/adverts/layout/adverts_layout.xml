@@ -5,8 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--  Recycler View for AdvertsModel  -->
+    <!--  PROGRESS BAR - [INVISIBLE]  -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="invisible"
+        android:background="@color/colorPrimary"
+        style="?android:attr/progressBarStyleHorizontal" />
 
+    <!--  Recycler View for AdvertsModel  -->
     <LinearLayout
         android:id="@+id/adverts_view_main_layout"
         android:layout_width="match_parent"
@@ -56,7 +65,6 @@
     </LinearLayout>
 
     <!-- REFINE SEARCH VIEW LAYOUT -->
-
     <Button
         android:id="@+id/refine_search_btn"
         style="@style/btn_main"

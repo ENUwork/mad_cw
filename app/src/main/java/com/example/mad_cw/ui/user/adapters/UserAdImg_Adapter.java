@@ -13,14 +13,14 @@ import com.example.mad_cw.R;
 
 import java.util.List;
 
-public class User_Advert_Image_Select_Adapter extends RecyclerView.Adapter<User_Advert_Image_Select_Adapter.ViewHolder> {
+public class UserAdImg_Adapter extends RecyclerView.Adapter<UserAdImg_Adapter.ViewHolder> {
 
     private List<String> mData;
     private LayoutInflater mInflater;
     private ItemClickListener mClickListener;
 
     // data is passed into the constructor
-    public User_Advert_Image_Select_Adapter(Context context, List<String> data) {
+    public UserAdImg_Adapter(Context context, List<String> data) {
         this.mInflater = LayoutInflater.from(context);
         this.mData = data;
     }

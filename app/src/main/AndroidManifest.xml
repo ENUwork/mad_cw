@@ -18,7 +18,6 @@
             android:name=".MainActivity"
             android:label="@string/app_title"
             android:theme="@style/SplashTheme">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
@@ -41,9 +40,9 @@
         <activity android:name=".ui.chat.ChatLobby_Activity"/>
 
         <!-- Classified Ads Activities -->
-        <activity android:name=".ui.user.User_Advert_Create_Edit_Activity" />
-        <activity android:name=".ui.user.User_Adverts_Favourite_Activity" />
-        <activity android:name=".ui.user.User_Adverts_Personal_Activity" />
+        <activity android:name=".ui.user.UserCURDAds_Activity" />
+        <activity android:name=".ui.user.UserPersonalAds_Activity" />
+        <activity android:name=".ui.user.UserFavouriteAds_Activity" />
         <activity android:name=".ui.adverts.AdvertDetails_Activity" />
 
     </application>

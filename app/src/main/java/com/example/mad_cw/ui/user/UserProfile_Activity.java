@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -80,13 +81,14 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         // Layout View:
         mainInfoLayout = findViewById(R.id.main_user_layout);
         userEditLayout = findViewById(R.id.user_edit_layout);
-
         ProPic = findViewById(R.id.userProfilePic);
         UserUidNum = findViewById(R.id.textView);
         fName = findViewById(R.id.account_first_name);
         userName = findViewById(R.id.account_username);
         userLoc = findViewById(R.id.account_location);
         userEmail = findViewById(R.id.account_email);
+
+        setProgressBar(R.id.progressBar);
 
         // Animations:
         slideDown = AnimationUtils.loadAnimation(this, R.anim.slide_down);
@@ -135,17 +137,17 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         switch (v.getId()) {
 
             case R.id.fav_ads_btn:
-                Intent fav_ads = new Intent(this, User_Adverts_Favourite_Activity.class);
+                Intent fav_ads = new Intent(this, UserPersonalAds_Activity.class);
                 startActivity(fav_ads);
                 break;
 
             case R.id.user_profile_ad_btn:
-                Intent post_ad = new Intent(this, User_Advert_Create_Edit_Activity.class);
+                Intent post_ad = new Intent(this, UserCURDAds_Activity.class);
                 startActivity(post_ad);
                 break;
 
             case R.id.user_profile_myAds_btn:
-                Intent personal_ad = new Intent(this, User_Adverts_Personal_Activity.class);
+                Intent personal_ad = new Intent(this, UserFavouriteAds_Activity.class);
                 startActivity(personal_ad);
                 break;
 
@@ -165,6 +167,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 break;
 
             case R.id.saveAccount:
+                showProgressBar();
                 updateProfileInfo();
                 // userEditLayout.startAnimation(slideDown);
                 userEditLayout.setVisibility(View.GONE);
@@ -281,6 +284,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         });
 
         // Refresh the UI Page:
+        hideProgressBar();
         onStart();
     }
 
@@ -302,14 +306,16 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void Void) {
-                        // Log.d(TAG, "DocumentSnapshot added with ID: " + documentReference.getId());
-                        Log.w(TAG, "User Successfully Registered");
+                        Toast.makeText(getBaseContext(), "\uD83C\uDF89 Success! Your account info has been updated", Toast.LENGTH_LONG).show();
+                        hideProgressBar();
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         Log.w(TAG, "Error adding document", e);
+                        Toast.makeText(getBaseContext(), "\uD83D\uDE31 Uh-Oh! Something went wrong", Toast.LENGTH_LONG).show();
+                        hideProgressBar();
                     }
                 });
 

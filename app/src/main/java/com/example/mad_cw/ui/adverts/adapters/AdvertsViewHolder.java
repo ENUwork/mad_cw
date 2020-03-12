@@ -12,7 +12,7 @@ import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertDetails_Activity;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
 import com.example.mad_cw.ui.chat.ChatRoom_Activity;
-import com.example.mad_cw.ui.user.User_Advert_Create_Edit_Activity;
+import com.example.mad_cw.ui.user.UserCURDAds_Activity;
 
 public class AdvertsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -55,11 +55,11 @@ public class AdvertsViewHolder extends RecyclerView.ViewHolder implements View.O
                 open_chat.putExtra("advert_info", this.advertsModel);
                 itemView.getContext().startActivity(open_chat);
             }
-            else if (class_name.equals("User_Adverts_Personal_Activity")) {
+            else if (class_name.equals("UserFavouriteAds_Activity")) {
 
                 // Redirect User to "Edit page":
                 // Create new Intent to pass along data:
-                Intent sel_advert = new Intent(itemView.getContext(), User_Advert_Create_Edit_Activity.class);
+                Intent sel_advert = new Intent(itemView.getContext(), UserCURDAds_Activity.class);
                 // Pass advert data along:
                 sel_advert.putExtra("advert", this.advertsModel);
                 // Initiate the data passing to the Advert_details class:

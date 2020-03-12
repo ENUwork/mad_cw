@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -14,22 +14,17 @@
     </style>
 
     <!--  APP THEME [NO ACTION BAR]  -->
-
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
-
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
-
     <style name="SplashTheme" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
     </style>
 
     <!--  APP BUTTON STYLES  -->
-
     <style name="btn_main">
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -42,7 +37,6 @@
         <item name="android:textStyle"> bold </item>
         <item name="android:textAlignment"> center </item>
     </style>
-
     <style name="btn_user">
         <item name="android:layout_width"> match_parent </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -57,7 +51,6 @@
         <item name="android:textSize"> 16sp </item>
         <item name="android:drawablePadding"> 15sp </item>
     </style>
-
     <style name="userProfileInputField">
         <item name="android:layout_width"> match_parent </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -70,7 +63,6 @@
     </style>
 
     <!--  ADVERT INPUT TITLE FIELDS  -->
-
     <style name="field">
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -86,7 +78,6 @@
     </style>
 
     <!--  ADVERT INPUT FIELDS  -->
-
     <style name="inputFiled">
         <item name="android:layout_width"> match_parent </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -102,7 +93,6 @@
     </style>
 
     <!--  SPINNER STYLE DESIGN  -->
-
     <style name="spinner_style">
         <item name="android:background"> @drawable/gradient_spinner </item>
         <item name="android:textSize"> 20sp </item>
@@ -114,7 +104,6 @@
     </style>
 
     <!--  SINGLE ADVERT VIEW STYLES  -->
-
     <style name="advertInfoRow">
         <item name="android:layout_width"> match_parent </item>
         <item name="android:layout_height"> match_parent </item>
@@ -127,7 +116,6 @@
     </style>
 
     <!-- advert refine search layout -->
-
     <style name="refineRowLayout">
         <item name="android:layout_width"> match_parent </item>
         <item name="android:layout_height"> wrap_content </item>
@@ -142,7 +130,6 @@
     </style>
 
     <!-- chat styles -->
-
     <style name="chatOutgoing">
         <item name="android:layout_width"> wrap_content </item>
         <item name="android:layout_height"> wrap_content </item>

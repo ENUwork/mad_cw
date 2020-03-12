@@ -108,7 +108,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.signInButton:
-
+                showProgressBar();
                 signIn(emailField.getText().toString(), passField.getText().toString());
                 break;
 
@@ -127,7 +127,6 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                 break;
 
         }
-
     }
 
     // _____________________
@@ -141,7 +140,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
             return;
         }
 
-        showProgressBar();
+        // showProgressBar();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -220,6 +219,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                             Toast.makeText(UserAuth_Activity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
 
                         }
+                        hideProgressBar();
                     }
                 });
     }
