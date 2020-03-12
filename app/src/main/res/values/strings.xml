@@ -101,7 +101,6 @@
     <string name="advert_uploaded"> </string>
 
     <!--  ITEM CONDITION WEAR  -->
-
     <string-array name="item_condition_wear">
         <item> </item>
         <item> Like New </item>
@@ -112,7 +111,6 @@
     </string-array>
 
     <!--  BIKE WHEELS SIZE  -->
-
     <string-array name="bike_wheel_size">
         <item> </item>
         <item> 26\" </item>
@@ -121,7 +119,6 @@
     </string-array>
 
     <!--  BIKE FRAME SIZE  -->
-
     <string-array name="bike_frame_size">
         <item> </item>
         <item> X-Small </item>
@@ -130,6 +127,22 @@
         <item> Large </item>
         <item> X-Large </item>
         <item> XX-Large </item>
+    </string-array>
+
+    <!--  BIKE FRAME SIZE  -->
+    <string-array name="bike_drivetrain_typ">
+        <item> </item>
+        <item> 1x9 </item>
+        <item> 1x10 </item>
+        <item> 1x11 </item>
+        <item> 1x12 </item>
+        <item> 2x9 </item>
+        <item> 2x10 </item>
+        <item> 2x11 </item>
+        <item> 2x12 </item>
+        <item> 3x9 </item>
+        <item> 3x10 </item>
+        <item> 3x11 </item>
     </string-array>
 
 </resources>

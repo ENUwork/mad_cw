@@ -81,7 +81,8 @@
             <EditText
                 android:id="@+id/post_ad_input_desc"
                 style="@style/inputFiled"
-                android:inputType="textLongMessage" />
+                android:gravity="start|top"
+                android:inputType="textMultiLine" />
 
             <!-- ADVERT PRICE -->
 

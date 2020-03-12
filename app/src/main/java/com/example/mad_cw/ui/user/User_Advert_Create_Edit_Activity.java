@@ -66,7 +66,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
     private EditText adPrice, adLoc, adTitle, adDesc, adAge;
     private TextView upCount;
     private String advert_uid;
-    private Spinner spinnerCondition, spinnerWheels, spinnerFrame;
+    private Spinner spinnerCondition, spinnerWheels, spinnerFrame, spinnerDriveTrain;
     private ImageButton selectImgBtn;
     private Button createAdBtn, updateAdBtn, deleteAdBtn;
 
@@ -323,7 +323,9 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         advert_info.put("post_time", FieldValue.serverTimestamp());
         advert_info.put("ad_owner", user_uid);
         advert_info.put("ad_other", Arrays.asList(spinnerCondition.getSelectedItem().toString(),
-                spinnerWheels.getSelectedItem().toString(), spinnerFrame.getSelectedItem().toString()));
+                spinnerWheels.getSelectedItem().toString(),
+                spinnerFrame.getSelectedItem().toString(),
+                spinnerDriveTrain.getSelectedItem().toString()));
         advert_info.put("images", newImgStringList);
 
         // Set the value of 'NYC'
@@ -351,10 +353,6 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
     private void updateAdvert(ArrayList<String> newImgStringList) {
 
-        //TODO:
-        // Delete/Remove Values from the "images" filed, due to image order rearranging
-        // Disallow the updating of the "time" field, to preserve the original post_time:
-
         // Get a new write batch
         WriteBatch batch = db.batch();
         DocumentReference exist_doc = db.collection("classified_ads").document(advert_uid);
@@ -366,7 +364,9 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         advert_info.put("ad_loc", adLoc.getText().toString());
         advert_info.put("ad_age", adAge.getText().toString());
         advert_info.put("ad_other", Arrays.asList(spinnerCondition.getSelectedItem().toString(),
-                spinnerWheels.getSelectedItem().toString(), spinnerFrame.getSelectedItem().toString()));
+                spinnerWheels.getSelectedItem().toString(),
+                spinnerFrame.getSelectedItem().toString(),
+                spinnerDriveTrain.getSelectedItem().toString()));
         advert_info.put("images", newImgStringList);
 
         // Testing: Using just set:
@@ -560,27 +560,32 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         spinnerCondition = (Spinner) findViewById(R.id.post_ad_select_condition);
         spinnerWheels = (Spinner) findViewById(R.id.spinnerWheelSize);
         spinnerFrame = (Spinner) findViewById(R.id.spinnerFrameSize);
+        spinnerDriveTrain = (Spinner) findViewById(R.id.spinnerDriveTrain);
 
         // create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapterCondition = ArrayAdapter.createFromResource(this, R.array.item_condition_wear, android.R.layout.simple_spinner_item);
         ArrayAdapter<CharSequence> adapterWheels = ArrayAdapter.createFromResource(this, R.array.bike_wheel_size, android.R.layout.simple_spinner_item);
-        ArrayAdapter<CharSequence> adapterFrame= ArrayAdapter.createFromResource(this, R.array.bike_frame_size, android.R.layout.simple_spinner_item);
-
+        ArrayAdapter<CharSequence> adapterFrame = ArrayAdapter.createFromResource(this, R.array.bike_frame_size, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapterDrivetrain = ArrayAdapter.createFromResource(this, R.array.bike_drivetrain_typ, android.R.layout.simple_spinner_item);
 
         // specify the layout to use when the list of choices appears
         adapterCondition.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapterWheels.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         adapterFrame.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        adapterDrivetrain.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         // apply the adapter to the spinner(s)
         spinnerCondition.setAdapter(adapterCondition);
         spinnerWheels.setAdapter(adapterWheels);
         spinnerFrame.setAdapter(adapterFrame);
+        spinnerDriveTrain.setAdapter(adapterDrivetrain);
 
         // set spinner listeners:
         spinnerCondition.setOnItemSelectedListener(this);
         spinnerWheels.setOnItemSelectedListener(this);
         spinnerFrame.setOnItemSelectedListener(this);
+        spinnerDriveTrain.setOnItemSelectedListener(this);
+
     }
 
     private void advertEditData(AdvertsModel advert) {
