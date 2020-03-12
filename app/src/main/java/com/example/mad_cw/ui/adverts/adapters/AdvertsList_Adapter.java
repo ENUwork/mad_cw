@@ -46,10 +46,10 @@ public class AdvertsList_Adapter extends RecyclerView.Adapter<AdvertsViewHolder>
 
         if (class_name.equals("ChatLobby_Activity")){
             // Load the chat lobby inflatable layout:
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_room_display, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.advert_item_adapter_v2, parent, false);
         }
         else {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_advert_item_display, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.advert_item_adapter_v1, parent, false);
         }
 
         return new AdvertsViewHolder(view);

@@ -52,7 +52,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Sign In
-        setContentView(R.layout.user_auth);
+        setContentView(R.layout.user_auth_layout);
 
         // SIGN IN Views:
         signInLayout = findViewById(R.id.sign_in_layout);

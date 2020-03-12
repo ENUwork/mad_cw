@@ -50,7 +50,7 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Sign In
-        setContentView(R.layout.user_advert_personal);
+        setContentView(R.layout.user_personal_ads_layout);
 
         // Instantiating Local Class Variables:
         searchField = (SearchView) findViewById(R.id.searchField);

@@ -36,7 +36,7 @@ public class ChatRoomList_Adapter extends RecyclerView.Adapter<ChatRoomList_Adap
     public ChatRoomList_Adapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         // Identify the target view of the activity:
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_row_display, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_bubble_adapter, parent, false);
         return new ChatRoomList_Adapter.ViewHolder(view);
     }
 

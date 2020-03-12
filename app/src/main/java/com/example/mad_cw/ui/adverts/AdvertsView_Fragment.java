@@ -159,8 +159,8 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
                         advertQueryNum.setText(getString(R.string.display_ads_qty, advertsListAdapter.getItemCount()));
                     }
                 }
-                }
-            });
+            }
+        });
     }
 
     private void searchQuery() {

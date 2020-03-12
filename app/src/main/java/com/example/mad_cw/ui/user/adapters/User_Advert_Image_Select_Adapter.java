@@ -29,7 +29,7 @@ public class User_Advert_Image_Select_Adapter extends RecyclerView.Adapter<User_
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = mInflater.inflate(R.layout.adapter_image_advert_view_pager, parent, false);
+        View view = mInflater.inflate(R.layout.advert_image_viewpager, parent, false);
         return new ViewHolder(view);
     }
 

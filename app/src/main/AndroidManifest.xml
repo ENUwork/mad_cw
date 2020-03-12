@@ -16,7 +16,7 @@
         <!-- Main Activity + Splash Screen -->
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main2"
+            android:label="@string/app_title"
             android:theme="@style/SplashTheme">
 
             <intent-filter>
@@ -36,13 +36,14 @@
         <activity android:name=".ui.user.UserProfile_Activity" />
 
         <!-- Chat Activities -->
-        <activity android:name=".ui.chat.ChatRoom_Activity" />
+        <activity android:name=".ui.chat.ChatRoom_Activity"
+            android:windowSoftInputMode="stateUnchanged|adjustPan" />
         <activity android:name=".ui.chat.ChatLobby_Activity"/>
 
         <!-- Classified Ads Activities -->
         <activity android:name=".ui.user.User_Advert_Create_Edit_Activity" />
         <activity android:name=".ui.user.User_Adverts_Favourite_Activity" />
-        <activity android:name=".ui.user.User_Adverts_Personal_Activity"/>
+        <activity android:name=".ui.user.User_Adverts_Personal_Activity" />
         <activity android:name=".ui.adverts.AdvertDetails_Activity" />
 
     </application>

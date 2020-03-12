@@ -25,7 +25,7 @@
     <string name="menu_adverts"> Buy/Sell </string>
     <string name="menu_share"> Share </string>
     <string name="main_img_desc"> Main Advert Image View </string>
-    <string name="title_activity_main2"> Main2Activity </string>
+    <string name="app_title"> Buy/Sell </string>
 
     <!-- FRAGMENT HOME SETTINGS -->
 

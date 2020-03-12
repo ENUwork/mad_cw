@@ -129,17 +129,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View hView =  navigationView.getHeaderView(0);
 
-        // Profile Image:
-        Uri photoUrl = user.getPhotoUrl();
-
         TextView nav_user = (TextView) hView.findViewById(R.id.textView);
-        ImageView profilePic = hView.findViewById(R.id.imageView);
-
-        if (photoUrl != null) {
-            // Display user Profile Details:
-            Glide.with(this).load(photoUrl).into(profilePic);
-        }
-
         // User email
         nav_user.setText(user.getEmail());
     }

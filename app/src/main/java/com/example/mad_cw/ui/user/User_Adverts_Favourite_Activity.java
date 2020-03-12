@@ -51,7 +51,7 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Sign In
-        setContentView(R.layout.user_advert_favourite);
+        setContentView(R.layout.user_favourite_ads_layout);
 
         // Instantiating Local Class Variables:
         searchField = (SearchView) findViewById(R.id.searchField);
@@ -80,9 +80,6 @@ public class User_Adverts_Favourite_Activity extends BaseActivity {
 
         // Set the Recycler View as a Gallery View:
         GridLayoutManager mLayoutManager = new GridLayoutManager(this, 2); // (Context context, int spanCount)
-
-        // Set the Recycler View as a Linear Row-by-Row view:
-        // mAdverts_List.setLayoutManager(new LinearLayoutManager(this));
 
         // Declare the assigned Layout:
         mAdverts_List.setLayoutManager(mLayoutManager);

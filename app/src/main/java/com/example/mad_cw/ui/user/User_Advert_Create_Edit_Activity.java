@@ -88,7 +88,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         super.onCreate(savedInstanceState);
 
         // Set Layout for User Post Advert:
-        setContentView(R.layout.user_advert_create_edit);
+        setContentView(R.layout.user_crud_advert_layout);
 
         // Hide Support Menu Bar:
         // getSupportActionBar().hide();

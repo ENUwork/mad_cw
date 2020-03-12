@@ -4,14 +4,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mad_cw.BaseActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.AdvertsModel;
@@ -27,6 +29,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -48,9 +51,12 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
 
     private Map<String, Object> newChatMap = new HashMap<>();
     private Map<String, Object> textHashMap = new HashMap<>();
-    private ImageButton sendMsgBtn;
+    private ImageButton sendMsgBtn, backBtnPress;
     private EditText user_txt_msg;
-    private TextView chat_ad_title, chat_ad_price;
+    private ImageView chat_ad_main_img;
+    private TextView chat_ad_title, chat_ad_price, chat_ad_location;
+
+    LinearLayoutManager layoutManager = new LinearLayoutManager(this);
 
     private String chat_uid;
 
@@ -74,46 +80,46 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
 
         // Setup the Recycler View, set Gallery as Layout, and assign it:
         recyclerView = findViewById(R.id.chat_recycler_view);
-        GridLayoutManager mLayoutManager = new GridLayoutManager(this, 1); // (Context context, int spanCount)
-        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setLayoutManager(layoutManager);
 
-        // Locate Target Fields:
+        // Alternative Method:
+        // ((LinearLayoutManager)recyclerView.getLayoutManager()).setStackFromEnd(true);
+
+        // Locate Target Components:
         user_txt_msg = findViewById(R.id.user_text_msg);
         sendMsgBtn = findViewById(R.id.send_msg_btn);
-        chat_ad_title = findViewById(R.id.ad_title_txt);
-        chat_ad_price = findViewById(R.id.ad_price_txt);
+        backBtnPress = findViewById(R.id.backBtn);
+        chat_ad_main_img = findViewById(R.id.advert_image_item);
+        chat_ad_title = findViewById(R.id.advert_title_item);
+        chat_ad_price = findViewById(R.id.advert_item_price);
+        chat_ad_location = findViewById(R.id.advert_item_location);
 
         // Set onCLickListeners:
         sendMsgBtn.setOnClickListener(this);
-
-        // Dealing with passed data accordingly:
-        advert = getIntent().getParcelableExtra("advert_info");
-
-        if (advert != null){
-            chat_ad_title.setText(advert.getAd_title());
-            chat_ad_price.setText(getString(R.string.set_ad_price, advert.getAd_price()));
-        }
+        backBtnPress.setOnClickListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
-        verifyChatExistence();
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null){
+        if (currentUser != null) {
 
             // Dealing with Instantiating the Recycler View & the View Holder:
             chatListAdapter = new ChatRoomList_Adapter(chat_model_list, currentUser.getUid());
             recyclerView.setAdapter(chatListAdapter);
-
-            // Toast.makeText(this, "Success, user verified", Toast.LENGTH_LONG).show();
         }
+
+        // Dealing with passed data accordingly:
+        advert = getIntent().getParcelableExtra("advert_info");
+
+        if (advert != null) {
+            Glide.with(this).load(advert.getImages().get(0)).into(chat_ad_main_img);
+            chat_ad_title.setText(advert.getAd_title());
+            chat_ad_price.setText(getString(R.string.set_ad_price, advert.getAd_price()));
+            chat_ad_location.setText(advert.getAd_loc());
+        }
+
+        verifyChatExistence();
     }
 
     // _____________________
@@ -131,13 +137,13 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         List<String> usersMainList = new ArrayList<String>(Arrays.asList(userUid, advertOwnerUid));
-                        for (QueryDocumentSnapshot doc : task.getResult()){
+                        for (QueryDocumentSnapshot doc : task.getResult()) {
                             List<String> users_list = (List<String>) doc.getData().get("users");
                             usersMainList.retainAll(users_list);
-                            if (usersMainList.size() == 2 && advert.getDocumentId().equals(doc.getData().get("ad_uid"))){
+                            if (usersMainList.size() == 2 && advert.getDocumentId().equals(doc.getData().get("ad_uid"))) {
                                 chat_uid = doc.getId();
                                 getMessages(chat_uid);
-                                System.out.println("Chat Found" + doc.getId());
+                                System.out.println("Chat Found" + doc.getId()); // [Test]
                             }
                         }
                     }
@@ -146,12 +152,12 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
 
     private void getMessages(String chat_uid) {
 
-        db.collection("chat").document(chat_uid).collection("messages")
+        db.collection("chat").document(chat_uid).collection("messages").orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                         if (e != null) {
-                            Toast.makeText(getApplicationContext(), "Error Retriving Data", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "Error Retrieving Data", Toast.LENGTH_LONG).show();
                         }
                         // On Document Change retrieves only the updated data:
                         for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
@@ -213,17 +219,20 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
     @Override
     public void onClick(View v) {
 
-        switch (v.getId()){
+        switch (v.getId()) {
 
             case R.id.send_msg_btn:
 
                 // Instantiate Chat, upon sending a message;
-                if (chat_uid == null){
+                if (chat_uid == null) {
                     startChat();
                 } else {
                     sendMessage(user_txt_msg.getText().toString());
                 }
+                break;
 
+            case R.id.backBtn:
+                finish();
                 break;
         }
 
@@ -231,5 +240,6 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
 
     // ______________________
     // UI/UX methods:
+
 
 }
