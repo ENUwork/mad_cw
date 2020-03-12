@@ -54,7 +54,6 @@
                 android:orientation="vertical">
 
                 <!-- USER ACCOUNT EDIT INFO REDIRECT Btn. -->
-
                 <Button
                     android:id="@+id/accountDetailsBtn"
                     style="@style/btn_user"
@@ -62,10 +61,7 @@
                     android:drawableTint="@color/colorPrimary"
                     android:text="Account Details" />
 
-                <!-- USER PEDAL TRIBE FEEDBACK REDIRECT Btn. -->
-
                 <!-- USER ADVERT CREATE Btn. -->
-
                 <Button
                     android:id="@+id/user_profile_ad_btn"
                     style="@style/btn_user"
@@ -74,7 +70,6 @@
                     android:text="@string/post_ad" />
 
                 <!-- USER PERSONAL ADVERTS Btn. -->
-
                 <Button
                     android:id="@+id/user_profile_myAds_btn"
                     style="@style/btn_user"
@@ -82,8 +77,7 @@
                     android:drawableTint="@color/colorPrimary"
                     android:text="@string/my_ads_txt" />
 
-                <!-- USER FAVOURITE ADVERTS Btn. -->
-
+                <!-- USER DIRECT MESSAGES ADVERTS Btn. -->
                 <Button
                     android:id="@+id/user_profile_myChat"
                     style="@style/btn_user"
@@ -93,6 +87,7 @@
                     android:drawableTint="@color/colorPrimary"
                     android:text="Messages" />
 
+                <!-- USER FAVOURITE ADVERTS Btn. -->
                 <Button
                     android:id="@+id/fav_ads_btn"
                     style="@style/btn_user"
@@ -100,15 +95,15 @@
                     android:drawableTint="@color/colorPrimary"
                     android:text="@string/fav_ads_txt" />
 
-                <!-- USER SING OUT Btn. -->
-
-                <Button
+                <!-- USER PEDAL TRIBE FEEDBACK REDIRECT Btn. -->
+                <!-- <Button
                     android:id="@+id/pedal_tribe_feedback_btn"
                     style="@style/btn_user"
                     android:fontFamily="@font/ubuntu_bold_italic"
                     android:text="@string/pedal_T"
-                    android:textSize="18sp" />
+                    android:textSize="18sp" /> -->
 
+                <!-- USER SING OUT Btn. -->
                 <Button
                     android:id="@+id/signOutButton"
                     style="@style/btn_user"

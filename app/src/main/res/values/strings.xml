@@ -5,7 +5,6 @@
     <string name="app_name">Pedal Tribe</string>
 
     <!-- [TESTING] -->
-
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
     <string name="firebase_status_fmt">Firebase UID: %s</string>
@@ -34,7 +33,8 @@
 
     <!-- USER SIGN UP -->
 
-    <string name="sign_up_welcome"> Welcome to Pedal Tribe, \n the largest cycling community \n built for cyclists, by cyclists </string>
+    <string name="sign_up_welcome"> Welcome to <b><i>Pedal<font color='#00A3FF'> Tribe</font></i></b></string>
+    <string name="sign_up_welcome_2">Built for cyclists, by cyclists 🚴‍♀️🚴‍♂️</string>
     <string name="old_account"> Already have an account? </string>
     <string name="sign_up_text"> Sign Up </string>
     <string name="error_sign_in_failed"> Uh-oh 😧 Sign In failed </string>

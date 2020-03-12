@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorAccent"
-    android:gravity="center">
+    android:gravity="center"
+    android:orientation="vertical">
 
-<!--  PROGRESS BAR - [INVISIBLE]  -->
+    <!--  PROGRESS BAR - [INVISIBLE]  -->
     <ProgressBar
         android:id="@+id/progressBar"
-        android:indeterminate="true"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:visibility="invisible"
         android:background="@color/colorPrimary"
-        style="?android:attr/progressBarStyleHorizontal" />
+        android:indeterminate="true"
+        android:visibility="invisible" />
 
-<!--  USER SIGN IN LAYOUT - [VISIBLE]  -->
+    <!--  USER SIGN IN LAYOUT - [VISIBLE]  -->
     <LinearLayout
         android:id="@+id/sign_in_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
-        android:visibility="visible"
-        android:gravity="center">
+        android:visibility="visible">
 
         <!-- WELCOME TEXT -->
 
@@ -42,9 +42,9 @@
             android:id="@+id/userEmail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:layout_marginTop="50dp"
             android:layout_marginBottom="10dp"
-            android:layout_marginHorizontal="50dp"
             android:background="@drawable/border_input"
             android:ems="10"
             android:hint="Email"
@@ -56,9 +56,9 @@
             android:id="@+id/userPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="50dp"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="50dp"
-            android:layout_marginHorizontal="50dp"
             android:background="@drawable/border_input"
             android:ems="10"
             android:hint="Password"
@@ -73,8 +73,8 @@
             android:background="@drawable/button_primary"
             android:onClick="onClick"
             android:text="Sign In"
-            android:textAllCaps="false"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -82,60 +82,80 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="25dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView1"
+            <View
+                android:id="@+id/divider1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="25dp"
-                android:text="Do not have an account?"
-                android:textAlignment="center"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16dp" />
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/sign_Up_HyperLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginVertical="25dp"
-                android:text="Register account"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16dp"
-                android:textStyle="bold" />
+                android:layout_gravity="center" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Do not have an account?"
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/sign_Up_HyperLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Register account"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </TableRow>
+
         </LinearLayout>
 
 
     </LinearLayout>
 
-<!--  USER SIGN UP LAYOUT - [GONE]  -->
+    <!--  USER SIGN UP LAYOUT - [GONE]  -->
     <LinearLayout
         android:id="@+id/sign_up_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <!--    WELCOME TEXT    -->
-
+        <!-- WELCOME TEXT -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="sans-serif"
             android:text="@string/sign_up_welcome"
             android:textAlignment="center"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="25sp"
             android:textStyle="bold"
             android:typeface="normal" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif"
+            android:layout_marginTop="10dp"
+            android:text="@string/sign_up_welcome_2"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="20sp"
+            android:typeface="normal" />
 
-    <!--    USER INPUT FIELDS   -->
-
-    <!--    USER - USERNAME    -->
-
+        <!-- USER INPUT FIELDS -->
+        <!-- USER - USERNAME -->
         <EditText
             android:id="@+id/username"
             android:layout_width="match_parent"
@@ -145,14 +165,13 @@
             android:layout_marginBottom="10dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="sans-serif"
             android:hint="@string/username_field"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textAlignment="textStart" />
 
-    <!--    USER - EMAIL    -->
-
+        <!-- USER - EMAIL -->
         <EditText
             android:id="@+id/userEmail2"
             android:layout_width="match_parent"
@@ -161,14 +180,13 @@
             android:layout_marginVertical="10dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="sans-serif"
             android:hint="@string/email_field"
             android:inputType="textEmailAddress"
             android:padding="10dp"
             android:textAlignment="textStart" />
 
-    <!--    USER - PASSWORD    -->
-
+        <!-- USER - PASSWORD -->
         <EditText
             android:id="@+id/userPassword2"
             android:layout_width="match_parent"
@@ -177,14 +195,13 @@
             android:layout_marginVertical="10dp"
             android:background="@drawable/border_input"
             android:ems="10"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="sans-serif"
             android:hint="@string/password_field"
             android:inputType="textPassword"
             android:padding="10dp"
             android:textAlignment="textStart" />
 
-    <!--    USER - LOCATION    -->
-
+        <!-- USER - LOCATION -->
         <EditText
             android:id="@+id/location_input"
             android:layout_width="match_parent"
@@ -200,18 +217,16 @@
             android:padding="10dp"
             android:textAlignment="textStart" />
 
-    <!--    USER - EMAIL    -->
-
         <Button
             android:id="@+id/signUpButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/button_primary"
-            android:fontFamily="@font/raleway_semibold"
+            android:fontFamily="sans-serif"
             android:onClick="onClick"
             android:text="@string/sign_up_text"
-            android:textAllCaps="false"
             android:textAlignment="center"
+            android:textAllCaps="false"
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -219,35 +234,43 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="50dp"
+            android:layout_marginVertical="25dp"
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/textView6"
+            <View
+                android:id="@+id/divider2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
-                android:layout_marginVertical="25dp"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/old_account"
-                android:textAlignment="center"
-                android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="16sp" />
+                android:layout_height="2dp"
+                android:background="@color/colorPrimaryDark" />
 
-            <TextView
-                android:id="@+id/sign_In_HyperLink"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="5dp"
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginVertical="25dp"
-                android:fontFamily="@font/raleway_semibold"
-                android:text="@string/sign_in_text"
-                android:textAlignment="center"
-                android:textColor="@color/colorPrimaryDark"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:layout_gravity="center">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/old_account"
+                    android:textAlignment="center"
+                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/sign_In_HyperLink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:text="Sign in"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+            </TableRow>
 
         </LinearLayout>
-
 
     </LinearLayout>
 

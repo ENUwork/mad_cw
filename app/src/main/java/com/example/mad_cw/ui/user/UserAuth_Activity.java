@@ -108,6 +108,10 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.signInButton:
+                // Check for Form Validation
+                if (!validateSignInForm()) {
+                    break;
+                }
                 showProgressBar();
                 signIn(emailField.getText().toString(), passField.getText().toString());
                 break;
@@ -119,7 +123,11 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                 break;
 
             case R.id.signUpButton:
-
+                // Check for Form Validation
+                if (!validateSignUpForm()) {
+                    break;
+                }
+                showProgressBar();
                 createAccount(emailField_UP.getText().toString(),
                         passField_UP.getText().toString(),
                         locField_UP.getText().toString(),
@@ -133,14 +141,6 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
     // user sign in/up methods:
 
     private void signIn(String email, String password) {
-
-        Log.d(TAG, "signIn:" + email); // [TEST]
-
-        if (!validateSignInForm()) {
-            return;
-        }
-
-        // showProgressBar();
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -181,14 +181,6 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
     }
 
     private void createAccount(final String email, final String password, final String location, final String username) {
-
-        // Logcat [Test]
-        Log.d(TAG, "createAccount:" + email);
-
-        // Check for Form Validation
-        if (!validateSignUpForm()) {
-            return;
-        }
 
         try {
             Thread.sleep(5000);
@@ -263,8 +255,8 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
 
         // Validate Email:
         String email = emailField.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            emailField.setError("Required.");
+        if (TextUtils.isEmpty(email) || !isEmailValid(email)) {
+            emailField.setError("Input Valid Email");
             valid = false;
         } else {
             emailField.setError(null);
@@ -287,11 +279,11 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
 
         // Validate Email:
         String email = emailField_UP.getText().toString();
-        if (TextUtils.isEmpty(email)) {
-            emailField.setError("Required.");
+        if (TextUtils.isEmpty(email) || !isEmailValid(email)) {
+            emailField_UP.setError("Input Valid Email");
             valid = false;
         } else {
-            emailField.setError(null);
+            emailField_UP.setError(null);
         }
 
         // Validate Password Field
@@ -303,7 +295,29 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
             passField_UP.setError(null);
         }
 
+        // Validate Username Field
+        String userName = unameField_UP.getText().toString();
+        if (TextUtils.isEmpty(userName)) {
+            unameField_UP.setError("Required.");
+            valid = false;
+        } else {
+            unameField_UP.setError(null);
+        }
+
+        // Validate Location Field
+        String location = locField_UP.getText().toString();
+        if (TextUtils.isEmpty(location)) {
+            locField_UP.setError("Required.");
+            valid = false;
+        } else {
+            locField_UP.setError(null);
+        }
+
         return valid;
+    }
+
+    private boolean isEmailValid(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
     }
 
 }

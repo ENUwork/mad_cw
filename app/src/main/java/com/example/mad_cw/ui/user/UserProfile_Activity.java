@@ -97,7 +97,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         // Click Events Setters
         findViewById(R.id.signOutButton).setOnClickListener(this);
         findViewById(R.id.accountDetailsBtn).setOnClickListener(this);
-        findViewById(R.id.pedal_tribe_feedback_btn).setOnClickListener(this);
+        // findViewById(R.id.pedal_tribe_feedback_btn).setOnClickListener(this);
         findViewById(R.id.user_profile_ad_btn).setOnClickListener(this);
         findViewById(R.id.fav_ads_btn).setOnClickListener(this);
         findViewById(R.id.updateProfilePic).setOnClickListener(this);
