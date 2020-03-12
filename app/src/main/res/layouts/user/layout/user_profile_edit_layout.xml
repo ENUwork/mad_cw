@@ -5,7 +5,6 @@
     android:layout_height="match_parent">
 
     <!--  USER EDIT INFO LAYOUT  -->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,14 +61,18 @@
         <Button
             android:id="@+id/updateProfilePic"
             style="@style/btn_user"
-            android:text="Update Profile Picture" />
+            android:background="#FF8A00"
+            android:text="Update Profile Picture"
+            android:textColor="#FFFFFF" />
 
         <!-- SAVE PROFILE Btn. -->
 
         <Button
             android:id="@+id/saveAccount"
             style="@style/btn_user"
-            android:text="Save Settings" />
+            android:background="@color/colorPrimary"
+            android:text="Save Settings"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 </LinearLayout>

@@ -1,18 +1,14 @@
 <resources>
 
     <!-- APP NAME -->
-
     <string name="app_name">Pedal Tribe</string>
+    <string name="app_title"> Buy/Sell </string>
 
     <!-- [TESTING] -->
-    <string name="id_fmt">User ID: %s</string>
-    <string name="email_fmt">Email: %s</string>
-    <string name="firebase_status_fmt">Firebase UID: %s</string>
     <string name="status_fmt">Email User: %1$s (verified: %2$b)</string>
     <string name="plc_hold"> PlaceHolder Text </string>
 
     <!-- NAVIGATION DRAWER STRINGS -->
-
     <string name="navigation_drawer_open"> Open navigation drawer </string>
     <string name="navigation_drawer_close"> Close navigation drawer </string>
     <string name="nav_header_title"> Signed in as, </string>
@@ -24,30 +20,26 @@
     <string name="menu_adverts"> Buy/Sell </string>
     <string name="menu_share"> Share </string>
     <string name="main_img_desc"> Main Advert Image View </string>
-    <string name="app_title"> Buy/Sell </string>
 
     <!-- FRAGMENT HOME SETTINGS -->
-
     <string name="buy_sell_txt"> Buy / Sell </string>
     <string name="view_all_txt"> View all </string>
 
     <!-- USER SIGN UP -->
-
     <string name="sign_up_welcome"> Welcome to <b><i>Pedal<font color='#00A3FF'> Tribe</font></i></b></string>
-    <string name="sign_up_welcome_2">Built for cyclists, by cyclists 🚴‍♀️🚴‍♂️</string>
+    <string name="sign_up_welcome_2">Built for cyclists, by cyclists 🚴‍♀🚴‍♂</string>
     <string name="old_account"> Already have an account? </string>
     <string name="sign_up_text"> Sign Up </string>
     <string name="error_sign_in_failed"> Uh-oh 😧 Sign In failed </string>
 
     <!-- USER SIGN IN -->
-
     <string name="sign_in_welcome"> Welcome back pedal freak, </string>
     <string name="new_account"> Do not have an account? </string>
     <string name="sign_in_text"> Sign In </string>
     <string name="error_sign_up_failed"> Uh-oh 😧 account could not be created </string>
 
     <!-- USER PROFILE -->
-
+    <string name="user_greet"> Hello,\n%s </string>
     <string name="account_det_txt"> Account Details </string>
     <string name="fav_ads_txt"> Favorite Ads </string>
     <string name="my_ads_txt"> My Ads </string>
@@ -62,7 +54,6 @@
     <string name="f_name"> First Name </string>
 
     <!-- ADVERT MAKE STRINGS -->
-
     <string name="ad_title"> Title </string>
     <string name="ad_desc"> Item Description </string>
     <string name="ad_price"> Price </string>
@@ -76,7 +67,6 @@
     <string name="ad_info"> Additional Info </string>
 
     <!-- ADVERT VIEW STRINGS -->
-
     <string name="ad_img_count"> %d/%d </string>
     <string name="select_img"> Select Images </string>
     <string name="create_txt"> List Advert! </string>

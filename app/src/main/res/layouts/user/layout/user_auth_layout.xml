@@ -38,33 +38,23 @@
             android:textStyle="bold"
             android:typeface="normal" />
 
+        <!-- Input Fields -->
+
         <EditText
             android:id="@+id/userEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
+            style="@style/userAuthField"
             android:layout_marginTop="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
             android:hint="Email"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textAlignment="textStart" />
+            android:inputType="textEmailAddress" />
 
         <EditText
             android:id="@+id/userPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="10dp"
+            style="@style/userAuthField"
             android:layout_marginBottom="50dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
             android:hint="Password"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textAlignment="textStart" />
+            android:inputType="textPassword" />
+
+        <!-- Submit Button -->
 
         <Button
             android:id="@+id/signInButton"
@@ -121,157 +111,13 @@
 
         </LinearLayout>
 
-
     </LinearLayout>
 
     <!--  USER SIGN UP LAYOUT - [GONE]  -->
-    <LinearLayout
-        android:id="@+id/sign_up_layout"
+    <include
+        layout="@layout/user_auth_sign_up_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <!-- WELCOME TEXT -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="@string/sign_up_welcome"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:typeface="normal" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:layout_marginTop="10dp"
-            android:text="@string/sign_up_welcome_2"
-            android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="20sp"
-            android:typeface="normal" />
-
-        <!-- USER INPUT FIELDS -->
-        <!-- USER - USERNAME -->
-        <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:fontFamily="sans-serif"
-            android:hint="@string/username_field"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textAlignment="textStart" />
-
-        <!-- USER - EMAIL -->
-        <EditText
-            android:id="@+id/userEmail2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:fontFamily="sans-serif"
-            android:hint="@string/email_field"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textAlignment="textStart" />
-
-        <!-- USER - PASSWORD -->
-        <EditText
-            android:id="@+id/userPassword2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="10dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:fontFamily="sans-serif"
-            android:hint="@string/password_field"
-            android:inputType="textPassword"
-            android:padding="10dp"
-            android:textAlignment="textStart" />
-
-        <!-- USER - LOCATION -->
-        <EditText
-            android:id="@+id/location_input"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="50dp"
-            android:background="@drawable/border_input"
-            android:ems="10"
-            android:fontFamily="@font/raleway_semibold"
-            android:hint="@string/location_field"
-            android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:textAlignment="textStart" />
-
-        <Button
-            android:id="@+id/signUpButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/button_primary"
-            android:fontFamily="sans-serif"
-            android:onClick="onClick"
-            android:text="@string/sign_up_text"
-            android:textAlignment="center"
-            android:textAllCaps="false"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="50dp"
-            android:layout_marginVertical="25dp"
-            android:orientation="vertical">
-
-            <View
-                android:id="@+id/divider2"
-                android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:background="@color/colorPrimaryDark" />
-
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginVertical="25dp"
-                android:layout_gravity="center">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/old_account"
-                    android:textAlignment="center"
-                    android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                    android:textSize="16dp" />
-
-                <TextView
-                    android:id="@+id/sign_In_HyperLink"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:text="Sign in"
-                    android:textAlignment="center"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="16dp"
-                    android:textStyle="bold" />
-            </TableRow>
-
-        </LinearLayout>
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
 
 </LinearLayout>

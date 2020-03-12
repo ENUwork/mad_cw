@@ -52,7 +52,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
     private static final int PICK_IMAGE = 1;
 
     // MainActivity Profile View:
-    private TextView UserUidNum;
+    private TextView UserName;
     private ImageView ProPic;
 
     private EditText fName, userLoc, userEmail, userName;
@@ -82,7 +82,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         mainInfoLayout = findViewById(R.id.main_user_layout);
         userEditLayout = findViewById(R.id.user_edit_layout);
         ProPic = findViewById(R.id.userProfilePic);
-        UserUidNum = findViewById(R.id.textView);
+        UserName = findViewById(R.id.account_displayfName);
         fName = findViewById(R.id.account_first_name);
         userName = findViewById(R.id.account_username);
         userLoc = findViewById(R.id.account_location);
@@ -202,8 +202,6 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
-                ProPic.setImageBitmap(bitmap);
                 handleImageUpload(bitmap);
             }
         }
@@ -225,9 +223,13 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
 
     private void handleImageUpload(Bitmap bitmap){
 
+        showProgressBar();
+
         // Handle Image
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+
+        // ProPic.setImageBitmap(bitmap);
 
         // Get Current User UID String:
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -254,10 +256,11 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
     }
 
     private void getDownloadUrl(StorageReference reference) {
-        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+        reference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
-            public void onSuccess(Uri uri) {
-                Log.w(TAG, "onSuccess: " + uri);
+            public void onComplete(@NonNull Task<Uri> task) {
+                Uri uri = task.getResult();
+                System.out.println(uri);
                 updateProfile(uri);
             }
         });
@@ -266,38 +269,39 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
     private void updateProfile(Uri uri) {
 
         // Get Current (Signed-In) User
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser currentUser = mAuth.getCurrentUser();
 
         // Set Parameters that require Updating
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setPhotoUri(uri)
+                .setDisplayName(fName.getText().toString())
                 .build();
 
         // Update profile & add "complete" listener
-        user.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+        currentUser.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "User profile updated.");
+                    hideProgressBar();
                 }
             }
         });
 
         // Refresh the UI Page:
-        hideProgressBar();
-        onStart();
+        Glide.with(this).load(uri).into(ProPic);
     }
 
     private void updateProfileInfo() {
 
         // Get Current User:
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        final FirebaseUser currentUser = mAuth.getCurrentUser();
         String uid = currentUser.getUid();
 
         user_updateHMap.put("email", userEmail.getText().toString());
         user_updateHMap.put("location", userLoc.getText().toString());
         user_updateHMap.put("username", userName.getText().toString());
-        user_updateHMap.put("first_name",fName.getText().toString());
+        user_updateHMap.put("first_name", fName.getText().toString());
 
         // Add a new document with a generated ID
         db.collection("users")
@@ -306,6 +310,8 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void Void) {
+                        // Display user Profile Details:
+                        UserName.setText(getString(R.string.user_greet, fName.getText().toString()));
                         Toast.makeText(getBaseContext(), "\uD83C\uDF89 Success! Your account info has been updated", Toast.LENGTH_LONG).show();
                         hideProgressBar();
                     }
@@ -318,11 +324,9 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                         hideProgressBar();
                     }
                 });
-
     }
 
     private void updateUI(FirebaseUser user) {
-        hideProgressBar();
 
         // Check User Details
         if (user != null) {
@@ -335,7 +339,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
 
             if (photoUrl != null) {
                 // Display user Profile Details:
-                UserUidNum.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+                UserName.setText(getString(R.string.user_greet, user.getDisplayName()));
                 Glide.with(this).load(photoUrl).into(ProPic);
             }
 
@@ -353,6 +357,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                             userEmail.setText(document.getString("email"));
                             userLoc.setText(document.getString("location"));
                             userName.setText(document.getString("username"));
+                            fName.setText(document.getString("first_name"));
 
                         } else {
                             Log.d(TAG, "No such document");
@@ -362,11 +367,6 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                     }
                 }
             });
-
-            // [ Test Env ]
-            // findViewById(R.id.verifyEmailButton).setEnabled(!user.isEmailVerified());
-            // UserUidNum.setText(getString(R.string.firebase_status_fmt, user.getUid()));
-
         }
     }
 

@@ -7,6 +7,16 @@
     android:animateLayoutChanges="true"
     android:background="@color/colorAccent" >
 
+    <!--  PROGRESS BAR - [INVISIBLE]  -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:indeterminate="true"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:visibility="invisible"
+        android:background="@color/colorPrimary"
+        style="?android:attr/progressBarStyleHorizontal" />
+
     <!--  SCROLLABLE CONTAINER  -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -32,14 +42,14 @@
             <!--  USER WELCOME MESSAGE  -->
 
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
+                android:id="@+id/account_displayfName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="25dp"
+                android:layout_margin="30dp"
                 android:text="Hello"
-                android:textAlignment="center"
+                android:textAlignment="textStart"
                 android:textColor="@color/common_google_signin_btn_text_dark_focused"
-                android:textSize="18sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <!--  USER MAIN INFO LAYOUT  -->

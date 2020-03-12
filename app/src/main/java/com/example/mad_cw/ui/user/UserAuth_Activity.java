@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
     private static final String TAG = "UserSignAuth";
 
     private EditText emailField, passField;
-    private EditText unameField_UP, passField_UP, locField_UP, emailField_UP;
+    private EditText firstName_UP, unameField_UP, passField_UP, locField_UP, emailField_UP;
 
     private LinearLayout signUpLayout, signInLayout;
 
@@ -61,6 +62,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
 
         // SIGN UP Views:
         signUpLayout = findViewById(R.id.sign_up_layout);
+        firstName_UP = findViewById(R.id.firstName);
         unameField_UP = findViewById(R.id.username);
         emailField_UP = findViewById(R.id.userEmail2);
         passField_UP = findViewById(R.id.userPassword2);
@@ -128,7 +130,8 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                     break;
                 }
                 showProgressBar();
-                createAccount(emailField_UP.getText().toString(),
+                createAccount(firstName_UP.getText().toString(),
+                        emailField_UP.getText().toString(),
                         passField_UP.getText().toString(),
                         locField_UP.getText().toString(),
                         unameField_UP.getText().toString());
@@ -180,7 +183,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                 });
     }
 
-    private void createAccount(final String email, final String password, final String location, final String username) {
+    private void createAccount(final String firstName, final String email, final String password, final String location, final String username) {
 
         try {
             Thread.sleep(5000);
@@ -198,7 +201,7 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                             Log.d(TAG, "createUserWithEmail:success");
 
                             // Store the rest of the data
-                            storeData(email, location, username);
+                            storeData(firstName, email, location, username);
 
                             // Access the User Profile / Portal
                             Intent userProfile = new Intent(UserAuth_Activity.this, UserProfile_Activity.class);
@@ -216,14 +219,31 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
                 });
     }
 
-    private void storeData(String email, String location, String username) {
+    private void storeData(String firstName, String email, String location, String username) {
 
         // Get Current User:
         FirebaseUser currentUser = mAuth.getCurrentUser();
         String uid = currentUser.getUid();
 
+        // Update User Profile DisplayName:
+        // Set Parameters that require Updating:
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(firstName)
+                .build();
+
+        // Update profile & add "complete" listener
+        currentUser.updateProfile(profileUpdates).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    Log.d(TAG, "User profile updated.");
+                }
+            }
+        });
+
         // Create a new user with a first and last name
         Map<String, Object> user = new HashMap<>();
+        user.put("first_name", firstName);
         user.put("email", email);
         user.put("location", location);
         user.put("username", username);
@@ -311,6 +331,15 @@ public class UserAuth_Activity extends BaseActivity implements View.OnClickListe
             valid = false;
         } else {
             locField_UP.setError(null);
+        }
+
+        // Validate First Name Field
+        String fName = firstName_UP.getText().toString();
+        if (TextUtils.isEmpty(fName)) {
+            firstName_UP.setError("Required.");
+            valid = false;
+        } else {
+            firstName_UP.setError(null);
         }
 
         return valid;
