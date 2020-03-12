@@ -124,13 +124,12 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
             String year = (String) DateFormat.format("yyyy", advert_post_date);
 
             // Populate Advert Content:
-            // Glide.with(this).load(advert.getImages().get(1)).into(adOwnerPic);
             adTitle.setText(advert.getAd_title());
             adPrice.setText(getString(R.string.set_ad_price, advert.getAd_price()));
             adLoc.setText(advert.getAd_loc());
             adWheel.setText(advert.getAd_other().get(1));
             adFrame.setText(advert.getAd_other().get(2));
-            // [FIX] adDriveT.setText(advert.getAd_other().get(3));
+            adDriveT.setText(advert.getAd_other().get(3));
             adDesc.setText(advert.getAd_desc());
             adAge.setText(advert.getAd_age());
             adPostTime.setText(getString(R.string.set_post_time, day, month, year));

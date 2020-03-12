@@ -687,6 +687,11 @@ public class UserCURDAds_Activity extends BaseActivity implements View.OnClickLi
                 spinnerFrame.setSelection(i);
             }
         }
+        for (int i = 0; i < spinnerDriveTrain.getAdapter().getCount(); i++){
+            if (spinnerDriveTrain.getAdapter().getItem(i).toString().contains(advert.getAd_other().get(3))) {
+                spinnerDriveTrain.setSelection(i);
+            }
+        }
 
         // Image Info, from string to URI
         ImageStringList.addAll(advert.getImages());
