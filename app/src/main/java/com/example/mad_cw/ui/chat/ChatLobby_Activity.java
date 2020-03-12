@@ -1,6 +1,8 @@
 package com.example.mad_cw.ui.chat;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -22,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChatLobby_Activity extends BaseActivity {
+public class ChatLobby_Activity extends BaseActivity implements View.OnClickListener{
     // Fragment (Class) Variables:
 
     private static final String TAG = "UserFavAds";
@@ -32,6 +34,8 @@ public class ChatLobby_Activity extends BaseActivity {
     private List<AdvertsModel> adverts_Model_list;
 
     private List<String> ad_uid_list;
+
+    private ImageButton backBtnPress;
 
     // Access a Cloud Firestore instance from the Activity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -48,8 +52,11 @@ public class ChatLobby_Activity extends BaseActivity {
         // Set Layout for User Sign In
         setContentView(R.layout.chat_lobby_layout);
 
-        // Instantiating Local Class Variables:
-        // searchField = (SearchView) findViewById(R.id.searchField);
+        // Locate Target Components:
+        backBtnPress = findViewById(R.id.backBtn);
+
+        // Set onCLickListeners:
+        backBtnPress.setOnClickListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -127,6 +134,20 @@ public class ChatLobby_Activity extends BaseActivity {
                             advertsListAdapter.notifyDataSetChanged();
                         }
                     });
+        }
+    }
+
+    // _____________________
+    // user action methods:
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.backBtn:
+                finish();
+                break;
         }
     }
 }

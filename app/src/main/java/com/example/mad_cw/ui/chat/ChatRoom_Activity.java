@@ -257,5 +257,4 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
     // ______________________
     // UI/UX methods:
 
-
 }

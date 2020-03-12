@@ -116,7 +116,18 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
     }
 
     // _____________________
-    // class click events handler:
+    // user action methods:
+
+    @Override
+    public void onBackPressed() {
+        // Check if the user is in "edit account mode":
+        if (userEditLayout.getVisibility() == View.VISIBLE){
+            userEditLayout.setVisibility(View.GONE);
+            mainInfoLayout.setVisibility(View.VISIBLE);
+        } else {
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void onClick(View v) {
