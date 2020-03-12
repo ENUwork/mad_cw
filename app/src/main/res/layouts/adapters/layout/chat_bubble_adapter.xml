@@ -4,14 +4,59 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/msg_txt_outgoing"
+    <LinearLayout
+        android:id="@+id/msg_outgoing_layout"
         style="@style/chatOutgoing"
-        android:text="TextView" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/msg_txt_outgoing"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF" />
+
+        <TextView
+            android:id="@+id/ad_chat_out_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="10sp" />
+
+    </LinearLayout>
 
     <TextView
-        android:id="@+id/msg_txt_incoming"
+        android:id="@+id/ad_chat_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAlignment="center"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/msg_incoming_layout"
         style="@style/chatIncoming"
-        android:text="TextView" />
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/msg_txt_incoming"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/ad_chat_in_time"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="TextView"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="10sp" />
+
+    </LinearLayout>
 
 </LinearLayout>

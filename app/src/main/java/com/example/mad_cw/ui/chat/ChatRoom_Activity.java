@@ -21,10 +21,12 @@ import com.example.mad_cw.ui.chat.adapters.ChatRoomList_Adapter;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -38,6 +40,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.google.firebase.firestore.DocumentSnapshot.ServerTimestampBehavior.ESTIMATE;
 
 public class ChatRoom_Activity extends BaseActivity implements View.OnClickListener {
 
@@ -98,6 +102,8 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
         sendMsgBtn.setOnClickListener(this);
         backBtnPress.setOnClickListener(this);
 
+        DocumentSnapshot.ServerTimestampBehavior behavior = ESTIMATE;
+
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
 
@@ -150,12 +156,13 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
                 });
     }
 
-    private void getMessages(String chat_uid) {
+    private void getMessages(final String chat_uid) {
 
         db.collection("chat").document(chat_uid).collection("messages").orderBy("timestamp", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
+
                         if (e != null) {
                             Toast.makeText(getApplicationContext(), "Error Retrieving Data", Toast.LENGTH_LONG).show();
                         }
@@ -163,7 +170,16 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
                         for (DocumentChange doc : queryDocumentSnapshots.getDocumentChanges()) {
                             if (doc.getType() == DocumentChange.Type.ADDED) {
                                 ChatModel chatModel = doc.getDocument().toObject(ChatModel.class);
-                                chat_model_list.add(chatModel);
+
+                                if (chatModel.getTimestamp() == null){
+                                    DocumentSnapshot.ServerTimestampBehavior behavior = ESTIMATE;
+                                    Timestamp timestamp = doc.getDocument().getTimestamp("timestamp", behavior);
+                                    chatModel.setTimestamp(timestamp);
+                                    chat_model_list.add(chatModel);
+                                } else {
+                                    chat_model_list.add(chatModel);
+                                }
+
                                 chatListAdapter.notifyDataSetChanged();
                                 recyclerView.smoothScrollToPosition(chatListAdapter.getItemCount());
                             }
