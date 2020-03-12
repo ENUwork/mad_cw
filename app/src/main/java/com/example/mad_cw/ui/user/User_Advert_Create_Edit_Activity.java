@@ -67,7 +67,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
     private TextView upCount;
     private String advert_uid;
     private Spinner spinnerCondition, spinnerWheels, spinnerFrame, spinnerDriveTrain;
-    private ImageButton selectImgBtn;
+    private ImageButton selectImgBtn, backBtnPress;
     private Button createAdBtn, updateAdBtn, deleteAdBtn;
 
     // Displaying Selected Images:
@@ -107,6 +107,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         updateAdBtn = findViewById(R.id.update_ad_btn);
         selectImgBtn = findViewById(R.id.select_ad_img_btn);
         deleteAdBtn = findViewById(R.id.delete_ad_btn);
+        backBtnPress = findViewById(R.id.backBtn);
 
         // Setup the Recycler View, set Gallery as Layout, and assign it:
         recyclerView = findViewById(R.id.recycler_view_img);
@@ -118,6 +119,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
         createAdBtn.setOnClickListener(this);
         updateAdBtn.setOnClickListener(this);
         deleteAdBtn.setOnClickListener(this);
+        backBtnPress.setOnClickListener(this);
 
         // Set Values:
         upCount.setText(getString(R.string.img_count, "0/10"));
@@ -134,7 +136,7 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
         // Check for Object to contain data:
         if (advert != null && currentUser != null && advert.getAd_owner().equals(currentUser.getUid())) {
-            Toast.makeText(this, "Data Packet Received", Toast.LENGTH_LONG).show();
+            // [TEST/DEV] Toast.makeText(this, "Data Packet Received", Toast.LENGTH_LONG).show();
 
             // Modify Layout Accordingly:
             createAdBtn.setVisibility(View.GONE);
@@ -163,16 +165,16 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
                 deleteAdvert();
                 break;
 
+            case R.id.backBtn:
+                finish();
+                break;
+
             case R.id.update_ad_btn:
             case R.id.create_ad_btn:
-
-                /*
                 if (!advertValidation()) {
                     Toast.makeText(this, "Uh-oh, please fill correctly all fields :)", Toast.LENGTH_LONG).show();
                     break;
                 }
-                 */
-
                 imgReUploadValidation();
                 break;
         }
@@ -496,9 +498,16 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
 
         // Get Form Values:
         String title = adTitle.getText().toString();
+        String price = adPrice.getText().toString();
         String desc = adDesc.getText().toString();
         String loc = adLoc.getText().toString();
+        String age = adAge.getText().toString();
+        String imgCount = upCount.getText().toString();
+
         String cond = spinnerCondition.getSelectedItem().toString();
+        String frame = spinnerFrame.getSelectedItem().toString();
+        String wheels = spinnerWheels.getSelectedItem().toString();
+        String driveT = spinnerDriveTrain.getSelectedItem().toString();
 
         // Title Validation:
         if (TextUtils.isEmpty(title)) {
@@ -506,6 +515,12 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
             valid = false;
         } else {
             adTitle.setError(null);
+        }
+
+        // Ad Price Validation:
+        if (TextUtils.isEmpty(price)) {
+            adPrice.setError("Required.");
+            valid = false;
         }
 
         // Description Validation:
@@ -520,13 +535,41 @@ public class User_Advert_Create_Edit_Activity extends BaseActivity implements Vi
             valid = false;
         }
 
-        // Location Validation:
+        // Advert Age Validation:
+        if (TextUtils.isEmpty(age)) {
+            adAge.setError("Required.");
+            valid = false;
+        }
+
+        // Spinner Condition:
         if (TextUtils.isEmpty(cond)) {
             ((TextView)spinnerCondition.getSelectedView()).setError("Required.");
             valid = false;
         }
 
+        // Spinner Frame:
+        if (TextUtils.isEmpty(frame)) {
+            ((TextView)spinnerFrame.getSelectedView()).setError("Required.");
+            valid = false;
+        }
+
+        // Spinner Wheels:
+        if (TextUtils.isEmpty(wheels)) {
+            ((TextView)spinnerWheels.getSelectedView()).setError("Required.");
+            valid = false;
+        }
+
+        // Spinner DriveTrain:
+        if (TextUtils.isEmpty(driveT)) {
+            ((TextView)spinnerDriveTrain.getSelectedView()).setError("Required.");
+            valid = false;
+        }
+
         // Images Validation:
+        if (imgCount.contains("0/10")){
+            Toast.makeText(this, "Please select minimum 1 photo", Toast.LENGTH_LONG).show();
+            valid = false;
+        }
 
         return valid;
     }

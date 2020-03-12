@@ -7,7 +7,7 @@
 
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/ic_home_black_24dp"
             android:title="@string/menu_home" />
 
         <item
@@ -21,16 +21,5 @@
             android:title="@string/menu_adverts" />
 
     </group>
-
-    <item android:title="Settings">
-        <menu>
-
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/menu_share" />
-
-        </menu>
-    </item>
 
 </menu>

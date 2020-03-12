@@ -2,6 +2,7 @@ package com.example.mad_cw.ui.adverts;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,6 +29,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Date;
 import java.util.List;
 
 // Getting File Directories:
@@ -44,7 +46,7 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
 
     private static final String TAG = "AdvertInfo";
 
-    private TextView adTitle, adPrice, adLoc, adWheel, adFrame, adAge, adPostTime, adDesc, imgCount;
+    private TextView adTitle, adPrice, adLoc, adWheel, adFrame, adAge, adDriveT, adPostTime, adDesc, imgCount;
     private ImageView adOwnerPic;
     private ImageButton favBtn_off, favBtn_on;
     private Button contactBtn;
@@ -76,6 +78,7 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
         adLoc = findViewById(R.id.ad_loc_txt);
         adWheel = findViewById(R.id.advert_info_whsize);
         adFrame = findViewById(R.id.advert_info_frsize);
+        adDriveT = findViewById(R.id.advert_info_drive_train);
         adDesc = findViewById(R.id.advert_info_desc);
         adAge = findViewById(R.id.advert_info_age);
         adPostTime = findViewById(R.id.advert_info_post_txt);
@@ -114,6 +117,12 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
             // Get Advert_Uid:
             adUid = advert.getDocumentId();
 
+            // Dealing with dates:
+            Date advert_post_date = advert.getPost_time();
+            String day = (String) DateFormat.format("dd", advert_post_date);
+            String month = (String) DateFormat.format("MMM", advert_post_date);
+            String year = (String) DateFormat.format("yyyy", advert_post_date);
+
             // Populate Advert Content:
             // Glide.with(this).load(advert.getImages().get(1)).into(adOwnerPic);
             adTitle.setText(advert.getAd_title());
@@ -121,9 +130,10 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
             adLoc.setText(advert.getAd_loc());
             adWheel.setText(advert.getAd_other().get(1));
             adFrame.setText(advert.getAd_other().get(2));
+            // [FIX] adDriveT.setText(advert.getAd_other().get(3));
             adDesc.setText(advert.getAd_desc());
             adAge.setText(advert.getAd_age());
-            adPostTime.setText(getString(R.string.set_post_time, advert.getPost_time()));
+            adPostTime.setText(getString(R.string.set_post_time, day, month, year));
 
         }
     }

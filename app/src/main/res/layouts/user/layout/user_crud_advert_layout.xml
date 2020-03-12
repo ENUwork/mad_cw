@@ -16,6 +16,35 @@
         android:indeterminate="true"
         android:visibility="gone" />
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/chat_lobby_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimaryDark"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme">
+
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:tint="#FFFFFF"
+            app:srcCompat="@drawable/ic_arrow_back_black_24dp"
+            android:contentDescription="Back Press Btn" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post Advert"
+            android:textAlignment="textStart"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+    </androidx.appcompat.widget.Toolbar>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -132,6 +161,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:weightSum="4" >
 
                     <!-- AD WHEEL SIZE -->
@@ -168,6 +198,7 @@
                 <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:gravity="center"
                     android:weightSum="4" >
 
                     <!-- AD FRAME SIZE -->
@@ -175,8 +206,8 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/ad_frame"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:text="@string/ad_frame" />
 
                     <Spinner
                         android:id="@+id/spinnerFrameSize"

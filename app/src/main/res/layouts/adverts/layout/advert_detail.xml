@@ -122,7 +122,9 @@
                 android:background="#FFFFFF" >
 
                 <TableRow
-                    style="@style/advertInfoRow" >
+                    style="@style/advertInfoRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TextView
                         style="@style/advertInfoRowText"
@@ -136,7 +138,9 @@
                 </TableRow>
 
                 <TableRow
-                    style="@style/advertInfoRow" >
+                    style="@style/advertInfoRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TextView
                         style="@style/advertInfoRowText"
@@ -150,7 +154,9 @@
                 </TableRow>
 
                 <TableRow
-                    style="@style/advertInfoRow" >
+                    style="@style/advertInfoRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TextView
                         style="@style/advertInfoRowText"
@@ -161,6 +167,25 @@
                         style="@style/advertInfoRowText"
                         android:text="TextView" />
 
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/textView2"
+                        style="@style/advertInfoRowText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/set_drivetrain" />
+
+                    <TextView
+                        android:id="@+id/advert_info_drive_train"
+                        style="@style/advertInfoRowText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="TextView" />
                 </TableRow>
 
             </TableLayout>
@@ -186,21 +211,36 @@
                     android:text="TextView"
                     android:textColor="@color/colorPrimaryDark" />
 
-                <TextView
-                    android:id="@+id/advert_info_post_txt"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/set_post_time" />
             </LinearLayout>
 
             <!--    CONTACT SELLER BTN.    -->
 
-            <Button
-                android:id="@+id/contact_ad_owner"
-                style="@style/btn_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/contact_txt" />
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:weightSum="6"
+                android:layout_marginHorizontal="30dp"
+                android:layout_marginBottom="20dp">
+
+                <TextView
+                    android:id="@+id/advert_info_post_txt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="4"
+                    android:text="@string/set_post_time"
+                    android:textAlignment="textStart" />
+
+                <Button
+                    android:id="@+id/contact_ad_owner"
+                    style="@style/btn_main"
+                    android:layout_weight="2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/contact_txt"
+                    android:layout_marginLeft="20dp" />
+
+            </TableRow>
 
         </LinearLayout>
 

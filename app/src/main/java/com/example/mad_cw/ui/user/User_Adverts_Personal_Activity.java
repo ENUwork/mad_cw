@@ -2,6 +2,8 @@ package com.example.mad_cw.ui.user;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
@@ -23,7 +25,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User_Adverts_Personal_Activity extends BaseActivity {
+public class User_Adverts_Personal_Activity extends BaseActivity implements View.OnClickListener {
 
     // Fragment (Class) Variables:
 
@@ -34,6 +36,7 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
     private List<AdvertsModel> adverts_Model_list;
 
     private SearchView searchField;
+    private ImageButton backBtnPress;
 
     private List<String> fav_ads_list;
 
@@ -52,8 +55,12 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
         // Set Layout for User Sign In
         setContentView(R.layout.user_personal_ads_layout);
 
-        // Instantiating Local Class Variables:
+        // Locate Target Components:
         searchField = (SearchView) findViewById(R.id.searchField);
+        backBtnPress = findViewById(R.id.backBtn);
+
+        // Set onCLickListeners:
+        backBtnPress.setOnClickListener(this);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -165,4 +172,17 @@ public class User_Adverts_Personal_Activity extends BaseActivity {
         advertsListAdapter.updateList(temp);
     }
 
+    // _____________________
+    // user action methods:
+
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.backBtn:
+                finish();
+                break;
+        }
+    }
 }

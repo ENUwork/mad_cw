@@ -4,7 +4,6 @@ import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -42,7 +41,7 @@ public class AdvertsList_Adapter extends RecyclerView.Adapter<AdvertsViewHolder>
 
         // Verify Caller (View) Class:
         String class_name = parent.getContext().getClass().getSimpleName();
-        Toast.makeText(parent.getContext(), parent.getContext().getClass().getSimpleName(), Toast.LENGTH_LONG).show();
+        // [TEST/DEV] Toast.makeText(parent.getContext(), parent.getContext().getClass().getSimpleName(), Toast.LENGTH_LONG).show();
 
         if (class_name.equals("ChatLobby_Activity")){
             // Load the chat lobby inflatable layout:
