@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-
             android:orientation="vertical">
 
             <!-- VIEW PAGER SLIDER & IMAGE COUNTER -->
@@ -72,7 +71,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/ad_title"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="25sp" />
+                            android:textSize="25sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/ad_price_txt"
@@ -80,7 +80,8 @@
                             android:layout_height="wrap_content"
                             android:text="@string/ad_price"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="23sp" />
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/ad_loc_txt"
@@ -88,7 +89,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/ad_loc"
                             android:textColor="@color/colorPrimaryDark"
-                            android:textSize="20sp" />
+                            android:textSize="18sp" />
 
                     </LinearLayout>
 
@@ -120,6 +121,22 @@
                 android:layout_height="match_parent"
                 android:padding="30dp"
                 android:background="#FFFFFF" >
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="Item Details"
+                        android:textColor="#C4C4C4"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </TableRow>
 
                 <TableRow
                     style="@style/advertInfoRow"
@@ -200,9 +217,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
                     android:text="@string/ad_desc"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="20sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/advert_info_desc"

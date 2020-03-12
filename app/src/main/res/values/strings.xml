@@ -57,7 +57,9 @@
     <string name="ad_title"> Title </string>
     <string name="ad_desc"> Item Description </string>
     <string name="ad_price"> Price </string>
+    <string name="ad_price2">🏷️%s £ </string>
     <string name="ad_loc"> Item Location </string>
+    <string name="ad_loc2">📍%s </string>
     <string name="ad_cond"> Item Condition </string>
     <string name="ad_age"> Item Age </string>
     <string name="ad_wheel"> Wheels Size </string>

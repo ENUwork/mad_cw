@@ -125,15 +125,14 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
 
             // Populate Advert Content:
             adTitle.setText(advert.getAd_title());
-            adPrice.setText(getString(R.string.set_ad_price, advert.getAd_price()));
-            adLoc.setText(advert.getAd_loc());
+            adPrice.setText(getString(R.string.ad_price2, advert.getAd_price()));
+            adLoc.setText(getString(R.string.ad_loc2, advert.getAd_loc()));
             adWheel.setText(advert.getAd_other().get(1));
             adFrame.setText(advert.getAd_other().get(2));
             adDriveT.setText(advert.getAd_other().get(3));
             adDesc.setText(advert.getAd_desc());
             adAge.setText(advert.getAd_age());
             adPostTime.setText(getString(R.string.set_post_time, day, month, year));
-
         }
     }
 
