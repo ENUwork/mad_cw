@@ -210,6 +210,8 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
 
     private void signOut() {
         mAuth.signOut();
+        Intent main = new Intent(this, MainActivity.class);
+        startActivity(main);
         this.finish();
     }
 

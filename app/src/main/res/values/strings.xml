@@ -3,6 +3,7 @@
     <!-- APP NAME -->
     <string name="app_name">Pedal Tribe</string>
     <string name="app_title"> Buy/Sell </string>
+    <string name="app_name_v2"><b><i>Pedal<font color='#00A3FF'> Tribe</font></i></b></string>
 
     <!-- [TESTING] -->
     <string name="status_fmt">Email User: %1$s (verified: %2$b)</string>

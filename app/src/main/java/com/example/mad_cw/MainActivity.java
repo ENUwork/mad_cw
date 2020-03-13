@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -24,7 +25,7 @@ import com.google.firebase.auth.FirebaseUser;
     main user actions and interactions.
  */
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, View.OnClickListener {
 
     // ________________
     // class variables:
@@ -76,9 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onStart();
         // Verify if user is already logged in:
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null ){
-            updateUI(currentUser);
-        }
+        updateUI(currentUser);
     }
 
     @Override
@@ -122,12 +121,36 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     // user UI/UX Update:
 
     private void updateUI(FirebaseUser user) {
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View hView =  navigationView.getHeaderView(0);
 
-        TextView nav_user = (TextView) hView.findViewById(R.id.textView);
-        // User email
-        nav_user.setText(user.getEmail());
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        TextView msg_txt = hView.findViewById(R.id.msg_txt);
+        TextView nav_user = hView.findViewById(R.id.textView);
+        Button sign_up_Btn = hView.findViewById(R.id.create_account_btn);
+        sign_up_Btn.setOnClickListener(this);
+
+        if (user != null ){
+            msg_txt.setVisibility(View.VISIBLE);
+            nav_user.setVisibility(View.VISIBLE);
+            sign_up_Btn.setVisibility(View.GONE);
+            nav_user.setText(user.getEmail());
+        } else {
+            msg_txt.setVisibility(View.GONE);
+            nav_user.setVisibility(View.GONE);
+            sign_up_Btn.setVisibility(View.VISIBLE);
+        }
     }
 
+    @Override
+    public void onClick(View v) {
+
+        switch (v.getId()){
+
+            case R.id.create_account_btn:
+                Intent open_account = new Intent(this, UserAuth_Activity.class);
+                startActivity(open_account);
+                break;
+        }
+
+    }
 }
