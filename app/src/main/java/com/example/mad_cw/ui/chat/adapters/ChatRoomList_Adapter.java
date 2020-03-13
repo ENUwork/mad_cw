@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -54,6 +55,11 @@ public class ChatRoomList_Adapter extends RecyclerView.Adapter<ChatRoomList_Adap
             prev_date = chatList.get(position - 1).getTimestamp().toDate();
             prev_day = (String) DateFormat.format("dd", prev_date);
             prev_month = (String) DateFormat.format("MM", prev_date);
+            holder.warningBox.setVisibility(View.GONE);
+            holder.dividerBox.setVisibility(View.GONE);
+        } else {
+            holder.warningBox.setVisibility(View.VISIBLE);
+            holder.dividerBox.setVisibility(View.VISIBLE);
         }
 
         // Current Date/Times:
@@ -95,11 +101,16 @@ public class ChatRoomList_Adapter extends RecyclerView.Adapter<ChatRoomList_Adap
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         LinearLayout msg_out_layout, msg_in_layout;
+        TableRow warningBox;
+        View dividerBox;
         TextView msg_txt_out, msg_txt_in,
                 ad_post_time, ad_post_out_time, ad_post_in_time;
 
         ViewHolder(View itemView) {
             super(itemView);
+
+            warningBox = itemView.findViewById(R.id.warningBox);
+            dividerBox = itemView.findViewById(R.id.dividerBox);
 
             msg_out_layout = itemView.findViewById(R.id.msg_outgoing_layout);
             msg_in_layout = itemView.findViewById(R.id.msg_incoming_layout);

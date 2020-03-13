@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mad_cw.BaseActivity;
+import com.example.mad_cw.MainActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.adverts.adapters.ViewPager_Adapter;
 import com.example.mad_cw.ui.chat.ChatRoom_Activity;
@@ -184,6 +185,14 @@ public class AdvertDetails_Activity extends BaseActivity implements View.OnClick
                 break;
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent main = new Intent(this, MainActivity.class);
+        startActivity(main);
+        this.finish();
     }
 
     @Override

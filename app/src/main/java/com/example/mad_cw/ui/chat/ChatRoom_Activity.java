@@ -121,8 +121,8 @@ public class ChatRoom_Activity extends BaseActivity implements View.OnClickListe
         if (advert != null) {
             Glide.with(this).load(advert.getImages().get(0)).into(chat_ad_main_img);
             chat_ad_title.setText(advert.getAd_title());
-            chat_ad_price.setText(getString(R.string.set_ad_price, advert.getAd_price()));
-            chat_ad_location.setText(advert.getAd_loc());
+            chat_ad_price.setText(getString(R.string.ad_price2, advert.getAd_price()));
+            chat_ad_location.setText(getString(R.string.ad_loc2, advert.getAd_loc()));
         }
 
         verifyChatExistence();

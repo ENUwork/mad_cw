@@ -101,7 +101,7 @@
             <EditText
                 android:id="@+id/post_ad_input_title"
                 style="@style/inputFiled"
-                android:inputType="textLongMessage" />
+                android:inputType="textMultiLine" />
 
             <!-- ADVERT DESCRIPTION -->
 

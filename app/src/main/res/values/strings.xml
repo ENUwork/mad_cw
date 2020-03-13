@@ -21,6 +21,13 @@
     <string name="menu_share"> Share </string>
     <string name="main_img_desc"> Main Advert Image View </string>
 
+    <!-- Chat Strings -->
+    <string name="chatWarning"> ⚠ </string>
+    <string name="cahtWarning_txt"> Remember not to share personal
+        \n information such as: (full name, home address, age).
+        \n Always properly inspect the item before buying, take your time.
+        \n If the item price is too low for what its worth, it’s probably stolen.</string>
+
     <!-- FRAGMENT HOME SETTINGS -->
     <string name="buy_sell_txt"> Buy / Sell </string>
     <string name="view_all_txt"> View all </string>

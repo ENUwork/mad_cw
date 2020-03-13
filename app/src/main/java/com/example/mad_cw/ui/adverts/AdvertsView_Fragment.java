@@ -70,7 +70,8 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
     // activity cycle methods:
 
     public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+                             ViewGroup container,
+                             Bundle savedInstanceState) {
 
         // Setting the View for Fragment:
         View root = inflater.inflate(R.layout.adverts_layout, container, false);
@@ -137,8 +138,6 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
         return root;
     }
 
-
-
     // ________________
     // handling adverts methods:
 
@@ -158,7 +157,7 @@ public class AdvertsView_Fragment extends Fragment implements View.OnClickListen
                         AdvertsModel advertsModel = doc.getDocument().toObject(AdvertsModel.class);
                         adverts_Model_list.add(advertsModel);
                         advertsListAdapter.notifyDataSetChanged();
-                        advertQueryNum.setText(getString(R.string.display_ads_qty, advertsListAdapter.getItemCount()));
+                        advertQueryNum.setText(getActivity().getString(R.string.display_ads_qty, advertsListAdapter.getItemCount()));
                     }
                 }
             }

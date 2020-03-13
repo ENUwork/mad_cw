@@ -20,6 +20,7 @@ import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.example.mad_cw.BaseActivity;
+import com.example.mad_cw.MainActivity;
 import com.example.mad_cw.R;
 import com.example.mad_cw.ui.chat.ChatLobby_Activity;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,10 +44,6 @@ import java.util.Map;
 
 public class UserProfile_Activity extends BaseActivity implements View.OnClickListener {
 
-    /*
-        Handles User & its Activity:
-     */
-
     // Class Variables:
     private static final String TAG = "UserProfile_Activity";
     private static final int PICK_IMAGE = 1;
@@ -62,11 +59,12 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
 
     private Animation slideUp, slideDown;
 
+    // FireStore Access:
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+
     // Access to Firebase Authentication from the Activity
     private FirebaseAuth mAuth;
-
-    // Access a Cloud Firestore instance from the Activity
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseUser currentUser;
 
     // _____________________
     // class activity cycles:
@@ -112,9 +110,12 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
     @Override
     public void onStart() {
         super.onStart();
-
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        updateUI(currentUser);
+        currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            updateUI(currentUser);
+        } else {
+            this.finish();
+        }
     }
 
     // _____________________
@@ -123,11 +124,14 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
     @Override
     public void onBackPressed() {
         // Check if the user is in "edit account mode":
-        if (userEditLayout.getVisibility() == View.VISIBLE){
+        if (userEditLayout.getVisibility() == View.VISIBLE) {
             userEditLayout.setVisibility(View.GONE);
             mainInfoLayout.setVisibility(View.VISIBLE);
         } else {
             super.onBackPressed();
+            Intent main = new Intent(this, MainActivity.class);
+            startActivity(main);
+            this.finish();
         }
     }
 
@@ -152,7 +156,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 break;
 
             case R.id.updateProfilePic:
-                selectProfilePic();
+                selectImageProfile();
                 break;
 
             case R.id.accountDetailsBtn:
@@ -180,9 +184,6 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    // _____________________
-    // data-intent handling methods:
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -202,12 +203,20 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                handleImageUpload(bitmap);
+                setImageUpload(bitmap);
             }
         }
     }
 
-    private void selectProfilePic() {
+    private void signOut() {
+        mAuth.signOut();
+        this.finish();
+    }
+
+    // _____________________
+    // data-intent handling methods:
+
+    private void selectImageProfile() {
 
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
@@ -216,23 +225,22 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
         pickIntent.setType("image/*");
 
         Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[] {pickIntent});
+        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
 
         startActivityForResult(chooserIntent, PICK_IMAGE);
     }
 
-    private void handleImageUpload(Bitmap bitmap){
+    private void setImageUpload(Bitmap bitmap) {
 
         showProgressBar();
+        // ProPic.setImageBitmap(bitmap);
 
         // Handle Image
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
 
-        // ProPic.setImageBitmap(bitmap);
-
         // Get Current User UID String:
-        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String uid = currentUser.getUid();
 
         // Store Data in Firebase Storage
         final StorageReference reference = FirebaseStorage.getInstance().getReference()
@@ -244,7 +252,7 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                        getDownloadUrl(reference);
+                        getImageDownloadUrl(reference);
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -255,26 +263,22 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 });
     }
 
-    private void getDownloadUrl(StorageReference reference) {
+    private void getImageDownloadUrl(StorageReference reference) {
         reference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
                 Uri uri = task.getResult();
-                System.out.println(uri);
-                updateProfile(uri);
+                System.out.println(uri);    // [TEST/DEV]
+                setImageProfile(uri);
             }
         });
     }
 
-    private void updateProfile(Uri uri) {
+    private void setImageProfile(Uri uri) {
 
-        // Get Current (Signed-In) User
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-
-        // Set Parameters that require Updating
+        // Info. required updating:
         UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
                 .setPhotoUri(uri)
-                .setDisplayName(fName.getText().toString())
                 .build();
 
         // Update profile & add "complete" listener
@@ -282,36 +286,32 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Log.d(TAG, "User profile updated.");
                     hideProgressBar();
                 }
             }
         });
 
-        // Refresh the UI Page:
+        // Update Profile Picture:
         Glide.with(this).load(uri).into(ProPic);
     }
 
     private void updateProfileInfo() {
 
         // Get Current User:
-        final FirebaseUser currentUser = mAuth.getCurrentUser();
         String uid = currentUser.getUid();
 
+        // Populate HashMap with Data:
         user_updateHMap.put("email", userEmail.getText().toString());
         user_updateHMap.put("location", userLoc.getText().toString());
         user_updateHMap.put("username", userName.getText().toString());
         user_updateHMap.put("first_name", fName.getText().toString());
 
-        // Add a new document with a generated ID
-        db.collection("users")
-                .document(uid)
-                .update(user_updateHMap)
+        // Update User Exisitng Document:
+        db.collection("users").document(uid).update(user_updateHMap)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void Void) {
-                        // Display user Profile Details:
-                        UserName.setText(getString(R.string.user_greet, fName.getText().toString()));
+                        updateUI(currentUser);
                         Toast.makeText(getBaseContext(), "\uD83C\uDF89 Success! Your account info has been updated", Toast.LENGTH_LONG).show();
                         hideProgressBar();
                     }
@@ -319,64 +319,46 @@ public class UserProfile_Activity extends BaseActivity implements View.OnClickLi
                 .addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
                         Toast.makeText(getBaseContext(), "\uD83D\uDE31 Uh-Oh! Something went wrong", Toast.LENGTH_LONG).show();
                         hideProgressBar();
                     }
                 });
     }
 
+    // _____________________
+    // user UI/UX methods:
+
     private void updateUI(FirebaseUser user) {
 
-        // Check User Details
-        if (user != null) {
+        // User Details:
+        Uri photoUrl = user.getPhotoUrl();
 
-            // Access a Cloud Firestore instance from your Activity
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-            // Profile Image:
-            Uri photoUrl = user.getPhotoUrl();
-
-            if (photoUrl != null) {
-                // Display user Profile Details:
-                UserName.setText(getString(R.string.user_greet, user.getDisplayName()));
-                Glide.with(this).load(photoUrl).into(ProPic);
-            }
-
-            // User Email:
-            DocumentReference docRef = db.collection("users").document(user.getUid());
-            docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                @Override
-                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                    if (task.isSuccessful()) {
-                        DocumentSnapshot document = task.getResult();
-                        if (document.exists()) {
-                            Log.d(TAG, "DocumentSnapshot data: " + document.getString("email"));
-
-                            // Set Email to be seen:
-                            userEmail.setText(document.getString("email"));
-                            userLoc.setText(document.getString("location"));
-                            userName.setText(document.getString("username"));
-                            fName.setText(document.getString("first_name"));
-
-                        } else {
-                            Log.d(TAG, "No such document");
-                        }
-                    } else {
-                        Log.d(TAG, "get failed with ", task.getException());
-                    }
-                }
-            });
+        if (photoUrl != null) {
+            Glide.with(this).load(photoUrl).into(ProPic);
         }
-    }
 
-    // _____________________
-    // user action methods:
-
-    private void signOut() {
-        mAuth.signOut();
-        this.finish();
-        updateUI(null);
+        // User Edit Fields:
+        DocumentReference docRef = db.collection("users").document(user.getUid());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        // Set Email to be seen:
+                        userEmail.setText(document.getString("email"));
+                        userLoc.setText(document.getString("location"));
+                        userName.setText(document.getString("username"));
+                        fName.setText(document.getString("first_name"));
+                        UserName.setText(getString(R.string.user_greet, document.getString("first_name")));
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Uh-oh, something is not right", Toast.LENGTH_LONG).show();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "Uh-oh, something is not right", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
     }
 
 }
