@@ -61,7 +61,7 @@
                     android:text="@string/plc_hold"
                     android:textAlignment="textStart"
                     android:textColor="#FFFFFF"
-                    android:textSize="15sp"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <TableRow
@@ -76,18 +76,18 @@
                         android:text="@string/plc_hold"
                         android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
 
                     <TextView
                         android:id="@+id/advert_item_location"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="5sp"
                         android:fontFamily="@font/raleway_semibold"
                         android:text="@string/plc_hold"
-                        android:layout_marginLeft="5sp"
                         android:textAlignment="textStart"
                         android:textColor="#FFFFFF"
-                        android:textSize="12sp" />
+                        android:textSize="14sp" />
                 </TableRow>
 
             </LinearLayout>

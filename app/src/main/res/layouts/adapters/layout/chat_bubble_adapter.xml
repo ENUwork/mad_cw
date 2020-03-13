@@ -52,16 +52,18 @@
 
         <TextView
             android:id="@+id/msg_txt_outgoing"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:maxWidth="200dp"
             android:text="TextView"
             android:textAlignment="textStart"
             android:textColor="#FFFFFF" />
 
         <TextView
             android:id="@+id/ad_chat_out_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:maxWidth="200dp"
             android:text="TextView"
             android:textAlignment="textStart"
             android:textColor="#FFFFFF"
@@ -76,17 +78,20 @@
 
         <TextView
             android:id="@+id/msg_txt_incoming"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:maxWidth="200dp"
             android:textColor="@color/colorPrimaryDark"
+            android:textAlignment="textEnd"
             android:text="TextView" />
 
         <TextView
             android:id="@+id/ad_chat_in_time"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="TextView"
-            android:textAlignment="textStart"
+            android:textAlignment="textEnd"
+            android:maxWidth="200dp"
             android:textColor="@color/colorPrimaryDark"
             android:textSize="10sp" />
 

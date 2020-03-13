@@ -147,6 +147,7 @@
     <!-- chat styles -->
     <style name="chatOutgoing">
         <item name="android:layout_width"> wrap_content </item>
+        <item name="android:maxWidth"> 200dp </item>
         <item name="android:layout_height"> wrap_content </item>
         <item name="android:fontFamily"> @font/open_sans </item>
         <item name="android:padding"> 10dp </item>
@@ -160,6 +161,7 @@
     </style>
     <style name="chatIncoming">
         <item name="android:layout_width"> wrap_content </item>
+        <item name="android:maxWidth"> 200dp </item>
         <item name="android:layout_height"> wrap_content </item>
         <item name="android:fontFamily"> @font/open_sans </item>
         <item name="android:padding"> 10dp </item>
