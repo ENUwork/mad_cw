@@ -14,7 +14,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.mad_cw.ui.home.HomeFragment"
+        android:name="com.pedalT.app.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
@@ -22,7 +22,7 @@
 
     <fragment
         android:id="@+id/nav_adverts"
-        android:name="com.example.mad_cw.ui.adverts.AdvertsView_Fragment"
+        android:name="com.pedalT.app.ui.adverts.AdvertsView_Fragment"
         android:label="@string/menu_adverts"
         tools:layout="@layout/adverts_layout" />
 
@@ -30,13 +30,13 @@
 
     <activity
         android:id="@+id/nav_account"
-        android:name="com.example.mad_cw.ui.user.UserAuth_Activity"
+        android:name="com.pedalT.app.ui.user.UserAuth_Activity"
         android:label="@string/menu_account_profile"
         tools:layout="@layout/user_auth_layout" />
 
     <activity
         android:id="@+id/nav_share"
-        android:name="com.example.mad_cw.ui.chat.ChatRoom_Activity"
+        android:name="com.pedalT.app.ui.chat.ChatRoom_Activity"
         android:label="User Chat Room"
         tools:layout="@layout/chat_room_layout" />
 

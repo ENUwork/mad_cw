@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:825859146304:android:7c67dac5123f089eb6d5a5",
+        "mobilesdk_app_id": "1:825859146304:android:9be0832efb4e3c57b6d5a5",
         "android_client_info": {
-          "package_name": "com.example.firebase_con"
+          "package_name": "com.example.mad_cw"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "825859146304-85ruq4kj1vecoj38hb5fjgiga3ldak25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.mad_cw",
+            "certificate_hash": "dd4b00285896b9ecfb467a2c48fe905a58eece5b"
+          }
+        },
         {
           "client_id": "825859146304-v1qs3nlardt1i6o3kqf54i2k85sdv71g.apps.googleusercontent.com",
           "client_type": 3
@@ -37,20 +45,12 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:825859146304:android:9be0832efb4e3c57b6d5a5",
+        "mobilesdk_app_id": "1:825859146304:android:2558360aa7c6b709b6d5a5",
         "android_client_info": {
-          "package_name": "com.example.mad_cw"
+          "package_name": "com.pedalT.app"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "825859146304-85ruq4kj1vecoj38hb5fjgiga3ldak25.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.mad_cw",
-            "certificate_hash": "dd4b00285896b9ecfb467a2c48fe905a58eece5b"
-          }
-        },
         {
           "client_id": "825859146304-v1qs3nlardt1i6o3kqf54i2k85sdv71g.apps.googleusercontent.com",
           "client_type": 3
